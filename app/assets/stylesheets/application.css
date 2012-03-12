@@ -11,8 +11,9 @@ html, body {
   padding: 0;
   background: White;
   color: DarkSlateGrey;
-  font-family: arial, helvetica, sans-serif;
+  font-family: 'Droid Sans', sans-serif;
   font-size: 10pt;
+	font-weight: normal;
 }
 div#main {
   margin: 0;
@@ -27,7 +28,7 @@ a {
 }
 
 h1 {
-  color: maroon;
+  color: dimGray;
   font-size: 150%;
   font-style: italic;
   display: block;
@@ -36,12 +37,13 @@ h1 {
 }
 
 h1.title {
-  margin: 0 0 1em;
+	margin: 0 0 15px 0;
   padding: 10px;
   background-color: #2B364A;
-  color: #C4D7F9;
+  color: white;
   border-bottom: 4px solid #051022;
-  font-size: 1.8em;
-  font-style: normal;
+  font-size: 2.7em;
+	font-style: normal;
+	letter-spacing: 3px;
 }
 

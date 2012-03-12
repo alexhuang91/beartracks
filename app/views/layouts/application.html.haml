@@ -2,12 +2,13 @@
 %html
   %head
     %title BearTracks
+    %link{:href => "http://fonts.googleapis.com/css?family=Droid+Sans", :rel => "stylesheet", :type => "text/css"}/
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
 
   %body
-    %h1.title BearTracks!
+    %h1.title BearTracks
     #main
       - if flash[:notice]
         #notice.message= flash[:notice]
