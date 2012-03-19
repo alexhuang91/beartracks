@@ -1,4 +1,10 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+
+# have a single line that says 'debugger' anywhere in any controller that
+# inherits from this, it will act as a GDB like debugging environment
+require 'ruby-debug'
+
+
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
