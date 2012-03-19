@@ -1,18 +1,30 @@
 !!! 5
 %html
-  %head
-    %title BearTracks
-    %link{:href => "http://fonts.googleapis.com/css?family=Droid+Sans", :rel => "stylesheet", :type => "text/css"}/
-    = stylesheet_link_tag 'application'
-    = javascript_include_tag 'application'
-    = csrf_meta_tags
+	%head
+		%title BearTracks
+		%link{:href => "http://fonts.googleapis.com/css?family=Droid+Sans", :rel => "stylesheet", :type => "text/css"}/
+		= stylesheet_link_tag 'application'
+		= javascript_include_tag 'application'
+		= csrf_meta_tags
 
-  %body
-    %h1.title BearTracks
-    #main
-      - if flash[:notice]
-        #notice.message= flash[:notice]
-      - elsif flash[:warning]
-        #warning.message= flash[:warning]
+	%body
+		%div#header
+			%h1.title BearTracks
+		#main
+			- if flash[:notice]
+				#notice.message= flash[:notice]
+			- elsif flash[:warning]
+				#warning.message= flash[:warning]
 
-      = yield
+		= yield
+
+		%div#footer
+			%div.main
+				#footimage
+					= image_tag("campanile_shadow.png")
+			%div.secondary
+				.inside
+					.left
+						(c) 2012
+						%span UC Berkeley CS169 Group 17.
+						All Rights Reserved.
