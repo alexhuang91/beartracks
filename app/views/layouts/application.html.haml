@@ -8,7 +8,7 @@
 		= csrf_meta_tags
 
 	%body
-		%div#header
+		#header
 			%h1.title BearTracks
 		#main
 			- if flash[:notice]
@@ -18,11 +18,11 @@
 
 		= yield
 
-		%div#footer
-			%div.main
+		#footer
+			.main
 				#footimage
 					= image_tag("campanile_shadow.png")
-			%div.secondary
+			.secondary
 				.inside
 					.left
 						(c) 2012
