@@ -10,21 +10,19 @@
 	%body
 		#header
 			%h1.title BearTracks
-		#main
+		#notice
 			- if flash[:notice]
 				#notice.message= flash[:notice]
 			- elsif flash[:warning]
 				#warning.message= flash[:warning]
-
-		= yield
+		
+		.wrapper
+			= yield
+			.push
 
 		#footer
 			.main
 				#footimage
 					= image_tag("campanile_shadow.png")
 			.secondary
-				.inside
-					.left
-						(c) 2012
-						%span UC Berkeley CS169 Group 17.
-						All Rights Reserved.
+				%p (c) 2012 UC Berkeley CS169 Group 17. All Rights Reserved.
