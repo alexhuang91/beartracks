@@ -1,10 +1,5 @@
 class InitialSchema < ActiveRecord::Migration
   def change
-    create_table :users do |t|
-      t.string :username, :null => false, :unique => true
-      t.string :password
-      t.timestamps
-    end
     create_table :packages do |t|
       t.integer :tracking_number, :null => false, :unique => true
       t.string :resident_name, :null => false
