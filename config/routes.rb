@@ -6,7 +6,8 @@ Beartracks::Application.routes.draw do
   
   root :to => 'home#index'
   resource :packages
-  
+  match '/login' => 'home#login', :as => :login
+  match '/signup' => 'home#signup', :as => :signup
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

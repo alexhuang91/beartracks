@@ -34,6 +34,9 @@ GEM
     addressable (2.2.7)
     archive-tar-minitar (0.5.2)
     arel (2.2.3)
+    authlogic (3.1.0)
+      activerecord (>= 3.0.7)
+      activerecord (>= 3.0.7)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
     capybara (1.1.2)
@@ -190,6 +193,7 @@ PLATFORMS
 
 DEPENDENCIES
   ZenTest
+  authlogic
   capybara
   coffee-rails (~> 3.1.0)
   cucumber-rails

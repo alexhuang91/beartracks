@@ -2,7 +2,10 @@ class InitialSchema < ActiveRecord::Migration
   def change
     create_table :users do |t|
       t.string :username, :null => false, :unique => true
-      t.string :password
+      t.string :email
+      t.string :crypted_password
+      t.string :password_salt
+      t.string :persistence_token
       t.timestamps
     end
     create_table :packages do |t|
