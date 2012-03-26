@@ -17,7 +17,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'ZenTest'
-  gem 'authlogic'
 end
 group :production do
   gem 'pg'
@@ -34,6 +33,8 @@ end
 
 gem 'jquery-rails'
 gem 'haml-rails'
+gem 'authlogic'
+
 
 # Use unicorn as the web server
 # gem 'unicorn'
