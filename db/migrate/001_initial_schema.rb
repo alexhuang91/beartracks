@@ -3,9 +3,9 @@ class InitialSchema < ActiveRecord::Migration
     create_table :users do |t|
       t.string :username, :null => false, :unique => true
       t.string :email
-      t.string :crypted_password
-      t.string :password_salt
-      t.string :persistence_token
+      t.string :crypted_password, :null => false
+      t.string :password_salt, :null => false
+      t.string :persistence_token, :null => false
       t.timestamps
     end
     create_table :packages do |t|
@@ -25,7 +25,7 @@ class InitialSchema < ActiveRecord::Migration
       t.string :sender_state
       t.integer :sender_zip
       t.text :description
-      t.timestamps
+      t.DateTime :updated_at
     end
     create_table :residents do |t|
       t.string :user_id
