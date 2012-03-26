@@ -6,6 +6,7 @@ class InitialSchema < ActiveRecord::Migration
       t.string :crypted_password, :null => false
       t.string :password_salt, :null => false
       t.string :persistence_token, :null => false
+      t.boolean :admin
       t.timestamps
     end
     create_table :packages do |t|
