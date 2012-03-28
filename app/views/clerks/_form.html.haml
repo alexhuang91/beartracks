@@ -1,0 +1,12 @@
+= form_for @clerk do |f|
+  
+  =f.label :login 
+  =f.text_field :login
+  
+  =f.label :password
+  =f.password_field :password
+  
+  =f.label :password_confirmation
+  =f.password_field :password_confirm
+  
+  =submit_tag "Submit" 
