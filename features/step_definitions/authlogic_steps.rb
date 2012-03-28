@@ -12,3 +12,7 @@ Then /^the current clerk's login should be "([^"]*)"$/ do |expected_login|
   current_session = ClerkSession.find
   current_session.clerk.login.should == expected_login
 end
+
+Given /^there are no clerks$/ do
+  Clerk.all.count.should == 0
+end
