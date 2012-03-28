@@ -79,7 +79,7 @@ h1.title {
 	min-height: 80%;
 	height: auto !important;
 	height: 100%;
-	margin: 0 auto;
+	margin: 0 auto auto 20px;
 }
 
 #footer, .push {
