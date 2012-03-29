@@ -85,3 +85,8 @@ h1.title {
 #footer, .push {
 	height: 1em;
 }
+
+#user_nav {
+	float: right;
+	margin: 10px 10px 10px 10px;
+}

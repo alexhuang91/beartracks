@@ -19,6 +19,12 @@ Scenario: Logging in through the user interface
     When I press "Login"
     Then I should be on the home page
     And the current clerk's login should be "John"
+    
+Scenario: Getting to the Login page from the root url
+  Given I am on the root page
+  Then I should see "Login"
+  When I follow "Login"
+  Then I should be on the login page
 
 Scenario: Signing up
     Given there are no clerks

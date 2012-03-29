@@ -10,6 +10,7 @@ class ClerkSessionsController < ApplicationController
       flash[:notice] = "Login success."
       redirect_to root_url
     else
+      flash[:error] = "There was an error logging in.  Please try again."
       render :action => :new
     end
   end
