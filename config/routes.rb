@@ -1,5 +1,11 @@
 Beartracks::Application.routes.draw do
+  get "clerk_sessions/new"
+
+  #get "clerk_sessions/create"
+  post "clerk_sessions/create"
   get "home/index"
+  
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -7,6 +13,8 @@ Beartracks::Application.routes.draw do
   root :to => 'home#index'
   resource :packages
   resources :clerks
+  
+  match 'login' => 'clerk_sessions#new'
   
   
   # Sample of regular route:
