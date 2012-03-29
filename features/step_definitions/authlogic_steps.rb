@@ -16,3 +16,9 @@ end
 Given /^there are no clerks$/ do
   Clerk.all.count.should == 0
 end
+
+Then /^a new Clerk account for "([^"]*)" should be created$/ do |login|
+  the_clerk = Clerk.find_by_login(login)
+  the_clerk.should_not be_nil
+  the_clerk.login.should eq(login)
+end

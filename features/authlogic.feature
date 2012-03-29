@@ -15,6 +15,7 @@ Scenario: Signing up
         | Login                 | Sally      |
         | Password              | newpass    |
         | Password confirmation | newpass    |
-    When I press "Create"
+    When I press "Submit"
     Then a new Clerk account for "Sally" should be created
     And the current clerk's login should be "Sally"
+    And I am on the root page
