@@ -17,7 +17,9 @@
           = link_to "Login", login_path
     #notice
       - if flash[:notice]
-        #notice.message= flash[:notice]
+        #notice.message
+          %span{:class => "message"} 
+            = flash[:notice]
       - elsif flash[:warning]
         #warning.message= flash[:warning]
     
