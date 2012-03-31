@@ -22,3 +22,13 @@ Then /^a new Clerk account for "([^"]*)" should be created$/ do |login|
   the_clerk.should_not be_nil
   the_clerk.login.should eq(login)
 end
+
+When /^I log out$/ do
+  session = ClerkSession.find
+  session.destroy
+end
+
+Then /^there should be no clerk logged in$/ do
+  session = ClerkSession.find
+  session.nil?.should be_true
+end
