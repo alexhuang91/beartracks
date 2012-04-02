@@ -1,6 +1,8 @@
 Beartracks::Application.routes.draw do
-  get "user_sessions/new"
+  get "clerk_sessions/new"
 
+  #get "clerk_sessions/create"
+  post "clerk_sessions/create"
   get "home/index"
 
   # The priority is based upon order of creation:
@@ -8,10 +10,12 @@ Beartracks::Application.routes.draw do
   
   root :to => 'home#index'
   resource :packages
-  match 'signup', :controller => 'home', :action => 'signup'
-  match 'login', :controller => 'user_sessions', :action => 'new'
-  match 'logout', :controller => 'user_sessions', :action => 'destroy'
-  resources :user_sessions
+  resources :clerks
+  
+  match 'login' => 'clerk_sessions#new'
+  match 'logout' => 'clerk_sessions#destroy'
+  
+  
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
