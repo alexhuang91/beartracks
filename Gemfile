@@ -37,7 +37,6 @@ gem 'haml-rails'
 gem 'authlogic'
 gem 'rails3-generators' # for authlogic generators
 
-
 # Use unicorn as the web server
 # gem 'unicorn'
 

@@ -12,8 +12,8 @@ Beartracks::Application.routes.draw do
   resource :packages
   resources :clerks
   
-  match 'login' => 'clerk_sessions#new'
-  match 'logout' => 'clerk_sessions#destroy'
+  match 'clerk/login' => 'clerk_sessions#new'
+  match 'clerk/logout' => 'clerk_sessions#destroy'
   
   
   # Sample of regular route:

@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(:version => 20120328204322) do
     t.string   "sender_state"
     t.integer  "sender_zip"
     t.text     "description"
-    t.datetime "created_at"
     t.datetime "updated_at"
   end
 

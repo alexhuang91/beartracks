@@ -14,9 +14,9 @@
         = link_to "Add New Clerk", new_clerk_path
         | 
         - if current_clerk
-          = link_to "Logout", logout_path
+          = link_to "Clerk Logout", clerk_logout_path
         - else
-          = link_to "Login", login_path
+          = link_to "Clerk Login", clerk_login_path
     #flash
       - if flash[:notice]
         #notice
