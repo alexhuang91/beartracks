@@ -1,4 +1,4 @@
-Feature: Testing Authlogic Signup and Login Logout
+Feature: Testing Authlogic Clerk Signup and Login Logout
 
 @model
 Scenario: Logging in and logging out
@@ -7,7 +7,7 @@ Scenario: Logging in and logging out
     | Tony     | pass       | pass                  |
   When I log in as a clerk with username "Tony" and password "pass"
   Then the current clerk's login should be "Tony"
-  When I log out
+  When I log out clerk
   Then there should be no clerk logged in
   
 Scenario: Logging in and out through the user interface

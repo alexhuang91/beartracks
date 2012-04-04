@@ -24,7 +24,7 @@ Then /^a new Clerk account for "([^"]*)" should be created$/ do |login|
   the_clerk.login.should eq(login)
 end
 
-When /^I log out$/ do
+When /^I log out clerk$/ do
   session = ClerkSession.find
   session.destroy
 end
@@ -45,7 +45,7 @@ Then /^the current resident's login should be "([^"]*)"$/ do |expected_login|
   current_session.resident.login.should == expected_login
 end
 
-Given /^there are no resident$/ do
+Given /^there are no residents$/ do
   Resident.all.count.should == 0
 end
 
@@ -55,7 +55,7 @@ Then /^a new resident account for "([^"]*)" should be created$/ do |login|
   the_resident.login.should eq(login)
 end
 
-When /^I log out$/ do
+When /^I log out resident$/ do
   session = ResidentSession.find
   session.destroy
 end

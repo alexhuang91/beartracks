@@ -19,15 +19,5 @@ class InitialSchema < ActiveRecord::Migration
       t.text :description
       t.datetime :updated_at
     end
-    create_table :residents do |t|
-      t.string :user_id
-      t.string :name
-      t.string :unit
-      t.string :building
-      t.integer :room
-      t.string :preference
-      t.integer :phone_number
-      t.string :email
-    end
   end
 end

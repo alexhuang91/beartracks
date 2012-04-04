@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120328204322) do
+ActiveRecord::Schema.define(:version => 3) do
 
   create_table "clerks", :force => true do |t|
     t.string   "login"
@@ -43,14 +43,20 @@ ActiveRecord::Schema.define(:version => 20120328204322) do
   end
 
   create_table "residents", :force => true do |t|
-    t.string  "user_id"
-    t.string  "name"
-    t.string  "unit"
-    t.string  "building"
-    t.integer "room"
-    t.string  "preference"
-    t.integer "phone_number"
-    t.string  "email"
+    t.string   "login"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.string   "user_id"
+    t.string   "name"
+    t.string   "unit"
+    t.string   "building"
+    t.integer  "room"
+    t.string   "preference"
+    t.integer  "phone_number"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
