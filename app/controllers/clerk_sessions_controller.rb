@@ -8,7 +8,7 @@ class ClerkSessionsController < ApplicationController
     @clerk_session = ClerkSession.new(params[:clerk_session])
     if @clerk_session.save
       flash[:notice] = "You have successfully logged in."
-      redirect_to root_url
+      redirect_to packages_path
     else
       flash[:warning] = "There was an error logging in.  Please try again."
       render :action => :new
