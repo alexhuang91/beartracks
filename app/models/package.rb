@@ -16,9 +16,7 @@ class Package < ActiveRecord::Base
     return "(nothing left blank, bad usage)" if self.has_required_fields
     fields = self.unfilled_fields
     field_strings = fields.collect { |f| @@never_null_fields[f] }
-    if fields.length > 1
-      field_strings[-1] = 'or '+field_strings[-1]
-    end
+    field_strings[-1] = 'or '+field_strings[-1] if fields.length > 1
     string = field_strings.join(', ')
   end
 end

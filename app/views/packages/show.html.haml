@@ -1,0 +1,33 @@
+%h2 Details about Package #{@package.tracking_number}
+
+%ul#details
+  %li
+    Resident:
+    %br
+    = @package.resident_name
+
+  %li
+    Housing:
+    %br
+    = @package.unit+', '+@package.room.to_s+' '+@package.building
+
+  %li
+    From:
+    %br
+    = @package.sender_address
+    %br
+    = @package.sender_city+', '+@package.sender_state+' '+@package.sender_zip.to_s
+
+  %li
+    Carrier:
+    %br
+    = @package.carrier
+
+%h3 Additional Comments:
+
+%p#description= @package.description
+
+= link_to 'Edit', edit_package_path(@package)
+= button_to 'Delete', package_path(@package), :method => :delete, :confirm => 'Are you sure?'
+
+= link_to 'Back to package list', packages_path
