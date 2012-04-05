@@ -13,12 +13,12 @@
       #user_nav
         = link_to "Add New Clerk", new_clerk_path
         |
-        - if not current_clerk and current_resident
+        - if current_resident
           = link_to "Logout", resident_logout_path
-        - elsif current_clerk and not current_resident
+        - elsif current_clerk
           = link_to "Logout", clerk_logout_path
-        - elsif not current_clerk
-          = link_to "Clerk Login", clerk_logout_path
+        - else
+          = link_to "Clerk Login", clerk_login_path
 
     #flash
       - if flash[:notice]
