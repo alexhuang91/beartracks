@@ -20,7 +20,7 @@ Scenario: Logging in and out through the user interface
         | Login     | John       |
         | Password  | pass       |
     When I press "Login"
-    Then I should be on the home page
+    Then I should be on the packages page
     And the current clerk's login should be "John"
     Then I should see "You have successfully logged in."
     Then I should see "Logout"
