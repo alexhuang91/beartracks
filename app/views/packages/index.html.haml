@@ -1,0 +1,22 @@
+%h1 All Packages
+
+%table#packages
+  %thead
+    %tr
+      %th Arrived
+      %th Internal ID
+      %th Tracking Number
+      %th Resident
+      %th Building and Room
+      %th More Info
+  %tbody
+    - @packages.each do |p|
+      %tr
+        %td= p.datetime_received.ctime
+        %td= p.id
+        %td= p.tracking_number
+        %td= p.resident_name
+        %td= "#{p.building}, #{p.room}"
+        %td=link_to "Package Details for #{p.tracking_number}", package_path(p)
+
+= link_to "Add New Package", new_package_path
