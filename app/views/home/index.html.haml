@@ -1,10 +1,8 @@
 %h1 
   Hello there welcome to BearTracks
-%br
-= link_to "Add New Resident", new_resident_path
-%br
-%br
-- if current_resident
-  = link_to "Resident Logout", resident_logout_path
-- else
+-if not current_resident
+  %br
+  = link_to "Sign up", new_resident_path
+  %br
+  %br
   = link_to "Resident Login", resident_login_path

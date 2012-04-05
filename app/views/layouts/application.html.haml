@@ -12,9 +12,11 @@
       %h1.title BearTracks
       #user_nav
         = link_to "Add New Clerk", new_clerk_path
-        | 
-        - if current_clerk
-          = link_to "Clerk Logout", clerk_logout_path
+        |
+        - if current_resident
+          = link_to "Logout", resident_logout_path
+        - elsif current_clerk
+          = link_to "Logout", clerk_logout_path
         - else
           = link_to "Clerk Login", clerk_login_path
 

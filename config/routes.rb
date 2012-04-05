@@ -9,7 +9,7 @@ Beartracks::Application.routes.draw do
   # first created -> highest priority.
   
   root :to => 'home#index'
-  resource :packages
+  resources :packages
   resources :clerks
   resources :residents
   match 'clerk/login' => 'clerk_sessions#new'
