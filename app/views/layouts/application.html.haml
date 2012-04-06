@@ -23,10 +23,12 @@
     #flash
       - if flash[:notice]
         #notice
-          %span{:class => "message"} 
+          %span{:class => "notice"} 
             = flash[:notice]
       - elsif flash[:warning]
-        #warning.message= flash[:warning]
+        #warning
+          %span{:class => "warning"}
+            = flash[:warning]
     
     .wrapper
       = yield
