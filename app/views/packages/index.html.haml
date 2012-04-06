@@ -1,5 +1,12 @@
 %h1 All Packages
 
+=form_tag packages_path, :method=>'get' do
+  Packages:
+  = select_tag :packages, options_for_select(@packages_hash, params[:packages])
+  Units:
+  = select_tag :unit, options_for_select(@units_hash, params[:unit])
+  = submit_tag 'Reload Packages'
+
 %table#packages
   %thead
     %tr
@@ -7,6 +14,7 @@
       %th Internal ID
       %th Tracking Number
       %th Resident
+      %th Unit
       %th Building and Room
       %th More Info
   %tbody
@@ -16,6 +24,7 @@
         %td= p.id
         %td= p.tracking_number
         %td= p.resident_name
+        %td= p.unit
         %td= "#{p.building}, #{p.room}"
         %td=link_to "Package Details for #{p.tracking_number}", package_path(p)
 
