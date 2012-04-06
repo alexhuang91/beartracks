@@ -3,7 +3,7 @@ Feature: A logged in resident cannot log in as a clerk
 Scenario: Resident Logged in Can't log in as a Clerk through interface
   Given the following resident exists:
     | login    | password   | password_confirmation | email   |
-    | Corre     | pass       | pass                  | j@j.com |
+    | Corre    | pass       | pass                  | mail@email.com |
   Then I am on the resident login page
   And I fill in the following:
       | Login     | Corre       |

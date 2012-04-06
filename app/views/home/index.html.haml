@@ -1,6 +1,6 @@
 %h1 
   Hello there welcome to BearTracks
--if not current_resident
+- if not current_resident and not current_clerk
   %br
   = link_to "Sign up", new_resident_path
   %br
