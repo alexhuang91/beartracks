@@ -12,7 +12,7 @@
   %tbody
     - @packages.each do |p|
       %tr
-        %td= p.datetime_received.ctime
+        %td= p.datetime_received.localtime.ctime
         %td= p.id
         %td= p.tracking_number
         %td= p.resident_name

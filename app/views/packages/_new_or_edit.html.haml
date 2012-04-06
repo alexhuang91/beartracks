@@ -1,25 +1,41 @@
--#THE THOUGHT OF THIS PAGE:
--# TODO make a partial that looks the same between new and edit
--# new leaves everything blank except perhaps "Unit" and edit
--# fills everything in
--#
--#
--#   t.integer  "tracking_number",   :null => false
--#   t.string   "resident_name",     :null => false
--#   t.integer  "resident_id"
--#   t.datetime "datetime_received", :null => false
--#   t.string   "carrier"
--#   t.string   "unit",              :null => false
--#   t.string   "building",          :null => false
--#   t.integer  "room",              :null => false
--#   t.integer  "clerk_received_id"
--#   t.integer  "clerk_accepted_id"
--#   t.datetime "datetime_accepted"
--#   t.string   "sender_address"
--#   t.string   "sender_city"
--#   t.string   "sender_state"
--#   t.integer  "sender_zip"
--#   t.text     "description"
--#   t.datetime "created_at"
--#   t.datetime "updated_at"
--#
+%table
+  %tr
+    %td= label :package, :resident_name, "Resident Name:*"
+    %td= text_field :package, "resident_name"
+  %tr
+    %td= label :package, :unit, "Unit:*"
+    -if @new
+      %td= select :package, :unit, units_array#,
+# :selected=>current_clerk.unit # if we give clerks such a field
+    -else
+      %td= select :package, :unit, units_array
+  %tr
+    %td= label :package, :building, "Building:*"
+    %td= text_field :package, "building"
+  %tr
+    %td= label :package, :room, "Room Number:*"
+    %td= text_field :package, "room"
+  %tr
+    %td= label :package, :sender_address, "Sender Address:"
+    %td= text_field :package, "sender_address"
+  %tr
+    %td= label :package, :sender_city, "Sender City:"
+    %td= text_field :package, "sender_city"
+  %tr
+    %td= label :package, :sender_state, "Sender State:"
+    -if @new
+      %td= select :package, :sender_state, states_array, :selected=>"CA"
+    -else
+      %td= select :package, :sender_state, states_array
+  %tr
+    %td= label :package, :sender_zip, "Sender Zip Code:"
+    %td= text_field :package, "sender_zip"
+  %tr
+    %td= label :package, :tracking_number, "Tracking Number:*"
+    %td= text_field :package, "tracking_number"
+  %tr
+    %td= label :package, :carrier, "Carrier:"
+    %td= text_field :package, "carrier"
+  %tr
+    %td= label :package, :description, "Additional Comments:"
+    %td= text_area :package, "description", :size=>"43x7"

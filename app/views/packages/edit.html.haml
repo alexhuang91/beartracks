@@ -1,46 +1,8 @@
 %h1 Edit Package
 
 = form_tag package_path(@package), :method=>'put'  do
-  %table
-    %tr
-      %td= label :package, :resident_name, "Resident Name:*"
-      %td= text_field :package, "resident_name"
-    %tr
-      %td= label :package, :unit, "Unit:*"
-      %td= select :package, :unit,
-  ['Unit 1', 'Unit 2', 'Unit 3', 'Foothill', 'Bowles', 'Stern',
-  'Clark Kerr', 'Manville', 'Ida L. Jackson', 'Channing-Bowditch',
-  'Martinez Commons', 'University Village']
-    %tr
-      %td= label :package, :building, "Building:*"
-      %td= text_field :package, "building"
-    %tr
-      %td= label :package, :room, "Room Number:*"
-      %td= text_field :package, "room"
-    %tr
-      %td= label :package, :sender_address, "Sender Address:"
-      %td= text_field :package, "sender_address"
-    %tr
-      %td= label :package, :sender_city, "Sender City:"
-      %td= text_field :package, "sender_city"
-    %tr
-      %td= label :package, :sender_state, "Sender State:"
-      %td= select :package, :sender_state,
-  ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
-  "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
-  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
-  "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
-  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
-    %tr
-      %td= label :package, :sender_zip, "Sender Zip Code:"
-      %td= text_field :package, "sender_zip"
-    %tr
-      %td= label :package, :tracking_number, "Tracking Number:*"
-      %td= text_field :package, "tracking_number"
-    %tr
-      %td= label :package, :carrier, "Carrier:"
-      %td= text_field :package, "carrier"
-    %tr
-      %td= label :package, :description, "Additional Comments:"
-      %td= text_area :package, "description", :size=>"43x7"
+
+  = render :partial=>"new_or_edit"
+
   = submit_tag "Update Package info"
+= link_to "Back to Package List", packages_path
