@@ -1,32 +1,35 @@
-Factory.sequence :login do |n|
-  "login_#{n}"
-end
+FactoryGirl.define do
+  
+  sequence :login do |n| 
+    "login_#{n}"
+  end
+  sequence :email do |n|
+    "email_#{n}@email.com"
+  end
+  
+  factory :clerk_session do
+    login "login"
+    password "password"
+    remember_me false
+  end
+  
+  factory :resident_session do
+    login "login"
+    password "password"
+    remember_me false
+  end
 
-Factory.sequence :email do |n|
-  "email_#{n}@email.com"
-end
+  factory :clerk do
+    login {Factory.next(:login)}
+    password "pass"
+    password_confirmation "pass"
+  end
 
-Factory.define :clerk_session do |sesh|
-  sesh.login "login"
-  sesh.password "password"
-  sesh.remember_me false
-end
+  factory :resident do
+    login {Factory.next(:login)}
+    email {Factory.next(:email)}
+    password "pass"
+    password_confirmation "pass"
+  end
 
-Factory.define :resident_session do |sesh|
-  sesh.login "login"
-  sesh.password "password"
-  sesh.remember_me false
-end
-
-Factory.define :clerk do |c|
-  c.login {Factory.next(:login)}
-  c.password "pass"
-  c.password_confirmation "pass"
-end
-
-Factory.define :resident do |r|
-  r.login {Factory.next(:login)}
-  r.email {Factory.next(:email)}
-  r.password "pass"
-  r.password_confirmation "pass"
 end

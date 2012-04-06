@@ -140,13 +140,13 @@ describe ClerkSessionsController do
     end
     
     it "should not allow viewing of clerk login page" do
-      response.should_not render_template("new")
       get "new"
+      response.should_not render_template("new")
     end
     
     it "should redirect to the home page" do
-      response.should_not render_template("new")
       do_create
+      response.should_not render_template("new")
     end
     
   end
