@@ -122,21 +122,30 @@ describe ClerkSessionsController do
   describe "Prevent a User from logging in as a Clerk when a Resident is already logged in." do
     
     before :each do
-      # log in a resident
-      @resident = Resident.create!(:login => "johnlennon", :email => "mail@mail.com", :password => "pass", :password_confirmation => "pass")
-      @sesh = ResidentSession.create!(:login => "johnlennon", :password => "pass", :remember_me => true)
+      @fake_session = mock('ResidentSession')
+      controller.stub(:current_resident_session).and_return(@fake_session)
+      @fake_session.stub(:nil?).and_return(false)
     end
     
-    after :each do
-      @sesh.destroy
-      @resident.destroy
+    it "should not create a clerk session when a login post request is attempted" do
+      ClerkSession.should_not_receive(:new)
+      do_create
     end
     
-    it "should not create a clerk session when a login is attempted" 
+    it "should not allow viewing of clerk login page" do
+      get :new # go to clerk/login
+      response.should_not render_template("new")
+    end
     
-    it "should not allow viewing of clerk login page" 
+    it "should redirect to the home page when trying to view clerk login page" do
+      get :new
+      response.should redirect_to(root_url)
+    end
     
-    it "should redirect to the home page" 
+    it "should redirect to the home page when trying to post a clerk login request" do
+      do_create
+      response.should redirect_to(root_url)
+    end
     
   end
   

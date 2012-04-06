@@ -17,6 +17,8 @@ Beartracks::Application.routes.draw do
   match 'resident/login' => 'resident_sessions#new'
   match 'resident/logout' => 'resident_sessions#destroy'
   
+  match 'clerk/home' => 'packages#index'
+  
   
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

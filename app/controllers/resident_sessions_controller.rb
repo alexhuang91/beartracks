@@ -33,7 +33,8 @@ class ResidentSessionsController < ApplicationController
     if current_clerk_session.nil? 
       return true
     end
-    redirect_to packages_path, :warning => "You cannot log in as a resident if you're logged in as a clerk."
+    flash[:warning] = "You cannot log in as a Resident if you're logged in as a Clerk."
+    redirect_to clerk_home_path 
     return false
   end
   
