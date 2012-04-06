@@ -48,5 +48,5 @@ Scenario: Signing up
     When I press "Submit"
     Then a new Clerk account for "Sally" should be created
     And the current clerk's login should be "Sally"
-    And I am on the root page
+    Then I should be on the clerk home page
     
