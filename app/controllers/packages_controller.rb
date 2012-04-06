@@ -62,7 +62,7 @@ class PackagesController < ApplicationController
     p = params[:package]
     p[:updated_at] = Time.now.to_datetime
     if @package.update_attributes(p)
-      flash[:notice] = "package #{@package.tracking_number} for #{@package.resident_name} was updated at #{p.updated_at.localtime.ctime}}"
+      flash[:notice] = "package #{@package.tracking_number} for #{@package.resident_name} was updated at #{p[:updated_at].ctime}"
       redirect_to package_path @package
     else
       flash[:error] = "There was an error in updating this package."
