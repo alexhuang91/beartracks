@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ClerkSessionsController do
-
+  
   describe "GET 'new'" do
     it "returns http success" do
       get 'new'
@@ -118,5 +118,38 @@ describe ClerkSessionsController do
     end
  
   end
+  
+  describe "Prevent a User from logging in as a Clerk when a Resident is already logged in." do
+    
+    before :each do
+      # log in a resident
+      @resident = Resident.create!(:login => "johnlennon", :email => "mail@mail.com", :password => "pass", :password_confirmation => "pass")
+      @sesh = ResidentSession.create!(:login => "johnlennon", :password => "pass", :remember_me => true)
+    end
+    
+    after :each do
+      @sesh.destroy
+      @resident.destroy
+    end
+    
+    it "should not create a clerk session when a login is attempted" do
+      #ClerkSession.find.should be_nil
+      assigns(:clerk_session).should be_nil
+      do_create
+      ClerkSession.find.should be_nil
+    end
+    
+    it "should not allow viewing of clerk login page" do
+      response.should_not render_template("new")
+      get "new"
+    end
+    
+    it "should redirect to the home page" do
+      response.should_not render_template("new")
+      do_create
+    end
+    
+  end
+  
   
 end
