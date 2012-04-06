@@ -4,6 +4,7 @@ Beartracks::Application.routes.draw do
   get "resident_sessions/new"
   post "resident_sessions/create"
   get "home/index"
+  get "packages/picked_up"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
