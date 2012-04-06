@@ -18,6 +18,9 @@ Beartracks::Application.routes.draw do
   match 'resident/logout' => 'resident_sessions#destroy'
   match 'packages/:id/picked_up' => 'packages#picked_up'
   
+  match 'clerk/home' => 'packages#index'
+  
+  
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

@@ -14,19 +14,21 @@
         = link_to "Add New Clerk", new_clerk_path
         |
         - if current_resident
-          = link_to "Logout", resident_logout_path
+          = link_to "Resident Logout", resident_logout_path
         - elsif current_clerk
-          = link_to "Logout", clerk_logout_path
+          = link_to "Clerk Logout", clerk_logout_path
         - else
           = link_to "Clerk Login", clerk_login_path
 
     #flash
       - if flash[:notice]
         #notice
-          %span{:class => "message"} 
+          %span{:class => "notice"} 
             = flash[:notice]
       - elsif flash[:warning]
-        #warning.message= flash[:warning]
+        #warning
+          %span{:class => "warning"}
+            = flash[:warning]
     
     .wrapper
       = yield

@@ -1,8 +1,8 @@
 %h1 
-  Hello there welcome to BearTracks
--if not current_resident
+  Your mailroom package organization and notification solution.
+- if not current_resident and not current_clerk
   %br
-  = link_to "Sign up", new_resident_path
+  = link_to "Resident Sign Up", new_resident_path, :class => "signup"
   %br
   %br
-  = link_to "Resident Login", resident_login_path
+  = link_to "Resident Login", resident_login_path, :class => "signup"
