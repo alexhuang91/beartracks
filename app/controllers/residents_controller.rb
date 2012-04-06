@@ -7,7 +7,7 @@ class ResidentsController < ApplicationController
   def create
     @resident = Resident.new(params[:resident])
     if @resident.save
-      ResidentSession.create @resident
+      ResidentSession.create! @resident
       flash[:notice] = "Resident account successfully created."
       redirect_to root_url
     else
