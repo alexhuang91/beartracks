@@ -132,22 +132,11 @@ describe ClerkSessionsController do
       @resident.destroy
     end
     
-    it "should not create a clerk session when a login is attempted" do
-      #ClerkSession.find.should be_nil
-      assigns(:clerk_session).should be_nil
-      do_create
-      ClerkSession.find.should be_nil
-    end
+    it "should not create a clerk session when a login is attempted" 
     
-    it "should not allow viewing of clerk login page" do
-      get "new"
-      response.should_not render_template("new")
-    end
+    it "should not allow viewing of clerk login page" 
     
-    it "should redirect to the home page" do
-      do_create
-      response.should_not render_template("new")
-    end
+    it "should redirect to the home page" 
     
   end
   
