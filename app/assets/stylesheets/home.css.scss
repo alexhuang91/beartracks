@@ -1,3 +1,40 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.signup {
+	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9bcafa), color-stop(1, #bfdfff) );
+	background:-moz-linear-gradient( center top, #9bcafa 5%, #bfdfff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9bcafa', endColorstr='#bfdfff');
+	background-color:#9bcafa;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #84bbf3;
+	display:block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:25px;
+	font-weight:normal;
+	padding:25px 70px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #528ecc;
+	text-align: center;
+	margin: 0 60px 0 60px;
+}
+
+.signup:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #bfdfff), color-stop(1, #9bcafa) );
+	background:-moz-linear-gradient( center top, #bfdfff 5%, #9bcafa 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bfdfff', endColorstr='#9bcafa');
+	background-color:#bfdfff;
+}
+
+.signup:active {
+	position:relative;
+	top:1px;
+}
+

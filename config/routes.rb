@@ -17,6 +17,7 @@ Beartracks::Application.routes.draw do
   match 'clerk/logout' => 'clerk_sessions#destroy'
   match 'resident/login' => 'resident_sessions#new'
   match 'resident/logout' => 'resident_sessions#destroy'
+  match 'packages/:id/picked_up' => 'packages#picked_up'
   
   match 'clerk/home' => 'packages#index'
   

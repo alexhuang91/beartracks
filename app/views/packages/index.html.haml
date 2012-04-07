@@ -1,26 +1,38 @@
 %h1 All Packages
 
-%table#packages
-  %thead
-    %tr
-      %th Arrived
-      %th Internal ID
-      %th Tracking Number
-      %th Resident
-      %th Building and Room
-      %th Picked up?
-      %th More Info
-      %th Clerk
-  %tbody
-    - @packages.each do |p|
+=form_tag packages_path, :method=>'get' do
+  Packages:
+  = select_tag :packages, options_for_select(@packages_hash, params[:packages])
+  Units:
+  = select_tag :unit, options_for_select(@units_hash, params[:unit])
+  = submit_tag 'Reload Packages'
+-if @packages = []
+  (No packages to list)
+  %br
+-else
+  %table#packages
+    %thead
       %tr
-        %td= p.datetime_received.localtime.ctime
-        %td= p.id
-        %td= p.tracking_number
-        %td= p.resident_name
-        %td= "#{p.building}, #{p.room}"
-        %td= p.picked_up ? "Yes" : "No"
-        %td= link_to "Package Details for #{p.tracking_number}", package_path(p)
-        %td= p.clerk.login
+        %th Arrived
+        %th Internal ID
+        %th Tracking Number
+        %th Resident
+        %th Unit
+        %th Building and Room
+        %th Picked up?
+        %th Clerk
+        %th More Info
+    %tbody
+      - @packages.each do |p|
+        %tr
+          %td= p.datetime_received.localtime.ctime
+          %td= p.id
+          %td= p.tracking_number
+          %td= p.resident_name
+          %td= p.unit
+          %td= "#{p.building}, #{p.room}"
+          %td= p.picked_up ? "Yes" : "No"
+          %td= p.clerk.login
+          %td=link_to "Package Details for #{p.tracking_number}", package_path(p)
 
 = link_to "Add New Package", new_package_path
