@@ -10,6 +10,7 @@
       %th Building and Room
       %th Picked up?
       %th More Info
+      %th Clerk
   %tbody
     - @packages.each do |p|
       %tr
@@ -20,5 +21,6 @@
         %td= "#{p.building}, #{p.room}"
         %td= p.picked_up ? "Yes" : "No"
         %td= link_to "Package Details for #{p.tracking_number}", package_path(p)
+        %td= p.clerk.login
 
 = link_to "Add New Package", new_package_path

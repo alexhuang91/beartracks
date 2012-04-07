@@ -11,8 +11,9 @@ class CreatePackages < ActiveRecord::Migration
       t.string :building, :null => false
       t.integer :room, :null => false
 
-      t.integer :clerk_received_id
+      t.integer :clerk_received_id                     # replaced by :clerk_id, remove this line in the future
       t.integer :clerk_accepted_id
+      t.integer :clerk_id, :null => false              # foreign key
      
       t.string :sender_address
       t.string :sender_city

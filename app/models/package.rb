@@ -1,4 +1,5 @@
 class Package < ActiveRecord::Base
+  belongs_to :clerk
 
   def unfilled_fields
     @@never_null_fields = {:resident_name=>'Resident Name', :unit=>'Unit', :building=>'Building',

@@ -42,17 +42,20 @@ class PackagesController < ApplicationController
       flash[:error] = "Cannot leave #{p.blank_fields} blank"
       redirect_to new_package_path
     else
-      p[:datetime_received] = Time.now.to_datetime
+      p.datetime_received = Time.now.to_datetime
+      # This will let use do "p.clerk" to access a package's clerk 
+      p.clerk_id = current_clerk.id
+      # TODO clerk_received_id is deprecated. remove once everyone knows about clerk_id
       p[:clerk_received_id] = current_clerk.id
-      #### TODO change the next line to read p.clerk = current_clerk.login using rails associations
-      #p[:clerk_name] = current_clerk.login
       if p.save
       # TODO Send out an email or text or add to the slip-queue
         flash[:notice] = "package #{p[:tracking_number]} for #{p[:resident_name]} was created at #{p[:datetime_received].localtime.ctime}"
       else
         flash[:error] = "There was an error creating this package."
       end
-      # now that the package is saved, redirect appropriately
+      # Now that the package is saved, redirect to the list of packages if the
+      # clerk is done creating them, or another create package form if the
+      # clerk wants to create more packages.
       if params[:commit] == "Create Package"
         redirect_to packages_path
       else
@@ -75,7 +78,7 @@ class PackagesController < ApplicationController
   end
 
   def destroy
-# what is there to do here, just remove it from the db? but who gets to do this, admins and/or clerks, and when?
+    # what is there to do here, just remove it from the db? but who gets to do this, admins and/or clerks, and when?
   end
 
   def picked_up
