@@ -83,7 +83,10 @@ class PackagesController < ApplicationController
 
   def destroy
 # what is there to do here, just remove it from the db? but who gets to do this, admins and/or clerks, and when?
-    Package.find params[:id]
+    @package = Package.find params[:id]
+    @package.destroy
+    flash[:notice] = "package was deleted."
+    redirect_to packagess_path
   end
 
   def picked_up
