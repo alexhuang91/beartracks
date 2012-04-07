@@ -6,26 +6,29 @@
   Units:
   = select_tag :unit, options_for_select(@units_hash, params[:unit])
   = submit_tag 'Reload Packages'
-
-%table#packages
-  %thead
-    %tr
-      %th Arrived
-      %th Internal ID
-      %th Tracking Number
-      %th Resident
-      %th Unit
-      %th Building and Room
-      %th More Info
-  %tbody
-    - @packages.each do |p|
+-if @packages = []
+  (No packages to list)
+  %br
+-else
+  %table#packages
+    %thead
       %tr
-        %td= p.datetime_received.localtime.ctime
-        %td= p.id
-        %td= p.tracking_number
-        %td= p.resident_name
-        %td= p.unit
-        %td= "#{p.building}, #{p.room}"
-        %td=link_to "Package Details for #{p.tracking_number}", package_path(p)
+        %th Arrived
+        %th Internal ID
+        %th Tracking Number
+        %th Resident
+        %th Unit
+        %th Building and Room
+        %th More Info
+    %tbody
+      - @packages.each do |p|
+        %tr
+          %td= p.datetime_received.localtime.ctime
+          %td= p.id
+          %td= p.tracking_number
+          %td= p.resident_name
+          %td= p.unit
+          %td= "#{p.building}, #{p.room}"
+          %td=link_to "Package Details for #{p.tracking_number}", package_path(p)
 
 = link_to "Add New Package", new_package_path
