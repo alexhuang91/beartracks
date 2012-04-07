@@ -8,6 +8,7 @@
       %th Tracking Number
       %th Resident
       %th Building and Room
+      %th Picked up?
       %th More Info
   %tbody
     - @packages.each do |p|
@@ -17,6 +18,7 @@
         %td= p.tracking_number
         %td= p.resident_name
         %td= "#{p.building}, #{p.room}"
-        %td=link_to "Package Details for #{p.tracking_number}", package_path(p)
+        %td= p.picked_up ? "Yes" : "No"
+        %td= link_to "Package Details for #{p.tracking_number}", package_path(p)
 
 = link_to "Add New Package", new_package_path

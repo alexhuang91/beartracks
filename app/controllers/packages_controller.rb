@@ -3,7 +3,7 @@ class PackagesController < ApplicationController
   def show
     @package = Package.find params[:id]
     @clerk_received = Clerk.find @package.clerk_received_id
-    if @package.clerk_accepted_id
+    if @package.picked_up
       @accepted = true
       @clerk_released = Clerk.find @package.clerk_accepted_id
     end
@@ -16,7 +16,9 @@ class PackagesController < ApplicationController
 #     if params[:unit] == 'all'
 #       @packages = Package.where :datetime_accepted => nil
 #     else
-        @packages = Package.where :datetime_accepted => nil #, :unit => params[:unit]
+        # By default we want to show all packages. The clerk can filter out picked up ones if he/she desires.
+        @packages = Package.all
+        #@packages = Package.where :datetime_accepted => nil #, :unit => params[:unit]
 #     end
 #   else
 #     current_clerk.unit = params[:unit]
@@ -42,13 +44,15 @@ class PackagesController < ApplicationController
     else
       p[:datetime_received] = Time.now.to_datetime
       p[:clerk_received_id] = current_clerk.id
+      #### TODO change the next line to read p.clerk = current_clerk.login using rails associations
+      #p[:clerk_name] = current_clerk.login
       if p.save
-      # todo Send out an email or text or add to the slip-queue
+      # TODO Send out an email or text or add to the slip-queue
         flash[:notice] = "package #{p[:tracking_number]} for #{p[:resident_name]} was created at #{p[:datetime_received].localtime.ctime}"
       else
         flash[:error] = "There was an error creating this package."
       end
-# now that the package is saved, redirect appropriately
+      # now that the package is saved, redirect appropriately
       if params[:commit] == "Create Package"
         redirect_to packages_path
       else
@@ -76,6 +80,7 @@ class PackagesController < ApplicationController
 
   def picked_up
     p = Package.find(params[:id])
+    p.picked_up = true
     p.clerk_accepted_id = current_clerk.id
     p.datetime_accepted = Time.now.to_datetime
     if p.save
@@ -83,6 +88,6 @@ class PackagesController < ApplicationController
     else
       flash[:error] = "There was an error in updating this package."
     end
-    redirect_to packages_path #redirect elsewhere?
+    redirect_to package_path(p) 
   end
 end
