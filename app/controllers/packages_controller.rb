@@ -11,8 +11,8 @@ class PackagesController < ApplicationController
 
   def index
     if not params[:unit] or not params[:packages]
-      session[:unit]     = 'All Units' unless params[:unit]
-      session[:packages] = 'all'       unless params[:packages]
+      session[:unit]     = 'all' unless params[:unit]
+      session[:packages] = 'all' unless params[:packages]
       flash.keep
       redirect_to :unit=>session[:unit], :packages=>session[:packages] and return
     end
@@ -23,9 +23,9 @@ class PackagesController < ApplicationController
       redirect_to :unit=>session[:unit], :packages=>session[:packages] and return
     end
 
-    units = params[:unit] == 'All Units' ? units_array : params[:unit]
-    @units_array = units_array << 'All Units'
-    @units_hash = Hash[@units_array.collect { |u| [u,u] }]
+    units = params[:unit] == 'all' ? units_array : params[:unit]
+    @units_hash = Hash[units_array.collect { |u| [u,u] }]
+    @units_hash['All Units'] = 'all'
     @packages_hash = {'In House'=>'received', 'Picked Up'=>'picked_up', 'All Packages'=>'all'}
 
     if params[:packages] == 'received'
