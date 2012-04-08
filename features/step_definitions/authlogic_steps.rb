@@ -34,6 +34,11 @@ Then /^there should be no clerk logged in$/ do
   session.nil?.should be_true
 end
 
+Given /^there is no clerk logged in$/ do
+  session = ClerkSession.find
+  session.destroy unless session.nil?
+end
+
 
 ##RESIDENTS##
 When /^I log in as a resident with username "([^"]*)" and password "([^"]*)"$/ do |login, password|
