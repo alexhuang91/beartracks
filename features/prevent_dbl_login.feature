@@ -26,6 +26,6 @@ Scenario: Clerk Logged in Can't log in as a Resident through interface
   When I press "Login"
   And the current clerk's login should be "Tony"
   When I go to the resident login page
-  Then I should be on the clerk home page
+  Then I should be on the packages page
   When I go to the home page
   And I should not see "Login"
