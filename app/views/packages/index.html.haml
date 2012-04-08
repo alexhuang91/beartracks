@@ -3,10 +3,10 @@
 =form_tag packages_path, :method=>'get' do
   Packages:
   = select_tag :packages, options_for_select(@packages_hash, params[:packages])
-  Units:
+  Unit:
   = select_tag :unit, options_for_select(@units_hash, params[:unit])
   = submit_tag 'Reload Packages'
--if @packages = []
+-if @packages == []
   (No packages to list)
   %br
 -else

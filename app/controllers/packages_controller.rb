@@ -10,15 +10,15 @@ class PackagesController < ApplicationController
   end
 
   def index
-    if not params[:unit] or not params[:packages]
-      session[:unit]     = 'all' unless params[:unit]
-      session[:packages] = 'all' unless params[:packages]
-      flash.keep
-      redirect_to :unit=>session[:unit], :packages=>session[:packages] and return
-    end
     if params[:unit] != session[:unit] or params[:packages] != session[:packages]
       session[:unit]     = params[:unit]     || session[:unit]
       session[:packages] = params[:packages] || session[:packages]
+      flash.keep
+      redirect_to :unit=>session[:unit], :packages=>session[:packages] and return
+    end
+    if not params[:unit] or not params[:packages]
+      session[:unit]     = 'all' unless params[:unit]
+      session[:packages] = 'all' unless params[:packages]
       flash.keep
       redirect_to :unit=>session[:unit], :packages=>session[:packages] and return
     end
