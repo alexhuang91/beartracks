@@ -1,5 +1,7 @@
 class PackagesController < ApplicationController
-
+  
+  before_filter :clerk_check
+  
   def show
     @package = Package.find params[:id]
     @clerk_received = Clerk.find @package.clerk_received_id
@@ -109,4 +111,16 @@ class PackagesController < ApplicationController
     end
     redirect_to package_path(p) 
   end
+  
+  protected
+  
+  def clerk_check
+    if not clerk_logged_in?
+      flash[:warning] = "You must be logged in as a clerk to work with packages."
+      redirect_to root_url
+      return false
+    end
+    return true
+  end
+
 end

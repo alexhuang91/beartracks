@@ -3,10 +3,15 @@ require 'ruby-debug'
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_clerk_session, :current_clerk
+  helper_method :current_clerk_session, :current_clerk, :clerk_logged_in?
   helper_method :current_resident_session, :current_resident
   helper_method :units_array, :states_array
+  
   private
+    
+    def clerk_logged_in?
+      !current_clerk_session.nil?
+    end
 
     def current_clerk_session
       return @current_clerk_session if defined?(@current_clerk_session)
