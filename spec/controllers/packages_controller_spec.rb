@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe PackagesController do
-  render_views
   
   describe "Testing the clerk logged in before filter on index action." do
     
