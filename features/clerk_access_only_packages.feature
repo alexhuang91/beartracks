@@ -10,9 +10,12 @@ Scenario: When No clerk is Logged in all package actions redirect to home page
 @model
 Scenario: When a clerk is logged in all package actions should not redirect
   Given the following clerk exists:
-    | login    | password   | password_confirmation |
-    | Paul     | pass       | pass                  |
-  When I log in as a clerk with username "Paul" and password "pass"
-  When I go to the packages page
+        | login    | password   | password_confirmation |
+        | John     | pass       | pass                  |
+    And I am on the clerk login page
+    And I fill in the following:
+        | Login     | John       |
+        | Password  | pass       |
+    When I press "Login"
   Then I should be on the packages page
   And I should not see "must be logged in"
