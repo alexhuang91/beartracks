@@ -58,7 +58,7 @@ class PackagesController < ApplicationController
       # This will let use do "p.clerk" to access a package's clerk 
       p.clerk_id = current_clerk.id
       # TODO clerk_received_id is deprecated. remove once everyone knows about clerk_id
-      p[:clerk_received_id] = current_clerk.id
+      p.clerk_received_id = current_clerk.id
       if p.save
       # TODO Send out an email or text or add to the slip-queue
         flash[:notice] = "package #{p.tracking_number} for #{p.resident_name} was created at #{p.datetime_received.localtime.ctime}"
@@ -109,7 +109,6 @@ class PackagesController < ApplicationController
       flash[:warning] = "There was an error in updating this package."
       redirect_to package_path p
     end
-    redirect_to package_path(p) 
   end
   
   protected
