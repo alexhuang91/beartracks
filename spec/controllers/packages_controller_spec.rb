@@ -38,14 +38,46 @@ describe PackagesController do
       
       describe "show action." do
         
-        before :each do
-          do_show
-        end
-        
         it "should redirect to home page" do
+          do_show
           response.should redirect_to(root_url)
         end
         
+      end
+      
+      describe "edit action." do
+        it "should redirect to home page" do
+          get :edit, :id => 1
+          response.should redirect_to(root_url)
+        end
+      end
+      
+      describe "new action." do
+        it "should redirect to home page" do
+          get :new
+          response.should redirect_to root_url
+        end
+      end
+      
+      describe "create action." do
+        it "should redirect to home page" do
+          post :create
+          response.should redirect_to root_url
+        end
+      end
+      
+      describe "update action." do
+        it "should redirect to home page" do
+          get :update, :id => 1
+          response.should redirect_to root_url
+        end
+      end
+      
+      describe "destroy action." do
+        it "should redirect to home page" do
+          get :destroy, :id => 1
+          response.should redirect_to root_url
+        end
       end
       
     end
