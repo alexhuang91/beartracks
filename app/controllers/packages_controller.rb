@@ -56,7 +56,7 @@ class PackagesController < ApplicationController
     else
       p.datetime_received = Time.now.to_datetime
       # This will let use do "p.clerk" to access a package's clerk 
-      p.clerk_id = current_clerk.id
+      p.clerk = current_clerk
       # TODO clerk_received_id is deprecated. remove once everyone knows about clerk_id
       p.clerk_received_id = current_clerk.id
       if p.save
