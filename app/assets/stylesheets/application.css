@@ -6,6 +6,22 @@
  *= require_tree . 
 */
 
+/*
+ * Packages table
+ */
+table#packages {
+	width: 100%;
+}
+
+tr.package-columns {
+	color: black;
+	font-weight: bold;
+	font-size: 12pt;
+	text-align: center;
+	vertical-align: middle;
+}
+
+
 html, body {
   margin: 0;
   padding: 0;
@@ -52,27 +68,11 @@ h1.title {
 }
 
 #footer {
-	border-top: 1px solid #F3F2F2;
-	color: #A2A2A2;
-	background: #F2F2F2;
-	margin: 0 0 0 0;
-}
-
-#footimage {
-	margin: 0 0 -45px 0;
-}
-
-#footer .main {
-	background-color: #F2F2F2;
-}
-
-#footer .secondary {		
-	width: 100%;
-	margin: 0 auto;
-	padding: 10px 0 10px 30px;	
-	background-color: #e4e4e4;
-	border-top: 1px solid #e4e4e4;
-	color: #5b5b5b;
+	background-image: url('campanile_shadow.png');
+	background-repeat: no-repeat;
+	height: 308px; /* this is the height of the image */
+	line-height: 600px; /* force text to bottom of page */
+	text-align: center;
 }
 
 .wrapper {
@@ -80,10 +80,6 @@ h1.title {
 	height: auto !important;
 	height: 100%;
 	margin: 0 auto auto 20px;
-}
-
-#footer, .push {
-	height: 1em;
 }
 
 #user_nav {
