@@ -1,51 +1,52 @@
-%h2 Details about Package #{@package.tracking_number}
-
 %table#details
+  %caption#package-detail-caption Details about package #{@package.id}
   %tr
-    %td Resident:
-    %td= @package.resident_name
+    %td.package-detail-header Resident:
+    %td.package-detail-info= @package.resident_name
   %tr
-    %td Housing:
-    %td= @package.unit + ', ' + @package.room.to_s + ' ' + @package.building
+    %td.package-detail-header Housing:
+    %td.package-detail-info= @package.unit + ', ' + @package.building + ' ' + @package.room
   %tr
-    %td From:
-    %td= @package.sender_address
+    %td.package-detail-header From:
+    %td.package-detail-info= @package.sender_address
   %tr
-    %td
-    %td= @package.sender_city + ', ' + @package.sender_state + ' ' + @package.sender_zip.to_s
+    %td.package-detail-header
+    %td.package-detail-info= @package.sender_city + ', ' + @package.sender_state + ' ' + @package.sender_zip.to_s
   %tr
-    %td Carrier:
-    %td= @package.carrier
+    %td.package-detail-header Carrier:
+    %td.package-detail-info= @package.carrier
   %tr
-    %td Arrived:
-    %td= @package.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
+    %td.package-detail-header Arrived:
+    %td.package-detail-info= @package.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
 
   %tr
-    %td Received By:
-    %td= @clerk_received.login
+    %td.package-detail-header Received By:
+    %td.package-detail-info= @clerk_received.login
 
   %tr
-    %td Picked Up?:
-    %td= @package.picked_up ? "Yes" : "No"
+    %td.package-detail-header Picked Up?:
+    %td.package-detail-info= @package.picked_up ? "Yes" : "No"
 
   -if @accepted
     %tr
-      %td Picked Up At:
-      %td= @package.datetime_accepted.localtime.strftime("%m/%d/%y %I:%M%p")
+      %td.package-detail-header Picked Up At:
+      %td.package-detail-info= @package.datetime_accepted.localtime.strftime("%m/%d/%y %I:%M%p")
     %tr
-      %td Released By:
-      %td= @clerk_released.login
+      %td.package-detail-header Released By:
+      %td.package-detail-info= @clerk_released.login
 
--if @package.description and @package.description != ""
-  %h3 Additional Comments:
+  -if @package.description
+    %tr
+      %td.package-detail-header Comments:
+      %td.package-detail-info= @package.description
 
-  %p#description= @package.description
--else
-  %p#description= '(no additional comments)'
-
-= link_to 'Edit', edit_package_path(@package)
--if not @package.picked_up
-  = link_to 'Picked Up', :action => 'picked_up', :id => @package.id
-= button_to 'Delete', package_path(@package), :method => :delete, :confirm => 'Are you sure?'
-
-= link_to 'Back to package list', packages_path
+#options
+  = link_to 'Edit', edit_package_path(@package) 
+  |
+  = link_to 'Delete', package_path(@package), :method => :delete, :confirm => 'Are you sure?'
+  -if not @package.picked_up
+    |
+    = link_to 'Picked Up', :action => 'picked_up', :id => @package.id
+  %br
+  %br
+  = link_to 'Back to package list', packages_path

@@ -1,19 +1,28 @@
 /*
- * Packages table styles
- * 
- * Look for the table in /app/views/packages/index.html.haml
- */
+ * Styles for everything about packages
+*/
 
 table#packages {
 	width: 90%;
 	margin: 15px auto 20px;
 }
 
-.packages-table-caption {
+table#details {
+  width: 50%;
+  margin: 50px auto 10px;
+}
+
+#packages-table-caption {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 15px;
   color: gray;
+}
+
+#package-detail-caption {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 tr.packages-table-header {
@@ -29,4 +38,18 @@ tr.packages-table-info {
 
 .packages-table-cell {
 	padding: 7px 0px;
+}
+
+.package-detail-header { 
+  font-weight: bold;
+  text-align: right;
+  padding: 10px 5px 10px 0px;
+}
+
+.package-detail-info {
+  text-align: left;
+}
+
+#options {
+  text-align: center;
 }
