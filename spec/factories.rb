@@ -35,4 +35,25 @@ FactoryGirl.define do
     password_confirmation "pass"
   end
 
+  factory :package do
+    resident_name "Name"
+    resident_id 1
+    unit "Unit"
+    building "Building"
+    room "Room"
+    tracking_number "12345"
+    datetime_received Time.now-500
+    updated_at Time.now
+    datetime_accepted nil
+    sender_city "City"
+    sender_state "CA"
+    sender_address "123 Big Street"
+    sender_zip "90210"
+    picked_up false
+    carrier "Mail Motherfucker"
+    clerk_received_id 10
+    clerk_accepted_id nil
+    clerk_id 12
+    description "Good Words"
+  end
 end
