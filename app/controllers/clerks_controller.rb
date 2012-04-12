@@ -16,4 +16,8 @@ class ClerksController < ApplicationController
     end
   end
   
+  def edit
+    @clerk = Clerk.find(params[:id])
+  end
+  
 end

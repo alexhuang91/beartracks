@@ -56,7 +56,7 @@ Scenario: Should not see edit profile link when no clerk logged in
   And I am on the root page
   Then I should not see "Edit Profile"
   
-Scenario: Should see edit profile link when clerk is logged in
+Scenario: Should see edit profile link when clerk is logged in and be able to edit
   Given the following clerk exists:
         | login    | password   | password_confirmation | unit   | email           | 
         | John     | pass       | pass                  | Unit 1 | john@lennon.com |
@@ -66,6 +66,9 @@ Scenario: Should see edit profile link when clerk is logged in
       | Password  | pass       |
   And I press "Login"
   Then I should see "Edit Profile"
+  When I follow "Edit Profile"
+  Then I should be on the clerk edit page for John
+  I should see "Edit Clerk Info"
   
   
   

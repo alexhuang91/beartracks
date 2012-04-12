@@ -15,6 +15,8 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
+    when /^the clerk edit page for (.*)$/
+      "/clerks/#{Clerk.find_by_login($1).id}/edit"
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
