@@ -46,7 +46,7 @@ describe PackagesController do
 
     it "should render the landing page view" do
       do_index
-      response.should redirect_to(:action => :index, :packages => "all", :unit => "Unit 1")
+      response.should redirect_to(:action => :index, :packages => "all")
     end
 
     it "should render the package details view" do
@@ -156,7 +156,7 @@ describe PackagesController do
       describe "index action" do
         it "should render the view" do# need to figure out how to verify since 
           do_index
-          response.should redirect_to :action => "index", :packages => "all", :unit => "Unit 1"
+          response.should redirect_to :action => "index", :packages => "all"
         end
 
         it "should not set a flash warning" do
