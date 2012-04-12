@@ -50,4 +50,3 @@ Scenario: Signing up
     Then a new resident account for "Sally" should be created
     And the current resident's login should be "Sally"
     And I am on the root page
-    

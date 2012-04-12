@@ -133,6 +133,12 @@ h1.title {
 	text-shadow:1px 1px 0px #cc9f52;
 	margin: 15px 15px 15px 15px;
 }
+.errormessage {
+  font-family:arial;
+  font-size:15px;
+  font-weight:normal;
+  color: #ff0000;
+}
 .error {
   -moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
@@ -148,10 +154,10 @@ h1.title {
   display:inline-block;
   color:#ffffff;
   font-family:arial;
-  font-size:15px;
+  font-size:12px;
   font-weight:bold;
   padding:6px 24px;
   text-decoration:none;
   text-shadow:1px 1px 0px #b23e35;
-  margin: 15px 15px 15px 15px;
+  margin: 2px 2px 2px 2px
 }
