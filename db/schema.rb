@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 3) do
+ActiveRecord::Schema.define(:version => 20120412013004) do
 
   create_table "clerks", :force => true do |t|
     t.string   "login"
@@ -23,14 +23,12 @@ ActiveRecord::Schema.define(:version => 3) do
   end
 
   create_table "packages", :force => true do |t|
-    t.integer  "tracking_number",                      :null => false
     t.string   "carrier"
     t.text     "description"
     t.string   "resident_name",                        :null => false
     t.integer  "resident_id"
     t.string   "unit",                                 :null => false
     t.string   "building",                             :null => false
-    t.integer  "room",                                 :null => false
     t.integer  "clerk_received_id"
     t.integer  "clerk_accepted_id"
     t.integer  "clerk_id",                             :null => false
@@ -42,6 +40,8 @@ ActiveRecord::Schema.define(:version => 3) do
     t.datetime "datetime_accepted"
     t.datetime "updated_at"
     t.boolean  "picked_up",         :default => false, :null => false
+    t.string   "tracking_number"
+    t.string   "room"
   end
 
   create_table "residents", :force => true do |t|

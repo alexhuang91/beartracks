@@ -23,18 +23,18 @@
     #flash
       - if flash[:notice]
         #notice
-          %span{:class => "notice"}
+          %span.notice
             = flash[:notice]
       - elsif flash[:warning]
         #warning
-          %span{:class => "warning"}
+          %span.warning
             = flash[:warning]
       - elsif flash[:error]
         #error
-          %span{:class => "error"}
+          %span.error
             = flash[:error]
     
-    .wrapper
+    #wrapper
       = yield
 
     #footer (c) 2012 UC Berkeley CS169 Group 17. All Rights Reserved.

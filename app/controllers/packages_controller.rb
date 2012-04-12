@@ -61,7 +61,7 @@ class PackagesController < ApplicationController
       p.clerk_received_id = current_clerk.id
       if p.save
       # TODO Send out an email or text or add to the slip-queue
-        flash[:notice] = "package #{p.tracking_number} for #{p.resident_name} was created at #{p.datetime_received.localtime.ctime}"
+        flash[:notice] = "Package created successfully."
       else
         flash[:warning] = "There was an error creating this package."
       end

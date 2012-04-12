@@ -1,0 +1,32 @@
+/*
+ * Packages table styles
+ * 
+ * Look for the table in /app/views/packages/index.html.haml
+ */
+
+table#packages {
+	width: 90%;
+	margin: 15px auto 20px;
+}
+
+.packages-table-caption {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: gray;
+}
+
+tr.packages-table-header {
+	color: black;
+	font-weight: bold;
+	font-size: 12pt;
+	text-align: center;
+}
+
+tr.packages-table-info {
+	text-align: center;
+}
+
+.packages-table-cell {
+	padding: 7px 0px;
+}
