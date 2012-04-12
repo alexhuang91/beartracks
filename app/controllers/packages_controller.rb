@@ -81,7 +81,7 @@ class PackagesController < ApplicationController
     p = params[:package]
     p[:updated_at] = Time.now.to_datetime
     if @package.update_attributes(p)
-      flash[:notice] = "package #{@package.tracking_number} for #{@package.resident_name} was updated #{@package.updated_at.localtime.ctime}}"
+      flash[:notice] = "Package was updated successfully."
       redirect_to package_path @package
     else
       flash[:warning] = "There was an error in updating this package."
@@ -93,7 +93,7 @@ class PackagesController < ApplicationController
     # what is there to do here, just remove it from the db? but who gets to do this, admins and/or clerks, and when?
     @package = Package.find params[:id]
     @package.destroy
-    flash[:notice] = "package was deleted."
+    flash[:notice] = "Package was deleted successfully."
     redirect_to packages_path
   end
 
@@ -103,7 +103,7 @@ class PackagesController < ApplicationController
     p.clerk_accepted_id = current_clerk.id
     p.datetime_accepted = Time.now.to_datetime
     if p.save
-      flash[:notice] = "package #{p.tracking_number} for #{p.resident_name} was picked up #{p.datetime_received.localtime.ctime}"
+      flash[:notice] = "Packed was picked up."
       redirect_to packages_path # or to the resident sign-up page if they arent opted in?
     else
       flash[:warning] = "There was an error in updating this package."

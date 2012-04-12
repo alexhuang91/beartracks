@@ -18,7 +18,7 @@
     %td= @package.carrier
   %tr
     %td Arrived:
-    %td= @package.datetime_received.localtime.ctime
+    %td= @package.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
 
   %tr
     %td Received By:
@@ -31,7 +31,7 @@
   -if @accepted
     %tr
       %td Picked Up At:
-      %td= @package.datetime_accepted.localtime.ctime
+      %td= @package.datetime_accepted.localtime.strftime("%m/%d/%y %I:%M%p")
     %tr
       %td Released By:
       %td= @clerk_released.login
