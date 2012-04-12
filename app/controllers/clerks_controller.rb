@@ -4,6 +4,10 @@ class ClerksController < ApplicationController
     @clerk = Clerk.new
   end
   
+  def show
+    
+  end
+  
   def create
     @clerk = Clerk.new(params[:clerk])
     if @clerk.save
@@ -18,6 +22,17 @@ class ClerksController < ApplicationController
   
   def edit
     @clerk = Clerk.find(params[:id])
+  end
+  
+  def update 
+    @clerk = Clerk.find(params[:id])
+    @clerk.update_attributes(params[:clerk]) # don't worry we're protected from is_admin by attr_protected
+    if @clerk.errors.any?
+      render :action => :edit
+    else
+      flash[:notice] = "#{@clerk.login} was successfully updated."
+      redirect_to clerk_path(@clerk)
+    end
   end
   
 end
