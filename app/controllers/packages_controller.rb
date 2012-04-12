@@ -25,18 +25,26 @@ class PackagesController < ApplicationController
       redirect_to :unit=>session[:unit], :packages=>session[:packages] and return
     end
 
-    units = params[:unit] == 'all' ? units_array : params[:unit]
-    @units_hash = Hash[units_array.collect { |u| [u,u] }]
-    @units_hash['All Units'] = 'all'
-    @packages_hash = {'In House'=>'received', 'Picked Up'=>'picked_up', 'All Packages'=>'all'}
+    # Do we want a clerk to be able to see all the packages at all the units?
+    # I'm thinking maybe we can limit them to just the unit they work at.
+    # If we don't want them to see everything, just remove everything that's commented
+    # out below between the TODO tags, and also remove all the unit stuff above
+    # TODO ===========================================================================
+    
+    #units = params[:unit] == 'all' ? units_array : params[:unit]
+    #@units_hash = Hash[units_array.collect { |u| [u,u] }]
+    #@units_hash['All Units'] = 'all'
+    @packages_hash = {'Not picked up'=>'received', 'Picked up'=>'picked_up', 'All Packages'=>'all'}
 
     if params[:packages] == 'received'
-      @packages = Package.where :datetime_accepted => nil, :unit => units
+      @packages = Package.where :picked_up => false #, :unit => units
     elsif params[:packages] == 'picked_up'
-      @packages = Package.where("datetime_accepted not ? and unit in (?)", nil, units)
+      @packages = Package.where :picked_up => true #, :unit => units 
     else
-      @packages = Package.where :unit => units
+      @packages = Package.all #Package.where :unit => units
     end
+    
+    # TODO ===========================================================================
   end
 
   def edit

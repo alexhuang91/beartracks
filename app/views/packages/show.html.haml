@@ -1,4 +1,4 @@
-%table#details
+%table#package-details
   %caption#package-detail-caption Details about package #{@package.id}
   %tr
     %td.package-detail-header Resident:
@@ -35,12 +35,12 @@
       %td.package-detail-header Released By:
       %td.package-detail-info= @clerk_released.login
 
--if @package.description
+-if @package.description and @package.description != ''
   #package-comments
     %p#package-comments-header Additional information
     %p= @package.description
 
-#options
+.options
   = link_to 'Edit', edit_package_path(@package) 
   |
   = link_to 'Delete', package_path(@package), :method => :delete, :confirm => 'Are you sure?'

@@ -7,22 +7,27 @@ table#packages {
 	margin: 15px auto 20px;
 }
 
-table#details {
+table#package-details {
   width: 50%;
   margin: 50px auto 10px;
 }
 
-#packages-table-caption {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: gray;
+table#package-form {
+  width: 50%;
+  margin: 50px auto 10px; 
 }
 
-#package-detail-caption {
+#package-view-options {
+  margin-left: 20px;
+}
+
+#package-detail-caption,
+#package-table-caption,
+#package-form-caption {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 15px;
+  color: black;
 }
 
 tr.packages-table-header {
@@ -36,21 +41,28 @@ tr.packages-table-info {
 	text-align: center;
 }
 
+#packages-table-options {
+  margin-top: 50px;
+  text-align: center;
+}
+
 .packages-table-cell {
 	padding: 7px 0px;
 }
 
-.package-detail-header { 
+.package-detail-header,
+.package-form-header {
   font-weight: bold;
   text-align: right;
   padding: 10px 5px 10px 0px;
 }
 
-.package-detail-info {
+.package-detail-info,
+.package-form-info {
   text-align: left;
 }
 
-#options {
+.options {
   text-align: center;
 }
 
@@ -65,11 +77,3 @@ tr.packages-table-info {
   font-weight: bold;
 }
 
-#package-view-options {
-  margin-left: 20px;
-}
-
-#packages-table-options {
-  margin-top: 50px;
-  text-align: center;
-}

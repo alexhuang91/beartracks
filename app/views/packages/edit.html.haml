@@ -1,8 +1,11 @@
-%h1 Edit Package
-
 = form_tag package_path(@package), :method=>'put'  do
 
-  = render :partial=>"new_or_edit"
+  = render :partial=>"form"
 
-  = submit_tag "Update Package info"
-= link_to "Back to Package List", packages_path
+.options
+  = submit_tag "Update"
+  %br
+  %br
+  = link_to "Cancel", package_path(@package)
+  |
+  = link_to "Back to Package List", packages_path

@@ -1,0 +1,47 @@
+%table#package-form
+  %caption#package-form-caption
+    -if @new
+      Create a new package
+    -else
+      Edit package
+  %caption *required fields
+  %tr
+    %td.package-form-header= label :package, :resident_name, "Resident Name*:"
+    %td.package-form-info= text_field :package, "resident_name"
+  %tr
+    %td.package-form-header= label :package, :unit, "Unit*:"
+    -if @new
+      %td.package-form-info= select :package, :unit, units_array#,
+# :selected=>current_clerk.unit # if we give clerks such a field
+    -else
+      %td.package-form-info= select :package, :unit, units_array
+  %tr
+    %td.package-form-header= label :package, :building, "Building*:"
+    %td.package-form-info= text_field :package, "building"
+  %tr
+    %td.package-form-header= label :package, :room, "Room Number*:"
+    %td.package-form-info= text_field :package, "room"
+  %tr
+    %td.package-form-header= label :package, :sender_address, "Sender Address:"
+    %td.package-form-info= text_field :package, "sender_address"
+  %tr
+    %td.package-form-header= label :package, :sender_city, "Sender City:"
+    %td.package-form-info= text_field :package, "sender_city"
+  %tr
+    %td.package-form-header= label :package, :sender_state, "Sender State:"
+    -if @new
+      %td.package-form-info= select :package, :sender_state, states_array, :selected=>"CA"
+    -else
+      %td.package-form-info= select :package, :sender_state, states_array
+  %tr
+    %td.package-form-header= label :package, :sender_zip, "Sender Zip Code:"
+    %td.package-form-info= text_field :package, "sender_zip"
+  %tr
+    %td.package-form-header= label :package, :tracking_number, "Tracking Number*:"
+    %td.package-form-info= text_field :package, "tracking_number"
+  %tr
+    %td.package-form-header= label :package, :carrier, "Carrier:"
+    %td.package-form-info= text_field :package, "carrier"
+  %tr
+    %td.package-form-header= label :package, :description, "Additional Information:"
+    %td.package-form-info= text_area :package, "description", :size=>"23x7"

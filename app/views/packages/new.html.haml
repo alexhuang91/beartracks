@@ -1,12 +1,17 @@
-%h1 Create a New Package
-
 = form_tag packages_path do
 
-  = render :partial=>"new_or_edit"
+  = render :partial=>"form"
 
+.options
+  %br
+  %br
   = submit_tag "Create Package"
   = submit_tag "Keep Creating Packages"
-= link_to "Back to Package List", packages_path
+  %br
+  %br
+  = button_to "Cancel", packages_path, :method => :get
+
+
 -# clerks USUALLY work at the same unit
 -# Do we care about security enough? Clerks can see everything, but it should default to their normal unit (or previous unit)
 -# keep track of all changes to packages
