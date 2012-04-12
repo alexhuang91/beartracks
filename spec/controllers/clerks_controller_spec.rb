@@ -51,6 +51,10 @@ describe ClerksController do
       response.should redirect_to edit_clerk_path(@clerk)
     end
     
+    it "should set a flash error" do
+      flash[:error].should_not be_nil
+    end
+    
   end
 
 end
