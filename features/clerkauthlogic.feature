@@ -3,8 +3,8 @@ Feature: Testing Authlogic Clerk Signup and Login Logout
 @model
 Scenario: Logging in and logging out
   Given the following clerk exists:
-    | login    | password   | password_confirmation |
-    | Tony     | pass       | pass                  |
+    | login    | password   | password_confirmation | unit   | email           | 
+    | Tony     | pass       | pass                  | Unit 1 | paul@beatles.com |
   When I log in as a clerk with username "Tony" and password "pass"
   Then the current clerk's login should be "Tony"
   When I log out clerk
@@ -12,8 +12,8 @@ Scenario: Logging in and logging out
   
 Scenario: Logging in and out through the user interface
   Given the following clerk exists:
-        | login    | password   | password_confirmation |
-        | John     | pass       | pass                  |
+        | login    | password   | password_confirmation | unit   | email           | 
+        | John     | pass       | pass                  | Unit 1 | john@lennon.com |
     And I am on the clerk login page
     Then I should not see "Logout"
     And I fill in the following:
@@ -42,9 +42,10 @@ Scenario: Signing up
     Given there are no clerks
     And I am on the new clerk page
     And I fill in the following:
-        | Login                 | Sally      |
-        | Password              | newpass    |
-        | Password confirmation | newpass    |
+        | Login                 | Sally          |
+        | Password              | newpass        |
+        | Password confirmation | newpass        |
+        | Email                 | sally@mail.com |
     When I press "Submit"
     Then a new Clerk account for "Sally" should be created
     And the current clerk's login should be "Sally"
