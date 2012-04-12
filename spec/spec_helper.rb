@@ -1,6 +1,5 @@
 # As directed by https://github.com/colszowka/simplecov
 require 'simplecov'
-SimpleCov.start
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 

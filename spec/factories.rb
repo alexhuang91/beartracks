@@ -20,14 +20,17 @@ FactoryGirl.define do
   end
 
   factory :clerk do
-    login {Factory.next(:login)}
+    login {FactoryGirl.generate(:login)}
+    email {FactoryGirl.generate(:email)}
+    is_admin false
+    unit "Unit 1"
     password "pass"
     password_confirmation "pass"
   end
 
   factory :resident do
-    login {Factory.next(:login)}
-    email {Factory.next(:email)}
+    login {FactoryGirl.generate(:login)}
+    email {FactoryGirl.generate(:email)}
     password "pass"
     password_confirmation "pass"
   end
