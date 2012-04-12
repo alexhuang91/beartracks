@@ -48,7 +48,7 @@ describe ClerksController do
     end
     
     it "should render the new view" do
-      response.should render_template(:edit)
+      response.should redirect_to edit_clerk_path(@clerk)
     end
     
   end
