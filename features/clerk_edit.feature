@@ -37,5 +37,6 @@ Scenario: Attempt to Edit With Errors
   And I fill in the following:
     | Email | alex |
   When I press "Submit"
+  Then I should be on the clerk edit page for John
   And I should see "the following errors"
   

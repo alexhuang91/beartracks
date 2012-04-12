@@ -28,8 +28,8 @@ class ClerksController < ApplicationController
     @clerk = Clerk.find(params[:id])
     @clerk.update_attributes(params[:clerk]) # don't worry we're protected from is_admin by attr_protected
     if @clerk.errors.any?
-      #redirect_to edit_clerk_path(@clerk)
-      render :action => :edit
+      flash[:error] = "Please fix the following errors:\n #{@clerk.errors.full_messages}"
+      redirect_to edit_clerk_path(@clerk)
     else
       flash[:notice] = "#{@clerk.login} was successfully updated."
       redirect_to clerk_path(@clerk)
