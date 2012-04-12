@@ -1,3 +1,10 @@
+- if @resident.errors.any?
+  .errormessage
+    Please fix the following errors:
+    %br
+    - @resident.errors.full_messages.each do |error|
+      %li #{error}
+%br
 %h1 New Resident
 
 = render :partial => "form"
