@@ -1,9 +1,10 @@
-=form_tag packages_path, :method=>'get' do
-  Packages:
-  = select_tag :packages, options_for_select(@packages_hash, params[:packages])
-  Unit:
-  = select_tag :unit, options_for_select(@units_hash, params[:unit])
-  = submit_tag 'Reload Packages'
+#package-view-options
+  =form_tag packages_path, :method=>'get' do
+    View:
+    = select_tag :packages, options_for_select(@packages_hash, params[:packages])
+    -#Unit:
+    -#= select_tag :unit, options_for_select(@units_hash, params[:unit])
+    = submit_tag 'Reload Packages'
 
 -if @packages == []
   (No packages to list)
@@ -16,12 +17,10 @@
         %th.packages-table-cell Arrival Time
         %th.packages-table-cell Package ID
         %th.packages-table-cell Tracking Number
-        %th.packages-table-cell Resident
+        %th.packages-table-cell Resident Name
         %th.packages-table-cell Unit
         %th.packages-table-cell Building
         %th.packages-table-cell Room
-        %th.packages-table-cell Picked up?
-        %th.packages-table-cell Clerk
         %th.packages-table-cell More Info
     %tbody
       - @packages.each do |p|
@@ -33,8 +32,7 @@
           %td.packages-table-cell= p.unit
           %td.packages-table-cell= p.building
           %td.packages-table-cell= p.room
-          %td.packages-table-cell= p.picked_up ? "Yes" : "No"
-          %td.packages-table-cell= p.clerk.login
           %td.packages-table-cell=link_to "view details", package_path(p)
 
-= link_to "Add New Package", new_package_path
+#packages-table-options
+  = link_to "Add New Package", new_package_path
