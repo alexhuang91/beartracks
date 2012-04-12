@@ -25,7 +25,9 @@ Scenario: Logging in and out through the user interface
     Then I should see "You have successfully logged in."
     Then I should see "Logout"
     Then I should not see "Resident Login"
-    
+    When I follow "Resident Logout"
+    Then I should see "You have successfully logged out."
+
 Scenario: Visiting the logout url with no user logged in
   Given there are no residents
   Given I am on the resident logout page
@@ -50,4 +52,3 @@ Scenario: Signing up
     Then a new resident account for "Sally" should be created
     And the current resident's login should be "Sally"
     And I am on the root page
-    

@@ -20,6 +20,9 @@ ActiveRecord::Schema.define(:version => 20120412013004) do
     t.string   "persistence_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "unit"
+    t.string   "email"
+    t.boolean  "is_admin",          :default => false, :null => false
   end
 
   create_table "packages", :force => true do |t|
