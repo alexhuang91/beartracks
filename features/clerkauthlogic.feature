@@ -51,3 +51,22 @@ Scenario: Signing up
     And the current clerk's login should be "Sally"
     Then I should be on the packages page
     
+Scenario: Should not see edit profile link when no clerk logged in
+  Given there is no clerk logged in
+  And I am on the root page
+  Then I should not see "Edit Profile"
+  
+Scenario: Should see edit profile link when clerk is logged in
+  Given the following clerk exists:
+        | login    | password   | password_confirmation | unit   | email           | 
+        | John     | pass       | pass                  | Unit 1 | john@lennon.com |
+  And I am on the clerk login page
+  And I fill in the following:
+      | Login     | John       |
+      | Password  | pass       |
+  And I press "Login"
+  Then I should see "Edit Profile"
+  
+  
+  
+    
