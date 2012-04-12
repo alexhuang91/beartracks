@@ -15,8 +15,12 @@ class ClerksController < ApplicationController
       flash[:notice] = "Clerk account successfully created."
       redirect_to clerk_home_path
     else
-      flash[:error] = "There was an error creating this user."
-      render :action => :new
+      if @clerk.errors.any?
+        flash[:error] = "Please fix the following errors:\n #{@clerk.errors.full_messages}"
+      else
+        flash[:error] = "There was a problem. Please try again."
+      end
+      redirect_to new_clerk_path
     end
   end
   
