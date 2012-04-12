@@ -28,6 +28,7 @@ class ClerksController < ApplicationController
     @clerk = Clerk.find(params[:id])
     @clerk.update_attributes(params[:clerk]) # don't worry we're protected from is_admin by attr_protected
     if @clerk.errors.any?
+      #redirect_to edit_clerk_path(@clerk)
       render :action => :edit
     else
       flash[:notice] = "#{@clerk.login} was successfully updated."

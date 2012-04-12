@@ -23,3 +23,19 @@ Scenario: Should see edit profile link when clerk is logged in and be able to ed
   When I press "Submit"
   Then the current clerk's login should be "Paul"
   And I should be on the clerk show page for Paul
+  
+Scenario: Attempt to Edit With Errors
+  Given the following clerk exists:
+        | login    | password   | password_confirmation | unit   | email           | 
+        | John     | pass       | pass                  | Unit 1 | john@lennon.com |
+  And I am on the clerk login page
+  And I fill in the following:
+      | Login     | John       |
+      | Password  | pass       |
+  And I press "Login"
+  When I follow "Edit Profile"
+  And I fill in the following:
+    | Email | alex |
+  When I press "Submit"
+  And I should see "the following errors"
+  
