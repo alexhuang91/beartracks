@@ -15,6 +15,10 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
+    when /^the clerk edit page for (.*)$/
+      "/clerks/#{Clerk.find_by_login($1).id}/edit"
+    when /^the clerk show page for (.*)$/
+      "/clerks/#{Clerk.find_by_login($1).id}"
 
     when /^the packages? page$/
       '/packages'
