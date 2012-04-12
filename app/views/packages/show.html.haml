@@ -35,10 +35,10 @@
       %td.package-detail-header Released By:
       %td.package-detail-info= @clerk_released.login
 
-  -if @package.description
-    %tr
-      %td.package-detail-header Comments:
-      %td.package-detail-info= @package.description
+-if @package.description
+  #package-comments
+    %p#package-comments-header Additional information
+    %p= @package.description
 
 #options
   = link_to 'Edit', edit_package_path(@package) 
