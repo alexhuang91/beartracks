@@ -13,7 +13,7 @@ class PackagesController < ApplicationController
 
   def index
     if params[:unit] != session[:unit] or params[:packages] != session[:packages]
-      session[:unit]     = params[:unit]     || session[:unit]
+    #  session[:unit]     = current_clerk.unit
       session[:packages] = params[:packages] || session[:packages]
       flash.keep
       redirect_to :unit=>session[:unit], :packages=>session[:packages] and return
@@ -34,15 +34,13 @@ class PackagesController < ApplicationController
     #units = params[:unit] == 'all' ? units_array : params[:unit]
     #@units_hash = Hash[units_array.collect { |u| [u,u] }]
     #@units_hash['All Units'] = 'all'
-    @packages_hash = {'Not picked up'=>'received', 'Picked up'=>'picked_up', 'All Packages'=>'all'}
 
-    if params[:packages] == 'received'
-      @packages = Package.where :picked_up => false #, :unit => units
-    elsif params[:packages] == 'picked_up'
-      @packages = Package.where :picked_up => true #, :unit => units 
-    else
-      @packages = Package.all #Package.where :unit => units
-    end
+    package_value = {'picked_up' => true, 'received' => false, 'all' => [true, false]}
+    picked = package_value[ params[:packages] ]
+    #units = params[:unit] == 'all' ? units_array : params[:unit]
+    #@units_hash = Hash[ units_array.collect { |u| [u,u] } ]; @units_hash['All Units'] = 'all'
+    @packages_hash = {'Not picked up'=>'received', 'Picked up'=>'picked_up', 'All Packages'=>'all'}
+    @packages = Package.where :picked_up => picked#, :unit => units
     
     # TODO ===========================================================================
   end
