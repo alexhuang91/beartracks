@@ -7,8 +7,8 @@ so that I can limit what packages I see on the packages page
 Background: packages in database, clerk logged in
 
   Given the following clerk exists:
-    | login    | password   | password_confirmation | unit   |
-    | Timy     | pass       | pass                  | Unit 1 |
+    | login    | password   | password_confirmation | unit   | first_name | last_name |
+    | Timy     | pass       | pass                  | Unit 1 | Timy       | TimTim    |
 
   Given there is no clerk logged in
   When I am on the homepage

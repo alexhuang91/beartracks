@@ -10,8 +10,8 @@ Scenario: When No clerk is Logged in all package actions redirect to home page
 @model
 Scenario: When a clerk is logged in all package actions should not redirect
   Given the following clerk exists:
-        | login    | password   | password_confirmation |
-        | John     | pass       | pass                  |
+        | login    | password   | password_confirmation | first_name | last_name |
+        | John     | pass       | pass                  | John       | Lennon    |
     And I am on the clerk login page
     And I fill in the following:
         | Login     | John       |

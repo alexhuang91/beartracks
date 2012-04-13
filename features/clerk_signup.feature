@@ -1,11 +1,13 @@
 Feature: Clerk Account Creation
 
+Background: Make a clerk exist
+  Given the following clerk exists:
+     | login    | password   | password_confirmation | email   | first_name | last_name |
+     | Tony     | pass       | pass                  | j@j.com | Tony       | Montana   |
+
 @model
 Scenario: Login Taken
-  Given the following clerk exists:
-    | login    | password   | password_confirmation | email   |
-    | Tony     | pass       | pass                  | j@j.com |
-  And I am on the new clerk page
+  Given I am on the new clerk page
   And I fill in the following:
     | Login                 | Tony    |
     | Password              | pass    |
@@ -16,10 +18,7 @@ Scenario: Login Taken
   And I should see "Login has already been taken"
 
 Scenario: Email Taken
-  Given the following clerk exists:
-    | login    | password   | password_confirmation | email   |
-    | Tony     | pass       | pass                  | j@j.com |
-  And I am on the new clerk page
+  Given I am on the new clerk page
   And I fill in the following:
     | Login                 | John    |
     | Password              | pass    |
@@ -88,6 +87,8 @@ Scenario: Signup Success
   Given I am on the new clerk page
   And I fill in the following:
     | Login                 | John    |
+    | First name            | John    |
+    | Last name             | Lennon  |
     | Password              | pass    |
     | Password confirmation | pass    |
     | Email                 | a@a.com |

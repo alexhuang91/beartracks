@@ -4,4 +4,7 @@ class Clerk < ActiveRecord::Base
   end
   
   attr_protected :is_admin # prevents is admin from being mass assigned
+  
+  validates_presence_of :first_name, :message => "Must specify your First Name"
+  validates_presence_of :last_name, :message => "Must specity your Last Name"
 end

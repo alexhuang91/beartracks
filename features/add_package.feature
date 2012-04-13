@@ -7,8 +7,8 @@ so that when I view packages, I can see it
 Background: Clerk logged in
 
   Given the following clerk exists:
-    | login    | password   | password_confirmation | unit   |
-    | Tony     | pass       | pass                  | Unit 1 |
+    | login    | password   | password_confirmation | unit   | first_name | last_name |
+    | Tony     | pass       | pass                  | Unit 1 | Tony       | Montana   |
 
   When I am on the homepage
   When I follow "Clerk Login"

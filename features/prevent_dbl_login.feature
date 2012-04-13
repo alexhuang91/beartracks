@@ -17,8 +17,8 @@ Scenario: Resident Logged in Can't log in as a Clerk through interface
   
 Scenario: Clerk Logged in Can't log in as a Resident through interface
   Given the following clerk exists:
-    | login    | password   | password_confirmation |
-    | Tony     | pass       | pass                  |
+    | login    | password   | password_confirmation | first_name | last_name |
+    | Tony     | pass       | pass                  | Tony       | Montana   |
   Then I am on the clerk login page
   And I fill in the following:
       | Login     | Tony       |
