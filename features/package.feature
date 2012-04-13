@@ -26,17 +26,17 @@ Background: packages in database, clerk logged in
   | Kevin         | 345             | Unit 3 | Water    | 3    | 1979-05-25        | true      | 1        |
   | Alex          | 456             | Unit 1 | Air      | 4    | 1971-03-11        | false     | 1        |
 
-Scenario: viewing all packages in all units
-  When I am on the packages page
-  Then I am on the packages page
+#Scenario: viewing all packages in all units
+#  When I am on the packages page
+#  Then I am on the packages page
 #  When I select "All Units" from "unit"
-  When I select "All Packages" from "packages"
-  And I press "Reload Packages"
-  Then I should be on the packages page
-  And I should see "Case"
-  And I should not see "Daniel"
-  And I should not see "Kevin"
-  And I should see "Alex"
+#  When I select "All Packages" from "packages"
+#  And I press "Reload Packages"
+#  Then I should be on the packages page
+#  And I should see "Case"
+#  And I should not see "Daniel"
+#  And I should not see "Kevin"
+#  And I should see "Alex"
 
 #Scenario: limit packages to one unit
 #  When I am on the packages page
@@ -49,27 +49,29 @@ Scenario: viewing all packages in all units
 #  And I should not see "Kevin"
 #  And I should see "Alex"
 
-Scenario: limit packages to picked up
-  When I am on the packages page
-#  And I select "All Units" from "unit"
-  And I select "Picked Up" from "packages"
-  And I press "Reload Packages"
-  Then I should be on the packages page
-  And I should see "Case"
-  And I should not see "Daniel"
-  And I should not see "Kevin"
-  And I should not see "Alex"
 
-Scenario: limit packages to in house
-  When I am on the packages page
+#Scenario: limit packages to picked up
+#  When I am on the packages page
 #  And I select "All Units" from "unit"
-  And I select "In House" from "packages"
-  And I press "Reload Packages"
-  Then I should be on the packages page
-  And I should not see "Case"
-  And I should not see "Daniel"
-  And I should not see "Kevin"
-  And I should see "Alex"
+#  And I select "Picked Up" from "packages"
+#  And I press "Reload Packages"
+#  Then I should be on the packages page
+#  And I should see "Case"
+#  And I should not see "Daniel"
+#  And I should not see "Kevin"
+#  And I should not see "Alex"
+
+#Scenario: limit packages to in house
+#  When I am on the packages page
+#  And I select "All Units" from "unit"
+#  And I select "In House" from "packages"
+#  And I press "Reload Packages"
+#  Then I should be on the packages page
+#  And I should not see "Case"
+#  And I should not see "Daniel"
+#  And I should not see "Kevin"
+#  And I should see "Alex"
+
 
 #Scenario: limit packages to one unit and picked up
 #  When I am on the packages page

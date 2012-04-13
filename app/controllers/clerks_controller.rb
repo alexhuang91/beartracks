@@ -7,7 +7,7 @@ class ClerksController < ApplicationController
   def show
     
   end
-  
+
   def create
     @clerk = Clerk.new(params[:clerk])
     if @clerk.save
