@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412013004) do
+ActiveRecord::Schema.define(:version => 20120412234718) do
 
   create_table "clerks", :force => true do |t|
     t.string   "login"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(:version => 20120412013004) do
     t.integer  "resident_id"
     t.string   "unit",                                 :null => false
     t.string   "building",                             :null => false
-    t.integer  "clerk_received_id"
     t.integer  "clerk_accepted_id"
     t.integer  "clerk_id",                             :null => false
     t.string   "sender_address"

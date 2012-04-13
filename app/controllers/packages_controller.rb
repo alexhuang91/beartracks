@@ -4,7 +4,7 @@ class PackagesController < ApplicationController
   
   def show
     @package = Package.find params[:id]
-    @clerk_received = Clerk.find @package.clerk_received_id
+    @clerk_received = Clerk.find @package.clerk_id
     if @package.picked_up
       @accepted = true
       @clerk_released = Clerk.find @package.clerk_accepted_id
@@ -63,8 +63,6 @@ class PackagesController < ApplicationController
       p.datetime_received = Time.now.to_datetime
       # This will let use do "p.clerk" to access a package's clerk 
       p.clerk_id = current_clerk.id
-      # TODO clerk_received_id is deprecated. remove once everyone knows about clerk_id
-      p.clerk_received_id = current_clerk.id
       if p.save
       # TODO Send out an email or text or add to the slip-queue
         flash[:notice] = "Package created successfully."

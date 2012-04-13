@@ -12,7 +12,7 @@ describe PackagesController do
       controller.stub(:clerk_logged_in?).and_return(true)
       @fakeClerk = FactoryGirl.create(:clerk, :unit => "Unit 1")
       @fakePackage = FactoryGirl.create(:package, :id => 2343, :tracking_number => 123, 
-          :resident_name => "a", :picked_up => false, :clerk_id => @fakeClerk.id, :clerk_received_id => @fakeClerk.id)
+          :resident_name => "a", :picked_up => false, :clerk_id => @fakeClerk.id)
       Clerk.stub(:find).with(@fakeClerk.id).and_return(@fakeClerk)
       Package.stub(:new).and_return(@fakePackage)
       controller.stub(:current_clerk).and_return(@fakeClerk)
