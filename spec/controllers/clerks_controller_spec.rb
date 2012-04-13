@@ -16,6 +16,8 @@ describe ClerksController do
       
       before :each do
         @clerk_good_params = {"login" => "ringostarr", 
+                         "first_name" => "Ringo",
+                         "last_name" => "Starr",
                          "password" => "pass",
                          "password_confirmation" => "pass", 
                          "email" => "ringo@beatles.com", 
@@ -59,6 +61,8 @@ describe ClerksController do
       
       before :each do
         @clerk_bad_params = {:login => "ringostarr", 
+                        :first_name => "Ringo",
+                        :last_name => "Starr",
                         :password => "pas",
                         :password_confirmation => "pas", 
                         :email => "ringo@beatles.com", 

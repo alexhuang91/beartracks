@@ -1,5 +1,13 @@
 FactoryGirl.define do
   
+  sequence :first_name do |n|
+    "George_#{n}"
+  end
+  
+  sequence :last_name do |n|
+    "Harrison_#{n}"
+  end
+  
   sequence :login do |n| 
     "login_#{n}"
   end
@@ -21,6 +29,8 @@ FactoryGirl.define do
 
   factory :clerk do
     login {FactoryGirl.generate(:login)}
+    first_name {FactoryGirl.generate(:first_name)}
+    last_name {FactoryGirl.generate(:last_name)}
     email {FactoryGirl.generate(:email)}
     is_admin false
     unit "Unit 1"
