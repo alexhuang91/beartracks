@@ -16,7 +16,7 @@ class ClerksController < ApplicationController
       redirect_to clerk_home_path
     else
       if @clerk.errors.any?
-        flash[:error] = "Please fix the following errors:\n #{@clerk.errors.full_messages}"
+        flash[:error] = html_list("Please fix the following errors:\n",@clerk.errors.full_messages)
       else
         flash[:error] = "There was a problem. Please try again."
       end
@@ -32,7 +32,7 @@ class ClerksController < ApplicationController
     @clerk = Clerk.find(params[:id])
     @clerk.update_attributes(params[:clerk]) # don't worry we're protected from is_admin by attr_protected
     if @clerk.errors.any?
-      flash[:error] = "Please fix the following errors:\n #{@clerk.errors.full_messages}"
+      flash[:error] = html_list("Please fix the following errors:\n", @clerk.errors.full_messages)
       redirect_to edit_clerk_path(@clerk)
     else
       flash[:notice] = "#{@clerk.login} was successfully updated."

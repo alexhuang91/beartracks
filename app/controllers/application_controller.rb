@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
       @current_resident = current_resident_session && current_resident_session.resident
     end
 
+    def html_list(header,list)
+      return [header,list].join("<li/>").html_safe
+    end
+
     def units_array
       ['Unit 1', 'Unit 2', 'Unit 3', 'Foothill', 'Bowles', 'Stern',
       'Clark Kerr', 'Manville', 'Ida L. Jackson', 'Channing-Bowditch',

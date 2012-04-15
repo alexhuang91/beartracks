@@ -11,6 +11,11 @@ class ResidentsController < ApplicationController
       flash[:notice] = "Resident account successfully created. "
       redirect_to root_url
     else
+      if @resident.errors.any?
+        flash[:error] = html_list("Please fix the following errors:\n", @resident.errors.full_messages)
+      else
+        flash[:error] = "There was a problem. Please try again."
+      end
       render :action => :new
     end
   end
