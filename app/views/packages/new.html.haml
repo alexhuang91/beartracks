@@ -9,7 +9,10 @@
     = submit_tag "Keep Creating Packages"
     %br
     %br
-    = button_to "Cancel", packages_path, :method => :get
+
+-# also can change to a link_to and leave it inside the form
+.options 
+  = button_to "Cancel", packages_path, :method => :get
 
 
 -# clerks USUALLY work at the same unit
