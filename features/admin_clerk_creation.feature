@@ -13,16 +13,21 @@ Given the following clerks exist:
    
 @model   
 Scenario: Admin Clerk can See Add Clerk Button on Page Header
-  When I log in as a clerk with username "admin" and password "admin"
+  And I am on the clerk login page
+  And I fill in the following:
+      | Login     | admin       |
+      | Password  | admin       |
+  When I press "Login"
   Then the current clerk's login should be "admin"
   Then the current clerk should be an admin
-  When I go to the home page
   Then I should see "Add New Clerk"
   
 @model
 Scenario: Regular Clerk can not see Add clerk button on page header
-  When I log in as a clerk with username "john" and password "pass"
-  Then the current clerk's login should be "john"
+  And I am on the clerk login page
+  And I fill in the following:
+      | Login     | john       |
+      | Password  | pass       |
+  When I press "Login"
   Then the current clerk should not be an admin
-  When I go to the home page
   Then I should not see "Add New Clerk"
