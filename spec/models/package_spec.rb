@@ -14,12 +14,14 @@ describe Package do
     describe 'give back an array with the missing fields' do
       it 'should be nil if fields are filled' do
         array = @filled_package.unfilled_fields
-        array.empty?
+        array.empty?.should == true
       end
 
       it 'should have some fields if some are not specified' do
         array = @partially_filled_package.unfilled_fields
-        array.empty? == false and not array.include? :unit
+        array.empty?.should == false and
+        array.include?(:unit).should == true and
+        array.include?(:room).should == false
       end
 
       it 'should have all fields if none of the fields are filled' do
@@ -30,34 +32,34 @@ describe Package do
             all_here = false
           end
         end
-        all_here == true
+        all_here.should == true
       end
     end
   end
 
   describe 'has required fields' do
     it 'should retun true if package has all fields' do
-      @filled_package.has_required_fields == true
+      @filled_package.has_required_fields.should == true
     end
 
     it 'should return false if package has some fields' do
-      @partially_filled_package.has_required_fields == false
+      @partially_filled_package.has_required_fields.should == false
     end
 
     it 'should return false if package has no fields' do
-      @empty_package.has_required_fields == false
+      @empty_package.has_required_fields.should == false
     end
   end
 
   describe 'blank fields' do
     describe 'returns a string' do
       it 'should be a verbose "No" if package has all fields' do
-        @filled_package.blank_fields == "(nothing left blank, bad usage)"
+        @filled_package.blank_fields.should == "(nothing left blank, bad usage)"
       end
 
       it 'should be a comma-separated list of the missing fields if it has some fields' do
         string = @partially_filled_package.blank_fields
-        string == "Unit, Building, or Tracking Number"
+        string.should == "Unit, Building, or Tracking Number"
       end
     end
   end
