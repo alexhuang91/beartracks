@@ -62,7 +62,7 @@ describe PackagesController do
 
     it "should display a notice saying that a package was created" do
       @fakePackage.stub(:has_required_fields).and_return(true)
-      post :create, :package => {}
+      post :create, :package => {}, :commit => "Save Package"
       flash[:notice].should_not be_nil
     end
   end
