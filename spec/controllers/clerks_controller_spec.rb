@@ -6,7 +6,31 @@ describe ClerksController do
   
   #setup :activate_authlogic
     
+  describe "create action by non-admin. test before filter" do
+    
+    before :each do
+      @clerk = FactoryGirl.create(:clerk)
+      controller.stub(:current_clerk).and_return(@clerk)
+    end
+    
+    it "should not create a new clerk" do
+      Clerk.should_not_receive(:new)
+      post :create
+    end
+    
+    it "should redirect to packages" do
+      post :create
+      response.should redirect_to packages_path
+    end
+    
+  end
+  
   describe "create action" do
+    
+    before :each do
+      @admin_clerk = FactoryGirl.create(:admin)
+      controller.stub(:current_clerk).and_return(@admin_clerk)
+    end
     
     describe "happy path. good params sent." do
       
@@ -89,6 +113,42 @@ describe ClerksController do
       it "should grab the errors from the clerk obj" do
         post_bad_create
         flash[:error].include?("Password is too short").should be_true
+      end
+      
+    end
+    
+  end
+  
+  describe "new action. and admin before filtering." do
+    
+    describe "admin clerk logged in." do
+      
+      before :each do
+        @clerk = FactoryGirl.create(:admin)
+        controller.stub(:current_clerk).and_return(@clerk)
+        get :new
+      end
+      
+      it "should render the new view" do
+        response.should render_template(:new)
+      end
+    
+    end
+    
+    describe "non-admin clerk logged in" do
+      
+      before :each do
+        @clerk = FactoryGirl.create(:clerk)
+        controller.stub(:current_clerk).and_return(@clerk)
+        get :new
+      end
+      
+      it "should not render the new view" do
+        response.should_not render_template(:new)
+      end
+      
+      it "should redirect to the clerks home path" do
+        response.should redirect_to packages_path
       end
       
     end

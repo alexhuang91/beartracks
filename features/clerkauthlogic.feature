@@ -39,8 +39,15 @@ Scenario: Getting to the Login page from the root url
   Then I should be on the clerk login page
 
 Scenario: Signing up
-    Given there are no clerks
-    And I am on the new clerk page
+    Given the following clerk exists:
+          | login | password | password_confirmation | unit   | email           | first_name | last_name | is_admin |
+          | admin | admin    | admin                 | Unit 1 | john@lennon.com | John       | Lennon    | true     |
+    And I am on the clerk login page
+    And I fill in the following:
+        | Login     | admin   |
+        | Password  | admin    |
+    When I press "Login"
+    And I go to the new clerk page
     And I fill in the following:
         | Login                 | Sally          |
         | First name            | Sally          |

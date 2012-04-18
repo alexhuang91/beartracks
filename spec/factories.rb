@@ -36,6 +36,11 @@ FactoryGirl.define do
     unit "Unit 1"
     password "pass"
     password_confirmation "pass"
+    
+    factory :admin do
+      is_admin true
+    end
+    
   end
 
   factory :resident do
