@@ -29,7 +29,7 @@ Scenario: Add Package with appropriate fields
     | Tracking Number | 1122   |
     | Building        | Cheney |
     | Room            | 253    |
-  When I press "Create Package"
+  When I press "Save Package"
   Then I should be on the packages page
   And I should see "Bilbo"
   And I should see "1122"
@@ -40,7 +40,7 @@ Scenario: Add Package without every appropriate field
     | Resident Name   | Bilbo  |
     | Building        | Cheney |
     | Room            | 253    |
-  When I press "Create Package"
+  When I press "Save Package"
   Then I should be on the add package page
   And I should see "Cannot leave Tracking Number blank"
   Then I follow "Clerk Logout"

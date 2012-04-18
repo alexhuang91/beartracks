@@ -31,7 +31,7 @@ Scenario: viewing all packages in all units
   Then I am on the packages page
 #  When I select "All Units" from "unit"
   When I select "All Packages" from "packages"
-  And I press "Reload Packages"
+  And I press "Refresh List"
   Then I should be on the packages page
   And I should see "Case"
   And I should not see "Daniel"
@@ -42,7 +42,7 @@ Scenario: viewing all packages in all units
 #  When I am on the packages page
 #  And I select "Unit 1" from "unit"
 #  And I select "All Packages" from "packages"
-#  And I press "Reload Packages"
+#  And I press "Refresh List"
 #  Then I should be on the packages page
 #  And I should see "Case"
 #  And I should not see "Daniel"
@@ -52,8 +52,8 @@ Scenario: viewing all packages in all units
 Scenario: limit packages to picked up
   When I am on the packages page
 #  And I select "All Units" from "unit"
-  And I select "Picked Up" from "packages"
-  And I press "Reload Packages"
+  And I select "Picked up" from "packages"
+  And I press "Refresh List"
   Then I should be on the packages page
   And I should see "Case"
   And I should not see "Daniel"
@@ -63,8 +63,8 @@ Scenario: limit packages to picked up
 Scenario: limit packages to in house
   When I am on the packages page
 #  And I select "All Units" from "unit"
-  And I select "In House" from "packages"
-  And I press "Reload Packages"
+  And I select "Not picked up" from "packages"
+  And I press "Refresh List"
   Then I should be on the packages page
   And I should not see "Case"
   And I should not see "Daniel"
@@ -74,8 +74,8 @@ Scenario: limit packages to in house
 #Scenario: limit packages to one unit and picked up
 #  When I am on the packages page
 #  And I select "Unit 1" from "unit"
-#  And I select "Picked Up" from "packages"
-#  And I press "Reload Packages"
+#  And I select "Picked up" from "packages"
+#  And I press "Refresh List"
 #  Then I should be on the packages page
 #  And I should see "Case"
 #  And I should not see "Daniel"

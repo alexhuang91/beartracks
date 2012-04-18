@@ -39,9 +39,37 @@ class PackagesController < ApplicationController
     units = params[:unit] == 'all' ? units_array : params[:unit]
     picked = package_value[params[:packages]]
     
+    # Set up instance variables for displaying packages
     @packages = Package.where :picked_up => picked, :unit => units
+    @table_caption = set_table_caption 
+    @clerk = current_clerk
   end
 
+  # set the table caption based on params
+  def set_table_caption
+    if params[:packages] == 'all'
+      package_status = ''
+    elsif params[:packages] == 'picked_up'
+      package_status = 'Picked up'
+    else
+      package_status = 'Not picked up'
+    end
+    
+    if @packages == []
+      if params[:unit] == 'all'
+        "No #{package_status} packages"
+      else
+        "No #{package_status} packages for #{params[:unit]}"
+      end
+    else
+      if params[:unit] == 'all'
+        "All #{package_status} packages"
+      else
+        "#{package_status} Packages for #{params[:unit]}"
+      end
+    end
+  end
+  
   def show
     @package = Package.find params[:id]
     @clerk_received = Clerk.find @package.clerk_id
@@ -77,9 +105,9 @@ class PackagesController < ApplicationController
       # Now that the package is saved, redirect to the list of packages if the
       # clerk is done creating them, or another create package form if the
       # clerk wants to create more packages.
-      if params[:commit] == "Create Package"
+      if params[:commit] == "Save Package"
         redirect_to packages_path
-      else
+      elsif params[:commit] == "Save and Create Another Package"
         redirect_to new_package_path
       end
     end
