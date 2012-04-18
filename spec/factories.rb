@@ -66,7 +66,6 @@ FactoryGirl.define do
     sender_zip "90210"
     picked_up false
     carrier "Mail Motherfucker"
-    clerk_received_id 10
     clerk_accepted_id nil
     clerk_id 12
     description "Good Words"

@@ -26,6 +26,12 @@ module NavigationHelpers
     when /^the clerk home page$/
       "/packages"
 
+    when /^the package details page for package ([0-9]+)$/
+      '/packages/$1'
+
+    when /^the edit package page for package ([0-9]+)$/
+      '/packages/$1/edit'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -2,23 +2,22 @@
   =form_tag packages_path, :method=>'get' do
     View:
     = select_tag :packages, options_for_select(@packages_hash, params[:packages])
-    -#Unit:
-    -#= select_tag :unit, options_for_select(@units_hash, params[:unit])
-    = submit_tag 'Reload Packages'
+    -if @clerk.is_admin?
+      = select_tag :unit, options_for_select(@units_hash, params[:unit])
+    = submit_tag 'Refresh List'
 
--if @packages == []
-  (No packages to list)
-  %br
--else
-  %table#packages
-    %caption#package-table-caption All Packages
+%table#packages
+  %caption#package-table-caption
+    = @table_caption
+  -if @packages != []
     %thead
       %tr.packages-table-header
         %th.packages-table-cell Arrival Time
         %th.packages-table-cell Package ID
         %th.packages-table-cell Tracking Number
         %th.packages-table-cell Resident Name
-        %th.packages-table-cell Unit
+        -if @clerk.is_admin?
+          %th.packages-table-cell Unit
         %th.packages-table-cell Building
         %th.packages-table-cell Room
         %th.packages-table-cell More Info
@@ -29,7 +28,8 @@
           %td.packages-table-cell= p.id
           %td.packages-table-cell= p.tracking_number
           %td.packages-table-cell= p.resident_name
-          %td.packages-table-cell= p.unit
+          -if @clerk.is_admin?
+            %td.packages-table-cell= p.unit
           %td.packages-table-cell= p.building
           %td.packages-table-cell= p.room
           %td.packages-table-cell=link_to "view details", package_path(p)
