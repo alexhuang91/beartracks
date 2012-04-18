@@ -78,7 +78,6 @@ class PackagesController < ApplicationController
   
   def show
     @package = Package.find params[:id]
-    @clerk_received = Clerk.find @package.clerk_id
     if @package.picked_up
       @accepted = true
       @clerk_released = Clerk.find @package.clerk_accepted_id
@@ -147,7 +146,7 @@ class PackagesController < ApplicationController
     p.clerk_accepted_id = current_clerk.id
     p.datetime_accepted = Time.now.to_datetime
     if p.save
-      flash[:notice] = "Packed was picked up."
+      flash[:notice] = "Package was picked up."
       redirect_to packages_path # or to the resident sign-up page if they arent opted in?
     else
       flash[:warning] = "There was an error in updating this package."
