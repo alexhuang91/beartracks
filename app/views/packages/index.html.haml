@@ -2,15 +2,13 @@
   =form_tag packages_path, :method=>'get' do
     View:
     = select_tag :packages, options_for_select(@packages_hash, params[:packages])
-    -#Unit:
-    -#= select_tag :unit, options_for_select(@units_hash, params[:unit])
-    = submit_tag 'Reload Packages'
+    = select_tag :unit, options_for_select(@units_hash, params[:unit])
+    = submit_tag 'Refresh List'
 
--if @packages == []
-  (No packages to list)
-  %br
--else
-  %table#packages
+%table#packages
+  -if @packages == []
+    %caption#package-table-caption No packages
+  -else
     %caption#package-table-caption All Packages
     %thead
       %tr.packages-table-header
