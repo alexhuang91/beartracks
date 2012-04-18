@@ -86,6 +86,7 @@ class PackagesController < ApplicationController
 
   def new
     @new = true
+    @clerk_unit = current_clerk.unit
   end
 
   def create

@@ -10,9 +10,8 @@
     %td.package-form-info= text_field :package, "resident_name"
   %tr
     %td.package-form-header= label :package, :unit, "Unit*:"
-    -if @new
-      %td.package-form-info= select :package, :unit, units_array#,
-# :selected=>current_clerk.unit # if we give clerks such a field
+    -if @new and @clerk_unit
+      %td.package-form-info= select :package, :unit, units_array,:selected=>@clerk_unit
     -else
       %td.package-form-info= select :package, :unit, units_array
   %tr
@@ -41,7 +40,10 @@
     %td.package-form-info= text_field :package, "tracking_number"
   %tr
     %td.package-form-header= label :package, :carrier, "Carrier:"
-    %td.package-form-info= text_field :package, "carrier"
+    -if @new
+      %td.package-form-info= select :package, :carrier, carriers_array, :selected=>"Other"
+    -else
+      %td.package-form-info= select :package, :carrier, carriers_array
   %tr
     %td.package-form-header= label :package, :description, "Additional Information:"
     %td.package-form-info= text_area :package, "description", :size=>"23x7"
