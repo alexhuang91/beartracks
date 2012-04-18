@@ -47,27 +47,27 @@ class PackagesController < ApplicationController
 
   # set the table caption based on params
   def set_table_caption
-    if params[:packages] == 'all'
-      package_status = ''
-    elsif params[:packages] == 'picked_up'
-      package_status = 'Picked up'
+    if @packages == []
+      package_existence = "No"
     else
-      package_status = 'Not picked up'
+      package_existence = "All"
+    end
+
+    if params[:packages] == 'all'
+      package_status = 'packages'
+    elsif params[:packages] == 'picked_up'
+      package_status = 'picked up packages'
+    else
+      package_status = 'not picked up packages'
+    end
+      
+    if params[:unit] == 'all'
+      package_unit = '' 
+    else
+      package_unit = "for #{params[:unit]}"
     end
     
-    if @packages == []
-      if params[:unit] == 'all'
-        "No #{package_status} packages"
-      else
-        "No #{package_status} packages for #{params[:unit]}"
-      end
-    else
-      if params[:unit] == 'all'
-        "All #{package_status} packages"
-      else
-        "#{package_status} Packages for #{params[:unit]}"
-      end
-    end
+    "#{package_existence} #{package_status} #{package_unit}"
   end
   
   def show
