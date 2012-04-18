@@ -1,14 +1,14 @@
-Feature: simple viewing options on the packages page to limit which packages are listed
+Feature: Package view options for a regular clerk
 
-as a clerk
-I want to be able to search by unit and package type
+As a clerk
+I want to be able to view packages by package pickup status
 so that I can limit what packages I see on the packages page
 
 Background: packages in database, clerk logged in
 
-  Given the following clerk exists:
-    | login    | password   | password_confirmation | unit   |
-    | Timy     | pass       | pass                  | Unit 1 |
+  Given the following clerks exist:
+    | login    | password   | password_confirmation | unit   | is_admin |
+    | Timy     | pass       | pass                  | Unit 1 |  false   |
 
   Given there is no clerk logged in
   When I am on the homepage
@@ -26,58 +26,35 @@ Background: packages in database, clerk logged in
   | Kevin         | 345             | Unit 3 | Water    | 3    | 1979-05-25        | true      | 1        |
   | Alex          | 456             | Unit 1 | Air      | 4    | 1971-03-11        | false     | 1        |
 
-Scenario: viewing all packages in all units
+Scenario: view all packages in the clerk's unit
   When I am on the packages page
-  Then I am on the packages page
-#  When I select "All Units" from "unit"
-  When I select "All Packages" from "packages"
+  When I select "All packages" from "packages"
   And I press "Refresh List"
   Then I should be on the packages page
+  And I should see "All packages for Unit 1"
   And I should see "Case"
   And I should not see "Daniel"
   And I should not see "Kevin"
   And I should see "Alex"
 
-#Scenario: limit packages to one unit
-#  When I am on the packages page
-#  And I select "Unit 1" from "unit"
-#  And I select "All Packages" from "packages"
-#  And I press "Refresh List"
-#  Then I should be on the packages page
-#  And I should see "Case"
-#  And I should not see "Daniel"
-#  And I should not see "Kevin"
-#  And I should see "Alex"
-
-Scenario: limit packages to picked up
+Scenario: view all picked up packages in the clerk's unit
   When I am on the packages page
-#  And I select "All Units" from "unit"
   And I select "Picked up" from "packages"
   And I press "Refresh List"
   Then I should be on the packages page
+  And I should see "All picked up packages for Unit 1"
   And I should see "Case"
   And I should not see "Daniel"
   And I should not see "Kevin"
   And I should not see "Alex"
 
-Scenario: limit packages to in house
+Scenario: view all not picked up packages in the clerk's unit
   When I am on the packages page
-#  And I select "All Units" from "unit"
   And I select "Not picked up" from "packages"
   And I press "Refresh List"
   Then I should be on the packages page
+  And I should see "All not picked up packages for Unit 1"
   And I should not see "Case"
   And I should not see "Daniel"
   And I should not see "Kevin"
   And I should see "Alex"
-
-#Scenario: limit packages to one unit and picked up
-#  When I am on the packages page
-#  And I select "Unit 1" from "unit"
-#  And I select "Picked up" from "packages"
-#  And I press "Refresh List"
-#  Then I should be on the packages page
-#  And I should see "Case"
-#  And I should not see "Daniel"
-#  And I should not see "Kevin"
-#  And I should not see "Alex"

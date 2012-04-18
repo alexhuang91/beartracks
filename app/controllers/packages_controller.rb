@@ -22,8 +22,14 @@ class PackagesController < ApplicationController
     
     # If either unit or packages setting is not set, default to all
     if not params[:unit] or not params[:packages]
-      session[:unit]     = 'all' unless params[:unit]
-      session[:packages] = 'all' unless params[:packages]
+      # Default the session setting to all if the setting is not set
+      if not params[:unit]
+        session[:unit] = 'all'
+      end
+      if not params[:packages]
+        session[:packages] = 'all'
+      end
+      
       flash.keep
       redirect_to :unit => session[:unit], :packages => session[:packages] and return
     end
@@ -33,7 +39,7 @@ class PackagesController < ApplicationController
     @units_hash['All Units'] = 'all'
     @packages_hash = {'Not picked up' => 'not_picked_up', 
                       'Picked up'     => 'picked_up', 
-                      'All Packages'  => 'all'}
+                      'All packages'  => 'all'}
 
     package_value = {'picked_up' => true, 'not_picked_up' => false, 'all' => [true, false]}
     units = params[:unit] == 'all' ? units_array : params[:unit]

@@ -56,8 +56,8 @@ h1.title {
 #footer {
 	background-image: url('campanile_shadow.png');
 	background-repeat: no-repeat;
-	height: 308px; /* this is the height of the image */
-	line-height: 600px; /* force text to bottom of page */
+	height: 308px; /* this is the height of the background image */
+	line-height: 575px; /* force text to near bottom of page */
 	text-align: center;
 }
 
