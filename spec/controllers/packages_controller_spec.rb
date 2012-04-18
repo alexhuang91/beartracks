@@ -46,7 +46,7 @@ describe PackagesController do
 
     it "should render the landing page view" do
       do_index
-      response.should redirect_to(:action => :index, :packages => "all")
+      response.should redirect_to(:action => :index, :packages => "all", :unit => "Unit 1")
     end
 
     it "should render the package details view" do
@@ -56,13 +56,13 @@ describe PackagesController do
 
     it "should display a warning for the unfilled necessary entries" do
       @fakePackage.stub(:has_required_fields).and_return(false)
-      get :create
+      post :create
       flash[:warning].should_not be_nil
     end
 
     it "should display a notice saying that a package was created" do
       @fakePackage.stub(:has_required_fields).and_return(true)
-      get :create, :package => {}
+      post :create, :package => {}
       flash[:notice].should_not be_nil
     end
   end
@@ -156,7 +156,7 @@ describe PackagesController do
       describe "index action" do
         it "should render the view" do# need to figure out how to verify since 
           do_index
-          response.should redirect_to :action => "index", :packages => "all"
+          response.should redirect_to :action => "index", :packages => "all", :unit => "Unit 1"
         end
 
         it "should not set a flash warning" do
