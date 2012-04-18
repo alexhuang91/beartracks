@@ -24,6 +24,12 @@ Then /^a new Clerk account for "([^"]*)" should be created$/ do |login|
   the_clerk.login.should eq(login)
 end
 
+Then /^the clerk account for "([^"]*)" should be an admin account$/ do |login|
+  clerk = Clerk.find_by_login(login)
+  clerk.should_not be_nil
+  clerk.is_admin?.should be_true
+end
+
 When /^I log out clerk$/ do
   session = ClerkSession.find
   session.destroy

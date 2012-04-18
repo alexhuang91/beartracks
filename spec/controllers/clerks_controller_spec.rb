@@ -60,8 +60,8 @@ describe ClerksController do
         assigns(:clerk).should == @fake_clerk
       end
       
-      it "should log the new clerk in" do
-        ClerkSession.should_receive(:create!).with(@fake_clerk)
+      it "should not log the new clerk in" do
+        ClerkSession.should_not_receive(:create!).with(@fake_clerk)
         post_good_create
       end
       
