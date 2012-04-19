@@ -17,8 +17,6 @@ class ResidentsController < ApplicationController
     else
       if @resident.errors.any?
         flash[:error] = html_list("Please fix the following errors:\n", @resident.errors.full_messages)
-      else
-        flash[:error] = "There was a problem. Please try again."
       end
       redirect_to new_resident_path
     end
@@ -32,11 +30,14 @@ class ResidentsController < ApplicationController
     @resident = Resident.find(params[:id])
     @resident.update_attributes(params[:resident])
     if @resident.errors.any?
-      flash[:error] = html_list("Please fix the following errors:\n", @resdient.errors.full_messages)
+      flash[:error] = html_list("Please fix the following errors:\n", @resident.errors.full_messages)
       redirect_to edit_resident_path(@resident)
     else
       flash[:notice] = "#{@resident.login} was successfully updated."
       redirect_to resident_path(@resident)
     end
+  end
+
+  def index
   end
 end

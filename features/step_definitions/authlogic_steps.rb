@@ -61,9 +61,14 @@ When /^I log in as a resident with username "([^"]*)" and password "([^"]*)"$/ d
   ResidentSession.create(:login => login, :password => password, :remember_me => true)
 end
 
-Then /^the current resident's login should be "([^"]*)"$/ do |expected_login|
+Then /^the current resident's login should be "([^"]*)"$/ do |expected_value|
   current_session = ResidentSession.find
-  current_session.resident.login.should == expected_login
+  current_session.resident.login.should == expected_value
+end
+
+Then /^the current resident's first name should be "([^"]*)"$/ do |expected_value|
+  current_session = ResidentSession.find
+  current_session.resident.first_name.should == expected_value
 end
 
 Given /^there are no residents$/ do

@@ -10,7 +10,7 @@ class ResidentSessionsController < ApplicationController
     @resident_session = ResidentSession.new(params[:resident_session])
     if @resident_session.save
       flash[:notice] = "You have successfully logged in."
-      redirect_to root_url
+      redirect_to residents_path
     else
       flash[:warning] = "There was an error logging in. Please try again."
       render :action => :new
