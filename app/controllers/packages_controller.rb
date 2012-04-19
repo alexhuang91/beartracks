@@ -46,6 +46,7 @@ class PackagesController < ApplicationController
     picked = package_value[params[:packages]]
     
     # Set up instance variables for displaying packages
+    @viewing_all = params[:packages] == "all"
     @packages = Package.where :picked_up => picked, :unit => units
     @table_caption = set_table_caption 
     @clerk = current_clerk

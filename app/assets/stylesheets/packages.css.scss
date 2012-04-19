@@ -41,6 +41,20 @@ tr.packages-table-info {
 	text-align: center;
 }
 
+/* This is to change font color */
+tr.packages-table-info-picked {
+	text-align: center;
+	color: #C4C4C4;
+}
+
+/* This is to change the BG color */
+/*
+tr.packages-table-info-picked {
+	text-align: center;
+	background-color: #DDDDDD;
+}
+*/
+
 #packages-table-options {
   margin-top: 50px;
   text-align: center;

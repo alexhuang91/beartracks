@@ -24,17 +24,30 @@
         %th.packages-table-cell More Info
     %tbody
       - @packages.each do |p|
-        %tr.packages-table-info
-          %td.packages-table-cell= p.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
-          %td.packages-table-cell= p.id
-          %td.packages-table-cell= p.tracking_number
-          %td.packages-table-cell= p.package_type
-          %td.packages-table-cell= p.resident_name
-          -if @clerk.is_admin?
-            %td.packages-table-cell= p.unit
-          %td.packages-table-cell= p.building
-          %td.packages-table-cell= p.room
-          %td.packages-table-cell=link_to "view details", package_path(p)
+        -if p.picked_up and @viewing_all
+          %tr.packages-table-info-picked
+            %td.packages-table-cell= p.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
+            %td.packages-table-cell= p.id
+            %td.packages-table-cell= p.tracking_number
+            %td.packages-table-cell= p.package_type
+            %td.packages-table-cell= p.resident_name
+            -if @clerk.is_admin?
+              %td.packages-table-cell= p.unit
+            %td.packages-table-cell= p.building
+            %td.packages-table-cell= p.room
+            %td.packages-table-cell=link_to "view details", package_path(p)
+        -else
+          %tr.packages-table-info
+            %td.packages-table-cell= p.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
+            %td.packages-table-cell= p.id
+            %td.packages-table-cell= p.tracking_number
+            %td.packages-table-cell= p.package_type
+            %td.packages-table-cell= p.resident_name
+            -if @clerk.is_admin?
+              %td.packages-table-cell= p.unit
+            %td.packages-table-cell= p.building
+            %td.packages-table-cell= p.room
+            %td.packages-table-cell=link_to "view details", package_path(p)
 
 #packages-table-options
   = link_to "Add New Package", new_package_path
