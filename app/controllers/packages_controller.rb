@@ -3,35 +3,29 @@ class PackagesController < ApplicationController
   before_filter :clerk_check
   
   def index
-    if params[:unit] != session[:unit] or params[:packages] != session[:packages]
-      # If the clerk is an admin, store and use the new unit setting.
-      # Otherwise, default back to the clerk's unit for the setting.
+    params_and_session_dont_match = params[:unit] != session[:unit] || params[:packages] != session[:packages]
+    a_param_is_nil = !params[:unit] || !params[:packages]
+    if a_param_is_nil or params_and_session_dont_match
+      # If the clerk is an admin, store and use the new unit setting (or default to 'all').
+      # Otherwise, enforce viewing only the clerk's unit for the setting.
       if current_clerk.is_admin?
-        session[:unit] = params[:unit] || session[:unit]
+        session[:unit] = params[:unit] || session[:unit] || 'all'
       else # clerk is not admin
         session[:unit] = current_clerk.unit
       end
       
       # If the new packages setting is not nil, use that. Otherwise, use
       # the session packages setting.
-      session[:packages] = params[:packages] || session[:packages]
+      session[:packages] = params[:packages] || session[:packages] || 'all'
       
       flash.keep
-      redirect_to :unit => session[:unit], :packages => session[:packages] and return
-    end
-    
-    # If either unit or packages setting is not set, default to all
-    if not params[:unit] or not params[:packages]
-      # Default the session setting to all if the setting is not set
-      if not params[:unit]
-        session[:unit] = 'all'
+      if params[:commit] == 'Search'
+        redirect_to :unit => session[:unit], :packages => session[:packages],
+        :search_option => params[:search_option], :search_string => params[:search_string],
+        :commit => 'Search' and return
+      else
+        redirect_to :unit => session[:unit], :packages => session[:packages] and return
       end
-      if not params[:packages]
-        session[:packages] = 'all'
-      end
-      
-      flash.keep
-      redirect_to :unit => session[:unit], :packages => session[:packages] and return
     end
 
     # Set up the mappings for the view options
@@ -40,20 +34,35 @@ class PackagesController < ApplicationController
     @packages_hash = {'Not picked up' => 'not_picked_up', 
                       'Picked up'     => 'picked_up', 
                       'All packages'  => 'all'}
+    @search_options = {'ID'=>'id', 'Tracking Number'=>'tracking_number','Room'=>'room',
+      'Building'=>'building', 'Carrier'=>'carrier', 'Resident Name'=> 'resident_name'}
 
     package_value = {'picked_up' => true, 'not_picked_up' => false, 'all' => [true, false]}
     units = params[:unit] == 'all' ? units_array : params[:unit]
     picked = package_value[params[:packages]]
     
+    # Select the packages to display
+    if params[:commit] == 'Search' and @search_options.values.include?(params[:search_option])
+      @packages = Package.where :picked_up => picked, :unit => units, params[:search_option] => params[:search_string]
+      @option = params[:search_option]
+      @s_string = params[:search_string]
+      @searching = true # instance variable used when setting the table caption
+    else
+      @packages = Package.where :picked_up => picked, :unit => units
+    end
+
     # Set up instance variables for displaying packages
     @viewing_all = params[:packages] == "all"
-    @packages = Package.where :picked_up => picked, :unit => units
     @table_caption = set_table_caption 
     @clerk = current_clerk
+    @unit_selection = params[:unit]
+    @packages_selection = params[:packages]
   end
 
   # set the table caption based on params
   def set_table_caption
+    return "Search Results" if @searching
+    
     if @packages == []
       package_existence = "No"
     else

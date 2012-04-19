@@ -1,10 +1,17 @@
 #package-view-options
   =form_tag packages_path, :method=>'get' do
     View:
-    = select_tag :packages, options_for_select(@packages_hash, params[:packages])
+    = select_tag :packages, options_for_select(@packages_hash, @packages_selection)
     -if @clerk.is_admin?
-      = select_tag :unit, options_for_select(@units_hash, params[:unit])
+      = select_tag :unit, options_for_select(@units_hash, @unit_selection)
     = submit_tag 'Refresh List'
+
+#simple-search-options
+  =form_tag packages_path, :method=>'get' do
+    Search by:
+    = select_tag :search_option, options_for_select(@search_options, @option)
+    = text_field_tag :search_string, @s_string
+    = submit_tag 'Search'
 
 %table#packages
   %caption#package-table-caption
