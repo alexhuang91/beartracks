@@ -25,6 +25,7 @@ Scenario: A clerk cannot visit the edit page of another clerk
   And I fill in the following:
     | Login     | john       |
     | Password  | pass       |
+  And I press "Login"
   When I go to the clerk edit page for paul
   Then I should be on the clerk home page
-  And I should see "You do not have access"
+  And I should see "you don't have access"

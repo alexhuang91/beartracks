@@ -157,17 +157,45 @@ describe ClerksController do
   
   describe "edit action." do
     
-    before :each do
-      @clerk = FactoryGirl.create(:clerk)
-      get :edit, :id => @clerk.id
+    describe "get w/ correct id." do
+    
+      before :each do
+        @clerk = FactoryGirl.create(:clerk)
+        controller.stub(:current_clerk).and_return(@clerk)
+        get :edit, :id => @clerk.id
+      end
+
+      it "should render edit view" do
+        response.should render_template(:edit)
+      end
+
+      it "should set the correct clerk and make it available to the view" do
+        assigns(:clerk).should == @clerk
+      end
+      
     end
     
-    it "should render edit view" do
-      response.should render_template(:edit)
-    end
-    
-    it "should set the correct clerk and make it available to the view" do
-      assigns(:clerk).should == @clerk
+    describe "get other id. BEFORE FILTER TEST" do
+      
+      before :each do
+        @clerk1 = FactoryGirl.create(:clerk)
+        @clerk2 = FactoryGirl.create(:clerk)
+        controller.stub(:current_clerk).and_return(@clerk1)
+        get :edit, :id => @clerk2.id
+      end
+      
+      it "should not render edit view" do
+        response.should_not render_template(:edit)
+      end
+      
+      it "should redirect to home view" do
+        response.should redirect_to clerk_home_path
+      end
+      
+      it "should set a flash warning" do
+        flash[:warning].should_not be_nil
+      end
+      
     end
     
   end
@@ -176,6 +204,7 @@ describe ClerksController do
     
     before :each do
       @clerk = FactoryGirl.create(:clerk)
+      controller.stub(:current_clerk).and_return(@clerk)
       put :update, :id => @clerk.id, :clerk => {:login => "Ringo"} 
     end
     
@@ -197,6 +226,7 @@ describe ClerksController do
     
     before :each do
       @clerk = FactoryGirl.create(:clerk)
+      controller.stub(:current_clerk).and_return(@clerk)
       put :update, :id => @clerk.id, :clerk => {:email => "email"}
     end
     
@@ -206,6 +236,30 @@ describe ClerksController do
     
     it "should set a flash error" do
       flash[:error].should_not be_nil
+    end
+    
+  end
+  
+  describe "update action. test before filter" do
+    
+    def update_other_id
+      put :update, :id => @clerk2.id, :clerk => {:login => "dude"}
+    end
+    
+    before :each do
+      @clerk1 = FactoryGirl.create(:clerk)
+      @clerk2 = FactoryGirl.create(:clerk)
+      controller.stub(:current_clerk).and_return(@clerk1)
+    end
+    
+    it "should not update attributes" do
+      @clerk2.should_not_receive(:update_attributes)
+      update_other_id
+    end
+    
+    it "should redirect" do
+      update_other_id
+      response.should be_redirect
     end
     
   end
