@@ -64,23 +64,6 @@ Scenario: edit a package's information without filling all required fields
   And I should see "Edit package"
   And I should see "Cannot leave Tracking Number blank."
 
-Scenario: cancel an update operation
-  Given I am on the package details page for package 1	
-  When I follow "Edit"
-  Then I should be on the edit package page for package 1
-  And I should see "Edit package"
-  When I follow "Cancel" 
-  Then I should be on the package details page for package 1	
-  And I should see "Details for package 1"
-
-Scenario: go back to the packages list from the edit form
-  Given I am on the package details page for package 1	
-  When I follow "Edit"
-  Then I should be on the edit package page for package 1
-  And I should see "Edit package"
-  When I follow "Back to package list" 
-  Then I should be on the packages page
-
 Scenario: mark a package as picked up
   Given I am on the packages page
   When I select "Not picked up" from "packages"
