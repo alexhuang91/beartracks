@@ -82,7 +82,6 @@ class PackagesController < ApplicationController
   
   def show
     @package = Package.find params[:id]
-    @clerk_received = Clerk.find @package.clerk_id
     if @package.picked_up
       @accepted = true
       @clerk_released = Clerk.find @package.clerk_accepted_id
@@ -102,7 +101,7 @@ class PackagesController < ApplicationController
   def create
     p = Package.new params[:package]
     if not p.has_required_fields
-      flash[:warning] = "Cannot leave #{p.blank_fields} blank"
+      flash[:warning] = "Cannot leave #{p.blank_fields} blank."
       redirect_to new_package_path
     else
       p.datetime_received = Time.now.to_datetime
@@ -126,14 +125,28 @@ class PackagesController < ApplicationController
 
   def update
     @package = Package.find params[:id]
-    p = params[:package]
-    p[:updated_at] = Time.now.to_datetime
-    if @package.update_attributes(p)
-      flash[:notice] = "Package was updated successfully."
-      redirect_to package_path @package
+    
+    # Try to update the package and rescue the exception if one is thrown
+    begin
+      params[:package][:updated_at] = Time.now.to_datetime
+      updated = @package.update_attributes(params[:package])
+    rescue
+      flash[:warning] = "Could not update package due to connection or remote service error."
+      redirect_to edit_package_path
+    end
+   
+    # Check to see if all the required fields are there and update if so
+    if not @package.has_required_fields
+      flash[:warning] = "Cannot leave #{@package.blank_fields} blank."
+      redirect_to edit_package_path
     else
-      flash[:warning] = "There was an error in updating this package."
-      redirect_to edit_package_path @package
+      if updated
+        flash[:notice] = "Package was updated successfully."
+        redirect_to package_path @package
+      else
+        flash[:warning] = "There was an error in updating this package."
+        redirect_to edit_package_path
+      end
     end
   end
 
@@ -151,7 +164,7 @@ class PackagesController < ApplicationController
     p.clerk_accepted_id = current_clerk.id
     p.datetime_accepted = Time.now.to_datetime
     if p.save
-      flash[:notice] = "Packed was picked up."
+      flash[:notice] = "Package was picked up."
       redirect_to packages_path # or to the resident sign-up page if they arent opted in?
     else
       flash[:warning] = "There was an error in updating this package."

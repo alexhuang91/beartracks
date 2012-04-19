@@ -42,13 +42,13 @@ Scenario: Add Package without all required fields
     | Room            | 253    |
   When I press "Save Package"
   Then I should be on the add package page
-  And I should see "Cannot leave Tracking Number blank"
+  And I should see "Cannot leave Tracking Number blank."
 
 Scenario: Add Package without filling in any fields
   When I go to the add package page
   When I press "Save Package"
   Then I should be on the add package page
-  And I should see "Cannot leave Resident Name, Building, Room, or Tracking Number blank"
+  And I should see "Cannot leave Resident Name, Building, Room, or Tracking Number blank."
 
 Scenario: Save and add another package
   When I go to the add package page
