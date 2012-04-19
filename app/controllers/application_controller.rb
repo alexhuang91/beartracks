@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_clerk_session, :current_clerk, :clerk_logged_in?
   helper_method :current_resident_session, :current_resident
-  helper_method :units_array, :states_array, :carriers_array
+  helper_method :units_array, :states_array, :carriers_array, :package_type_array
   
   private
     
@@ -53,5 +53,9 @@ class ApplicationController < ActionController::Base
 
     def carriers_array
       ["DHL Express", "FedEx", "OnTrac", "UPS", "USPS", "Other"]
+    end
+    
+    def package_type_array
+      ["Tube", "Box", "Large box", "Envelope", "Letter", "Other"]
     end
 end

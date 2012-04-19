@@ -11,7 +11,7 @@
   %tr
     %td.package-form-header= label :package, :unit, "Unit*:"
     -if @new and @clerk_unit
-      %td.package-form-info= select :package, :unit, units_array,:selected=>@clerk_unit
+      %td.package-form-info= select :package, :unit, units_array,:selected => @clerk_unit
     -else
       %td.package-form-info= select :package, :unit, units_array
   %tr
@@ -29,7 +29,7 @@
   %tr
     %td.package-form-header= label :package, :sender_state, "Sender State:"
     -if @new
-      %td.package-form-info= select :package, :sender_state, states_array, :selected=>"CA"
+      %td.package-form-info= select :package, :sender_state, states_array, :selected => "CA"
     -else
       %td.package-form-info= select :package, :sender_state, states_array
   %tr
@@ -39,9 +39,15 @@
     %td.package-form-header= label :package, :tracking_number, "Tracking Number*:"
     %td.package-form-info= text_field :package, "tracking_number"
   %tr
+    %td.package-form-header= label :package, :package_type, "Package Type:"
+    -if @new
+      %td.package-form-info= select :package, :package_type, package_type_array, :selected => "Other"
+    -else
+      %td.package-form-info= select :package, :package_type, package_type_array
+  %tr
     %td.package-form-header= label :package, :carrier, "Carrier:"
     -if @new
-      %td.package-form-info= select :package, :carrier, carriers_array, :selected=>"Other"
+      %td.package-form-info= select :package, :carrier, carriers_array, :selected => "Other"
     -else
       %td.package-form-info= select :package, :carrier, carriers_array
   %tr

@@ -15,6 +15,7 @@
         %th.packages-table-cell Arrival Time
         %th.packages-table-cell Package ID
         %th.packages-table-cell Tracking Number
+        %th.packages-table-cell Package Type
         %th.packages-table-cell Resident Name
         -if @clerk.is_admin?
           %th.packages-table-cell Unit
@@ -27,6 +28,7 @@
           %td.packages-table-cell= p.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
           %td.packages-table-cell= p.id
           %td.packages-table-cell= p.tracking_number
+          %td.packages-table-cell= p.package_type
           %td.packages-table-cell= p.resident_name
           -if @clerk.is_admin?
             %td.packages-table-cell= p.unit

@@ -19,6 +19,9 @@
     %td.package-detail-header Tracking Number:
     %td.package-detail-info= @package.tracking_number
   %tr
+    %td.package-detail-header Package Type:
+    %td.package-detail-info= @package.package_type
+  %tr
     %td.package-detail-header Arrived:
     %td.package-detail-info= @package.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
 
