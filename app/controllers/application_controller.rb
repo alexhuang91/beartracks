@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_clerk_session, :current_clerk, :clerk_logged_in?
   helper_method :current_resident_session, :current_resident
-  helper_method :units_array, :states_array
+  helper_method :preferences_array, :units_array, :states_array
   
   private
     
@@ -35,6 +35,10 @@ class ApplicationController < ActionController::Base
 
     def html_list(header,list)
       return [header,list].join("<li/>").html_safe
+    end
+
+    def preferences_array
+      ['Mail Slip', 'Email', 'Text Message']
     end
 
     def units_array

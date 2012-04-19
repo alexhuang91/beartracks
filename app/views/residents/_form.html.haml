@@ -1,25 +1,15 @@
-= form_for @resident do |f|
-  
-  =f.label :login
-  %br
-  =f.text_field :login
-  %br
-  
-  =f.label :password
-  %br
-  =f.password_field :password
-  %br
-  
-  =f.label :password_confirmation
-  %br
-  =f.password_field :password_confirmation
-  %br
-  
-
-  =f.label :email
-  %br
-  =f.text_field :email
-  %br
-
-  =submit_tag "Submit" 
-
+%table#resident-form
+  %caption#resident-form-caption= "New Resident"
+  = form_for @resident do |f|
+    %tr
+      %td.resident-form-header= f.label :login
+      %td.resident-form-info= f.text_field :login
+    %tr
+      %td.resident-form-header= f.label :password
+      %td.resident-form-info= f.password_field :password
+    %tr
+      %td.resident-form-header= f.label :password_confirmation
+      %td.resident-form-info= f.password_field :password_confirmation
+    %tr
+      %td.resident-form-header= f.label :email
+      %td.resident-form-info= f.text_field :email

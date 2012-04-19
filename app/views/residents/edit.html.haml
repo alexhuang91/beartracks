@@ -1,0 +1,6 @@
+= form_tag resident_path(@resident), :method=>'put'  do
+
+  = render :partial => "settings_form"
+
+  .options
+    = submit_tag "Submit"
