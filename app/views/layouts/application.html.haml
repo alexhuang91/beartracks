@@ -13,7 +13,7 @@
       #user_nav
         - if (!current_clerk.nil?) and (current_clerk.is_admin?)
           = link_to "Add New Clerk", new_clerk_path
-        |
+          |
         - if current_resident
           = link_to "Resident Logout", resident_logout_path
         - elsif current_clerk

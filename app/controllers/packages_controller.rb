@@ -29,13 +29,13 @@ class PackagesController < ApplicationController
     end
 
     # Set up the mappings for the view options
-    @units_hash = Hash[units_array.collect { |u| [u,u] }]
+    @units_hash = Hash[units_array.collect { |unit| [unit,unit] }]
     @units_hash['All Units'] = 'all'
     @packages_hash = {'Not picked up' => 'not_picked_up', 
                       'Picked up'     => 'picked_up', 
                       'All packages'  => 'all'}
-    @search_options = {'ID'=>'id', 'Tracking Number'=>'tracking_number','Room'=>'room',
-      'Building'=>'building', 'Carrier'=>'carrier', 'Resident Name'=> 'resident_name'}
+    @search_options = ['ID', 'Tracking Number', 'Room', 'Building', 'Carrier', 'Resident Name', 'Package Type']
+    @search_options = Hash[@search_options.collect{ |option| [option, option.downcase.gsub(/\s/, '_')] }]
 
     package_value = {'picked_up' => true, 'not_picked_up' => false, 'all' => [true, false]}
     units = params[:unit] == 'all' ? units_array : params[:unit]
