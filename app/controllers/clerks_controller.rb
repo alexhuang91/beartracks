@@ -1,6 +1,7 @@
 class ClerksController < ApplicationController
   
   before_filter :is_admin?, :only => [:new, :create]
+  before_filter :check_id_access, :only => [:edit, :update]
   
   def new
     @clerk = Clerk.new
@@ -46,6 +47,15 @@ class ClerksController < ApplicationController
   def is_admin?
     unless current_clerk.is_admin?
       redirect_to packages_path
+      return false
+    end
+    return true
+  end
+  
+  def check_id_access
+    unless params[:id].to_i == current_clerk.id
+      flash[:warning] = "Sorry, you don't have access to that!"
+      redirect_to clerk_home_path
       return false
     end
     return true
