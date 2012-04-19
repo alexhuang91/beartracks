@@ -61,7 +61,7 @@ class PackagesController < ApplicationController
 
   # set the table caption based on params
   def set_table_caption
-    return "Search Results" if @searching
+    return "Search results" if @searching
     
     if @packages == []
       package_existence = "No"
