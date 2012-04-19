@@ -78,6 +78,7 @@ class PackagesController < ApplicationController
   
   def show
     @package = Package.find params[:id]
+    @clerk = current_clerk
     if @package.picked_up
       @accepted = true
       @clerk_released = Clerk.find @package.clerk_accepted_id
@@ -147,11 +148,16 @@ class PackagesController < ApplicationController
   end
 
   def destroy
-    # what is there to do here, just remove it from the db? but who gets to do this, admins and/or clerks, and when?
-    @package = Package.find params[:id]
-    @package.destroy
-    flash[:notice] = "Package was deleted successfully."
-    redirect_to packages_path
+    # Only admins can delete packages
+    if current_clerk.is_admin?
+      @package = Package.find params[:id]
+      @package.destroy
+      flash[:notice] = "Package was deleted successfully."
+      redirect_to packages_path
+    else
+      flash[:warning] = "Only admins can delete packages."
+      redirect_to package_path @package
+    end
   end
 
   def picked_up

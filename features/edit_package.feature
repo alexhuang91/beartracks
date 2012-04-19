@@ -6,9 +6,10 @@ so that when I make a mistake entering information, I can correct it
 
 Background: Clerk logged in
 
-  Given the following clerk exists:
+  Given the following clerks exist:
     | login    | password   | password_confirmation | unit   | is_admin |
     | Tony     | pass       | pass                  | Unit 1 |   true   |
+    | Tiny     | pass       | pass                  | Unit 1 |   false  |
 
   When I am on the homepage
   When I follow "Clerk Login"
@@ -78,7 +79,7 @@ Scenario: mark a package as picked up
   And I should see "Package was picked up."
   And I should not see "Case"
 
-Scenario: delete a package
+Scenario: delete a package as an admin
   Given I am on the packages page
   Then I should see "All packages"
   And I should see "Case"
@@ -88,3 +89,15 @@ Scenario: delete a package
   Then I should be on the packages page
   And I should see "Package was deleted successfully."
   And I should not see "Case"
+
+Scenario: clerks can't delete packages
+  When I am on the home page
+  And I follow "Clerk Logout"
+  Then I follow "Clerk Login"
+  And I fill in the following:
+    | Login     | Tiny |
+    | Password  | pass |
+  And I press "Login"
+  Then I should be on the packages page
+  When I am on the package details page for package 1 
+  Then I should not see "Delete"

@@ -6,7 +6,7 @@ so that I can limit what packages I see on the packages page
 
 Background: packages in database, clerk logged in
 
-  Given the following clerks exist:
+  Given the following clerk exists:
     | login    | password   | password_confirmation | unit   | is_admin |
     | Timy     | pass       | pass                  | Unit 1 |  false   |
 
@@ -57,4 +57,4 @@ Scenario: view all not picked up packages in the clerk's unit
   And I should not see "Case"
   And I should not see "Daniel"
   And I should not see "Kevin"
-  And I should see "Alex"
+  And I should see "Alex" 
