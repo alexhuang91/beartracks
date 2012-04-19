@@ -1,9 +1,15 @@
 Feature: Clerk Account Creation
 
-Background: Make a clerk exist
-  Given the following clerk exists:
-     | login    | password   | password_confirmation | email   | first_name | last_name |
-     | Tony     | pass       | pass                  | j@j.com | Tony       | Montana   |
+Background: Make a clerk exist and log in an admin user
+  Given the following clerks exist:
+    | login    | password   | password_confirmation | email           | first_name | last_name | is_admin |
+    | Tony     | pass       | pass                  | j@j.com         | Tony       | Montana   | false    |
+    | admin    | admin      | admin                 | admin@admin.com | admin      | admin     | true     |
+  And I am on the clerk login page
+  And I fill in the following:
+    | Login     | admin       |
+    | Password  | admin       |
+    When I press "Login"
 
 @model
 Scenario: Login Taken

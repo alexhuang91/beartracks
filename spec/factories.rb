@@ -36,6 +36,11 @@ FactoryGirl.define do
     unit "Unit 1"
     password "pass"
     password_confirmation "pass"
+    
+    factory :admin do
+      is_admin true
+    end
+    
   end
 
   factory :resident do
@@ -61,7 +66,6 @@ FactoryGirl.define do
     sender_zip "90210"
     picked_up false
     carrier "Mail Motherfucker"
-    clerk_received_id 10
     clerk_accepted_id nil
     clerk_id 12
     description "Good Words"

@@ -2,47 +2,87 @@ class PackagesController < ApplicationController
   
   before_filter :clerk_check
   
+  def index
+    if params[:unit] != session[:unit] or params[:packages] != session[:packages]
+      # If the clerk is an admin, store and use the new unit setting.
+      # Otherwise, default back to the clerk's unit for the setting.
+      if current_clerk.is_admin?
+        session[:unit] = params[:unit] || session[:unit]
+      else # clerk is not admin
+        session[:unit] = current_clerk.unit
+      end
+      
+      # If the new packages setting is not nil, use that. Otherwise, use
+      # the session packages setting.
+      session[:packages] = params[:packages] || session[:packages]
+      
+      flash.keep
+      redirect_to :unit => session[:unit], :packages => session[:packages] and return
+    end
+    
+    # If either unit or packages setting is not set, default to all
+    if not params[:unit] or not params[:packages]
+      # Default the session setting to all if the setting is not set
+      if not params[:unit]
+        session[:unit] = 'all'
+      end
+      if not params[:packages]
+        session[:packages] = 'all'
+      end
+      
+      flash.keep
+      redirect_to :unit => session[:unit], :packages => session[:packages] and return
+    end
+
+    # Set up the mappings for the view options
+    @units_hash = Hash[units_array.collect { |u| [u,u] }]
+    @units_hash['All Units'] = 'all'
+    @packages_hash = {'Not picked up' => 'not_picked_up', 
+                      'Picked up'     => 'picked_up', 
+                      'All packages'  => 'all'}
+
+    package_value = {'picked_up' => true, 'not_picked_up' => false, 'all' => [true, false]}
+    units = params[:unit] == 'all' ? units_array : params[:unit]
+    picked = package_value[params[:packages]]
+    
+    # Set up instance variables for displaying packages
+    @packages = Package.where :picked_up => picked, :unit => units
+    @table_caption = set_table_caption 
+    @clerk = current_clerk
+  end
+
+  # set the table caption based on params
+  def set_table_caption
+    if @packages == []
+      package_existence = "No"
+    else
+      package_existence = "All"
+    end
+
+    if params[:packages] == 'all'
+      package_status = 'packages'
+    elsif params[:packages] == 'picked_up'
+      package_status = 'picked up packages'
+    else
+      package_status = 'not picked up packages'
+    end
+      
+    if params[:unit] == 'all'
+      package_unit = '' 
+    else
+      package_unit = "for #{params[:unit]}"
+    end
+    
+    "#{package_existence} #{package_status} #{package_unit}"
+  end
+  
   def show
     @package = Package.find params[:id]
-    @clerk_received = Clerk.find @package.clerk_received_id
+    @clerk_received = Clerk.find @package.clerk_id
     if @package.picked_up
       @accepted = true
       @clerk_released = Clerk.find @package.clerk_accepted_id
     end
-  end
-
-  def index
-    if params[:unit] != session[:unit] or params[:packages] != session[:packages]
-    #  session[:unit]     = current_clerk.unit
-      session[:packages] = params[:packages] || session[:packages]
-      flash.keep
-      redirect_to :unit=>session[:unit], :packages=>session[:packages] and return
-    end
-    if not params[:unit] or not params[:packages]
-      session[:unit]     = 'all' unless params[:unit]
-      session[:packages] = 'all' unless params[:packages]
-      flash.keep
-      redirect_to :unit=>session[:unit], :packages=>session[:packages] and return
-    end
-
-    # Do we want a clerk to be able to see all the packages at all the units?
-    # I'm thinking maybe we can limit them to just the unit they work at.
-    # If we don't want them to see everything, just remove everything that's commented
-    # out below between the TODO tags, and also remove all the unit stuff above
-    # TODO ===========================================================================
-    
-    #units = params[:unit] == 'all' ? units_array : params[:unit]
-    #@units_hash = Hash[units_array.collect { |u| [u,u] }]
-    #@units_hash['All Units'] = 'all'
-
-    package_value = {'picked_up' => true, 'received' => false, 'all' => [true, false]}
-    picked = package_value[ params[:packages] ]
-    #units = params[:unit] == 'all' ? units_array : params[:unit]
-    #@units_hash = Hash[ units_array.collect { |u| [u,u] } ]; @units_hash['All Units'] = 'all'
-    @packages_hash = {'Not picked up'=>'received', 'Picked up'=>'picked_up', 'All Packages'=>'all'}
-    @packages = Package.where :picked_up => picked#, :unit => units
-    
-    # TODO ===========================================================================
   end
 
   def edit
@@ -52,6 +92,7 @@ class PackagesController < ApplicationController
 
   def new
     @new = true
+    @clerk_unit = current_clerk.unit
   end
 
   def create
@@ -61,10 +102,7 @@ class PackagesController < ApplicationController
       redirect_to new_package_path
     else
       p.datetime_received = Time.now.to_datetime
-      # This will let use do "p.clerk" to access a package's clerk 
       p.clerk_id = current_clerk.id
-      # TODO clerk_received_id is deprecated. remove once everyone knows about clerk_id
-      p.clerk_received_id = current_clerk.id
       if p.save
       # TODO Send out an email or text or add to the slip-queue
         flash[:notice] = "Package created successfully."
@@ -74,9 +112,9 @@ class PackagesController < ApplicationController
       # Now that the package is saved, redirect to the list of packages if the
       # clerk is done creating them, or another create package form if the
       # clerk wants to create more packages.
-      if params[:commit] == "Create Package"
+      if params[:commit] == "Save Package"
         redirect_to packages_path
-      else
+      elsif params[:commit] == "Save and Create Another Package"
         redirect_to new_package_path
       end
     end

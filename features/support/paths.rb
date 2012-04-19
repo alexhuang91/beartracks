@@ -19,12 +19,18 @@ module NavigationHelpers
       "/clerks/#{Clerk.find_by_login($1).id}/edit"
     when /^the clerk show page for (.*)$/
       "/clerks/#{Clerk.find_by_login($1).id}"
-
     when /^the packages? page$/
       '/packages'
-
     when /^the add\s?-?package page$/
       '/packages/new'
+    when /^the clerk home page$/
+      "/packages"
+
+    when /^the package details page for package ([0-9]+)$/
+      '/packages/$1'
+
+    when /^the edit package page for package ([0-9]+)$/
+      '/packages/$1/edit'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

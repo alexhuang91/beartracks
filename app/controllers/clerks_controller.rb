@@ -1,5 +1,7 @@
 class ClerksController < ApplicationController
   
+  before_filter :is_admin?, :only => [:new, :create]
+  
   def new
     @clerk = Clerk.new
   end
@@ -11,7 +13,6 @@ class ClerksController < ApplicationController
   def create
     @clerk = Clerk.new(params[:clerk])
     if @clerk.save
-      ClerkSession.create! @clerk
       flash[:notice] = "Clerk account successfully created."
       redirect_to clerk_home_path
     else
@@ -39,5 +40,16 @@ class ClerksController < ApplicationController
       redirect_to clerk_path(@clerk)
     end
   end
+  
+  protected
+  
+  def is_admin?
+    unless current_clerk.is_admin?
+      redirect_to packages_path
+      return false
+    end
+    return true
+  end
+  
   
 end

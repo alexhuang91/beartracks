@@ -5,7 +5,7 @@ class Package < ActiveRecord::Base
     @@never_null_fields = {:resident_name=>'Resident Name', :unit=>'Unit', :building=>'Building',
       :room=>'Room',:tracking_number=>'Tracking Number'} #leaving datetime_received out, not for user
     empty_fields = @@never_null_fields.keys.
-      collect{ |field| field if (not self[field] or self[field].to_s.gsub(/[\s]/,'')=="") }.
+      collect{ |field| field if (not self[field] or self[field].to_s.blank?) }.
       compact
   end
 
