@@ -62,7 +62,7 @@ Scenario: edit a package's information without filling all required fields
   When I press "Update" 
   Then I should be on the edit package page for package 1
   And I should see "Edit package"
-  And I should see "Package was not updated successfully."  
+  And I should see "Cannot leave Tracking Number blank."
 
 Scenario: cancel an update operation
   Given I am on the package details page for package 1	
