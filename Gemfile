@@ -40,6 +40,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'authlogic'
 gem 'rails3-generators' # for authlogic generators
+gem 'kaminari'
 
 # Use unicorn as the web server
 # gem 'unicorn'

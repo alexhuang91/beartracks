@@ -1,5 +1,8 @@
 class Package < ActiveRecord::Base
   belongs_to :clerk
+  
+  # how many packages are displayed on a page
+  paginates_per 10 
 
   def unfilled_fields
     @@never_null_fields = {:resident_name=>'Resident Name', :unit=>'Unit', :building=>'Building',
