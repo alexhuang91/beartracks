@@ -35,12 +35,12 @@ describe PackagesController do
     end
 
     it "should display the view for the picked up method" do
-      put :picked_up, :id => @fakePackage.id
+      put :toggle_pickup, :id => @fakePackage.id
       response.should redirect_to(:action => :index)
     end
 
     it "should display a notice to the clerk when a package is accepted" do
-      put :picked_up, :id => @fakePackage.id
+      put :toggle_pickup, :id => @fakePackage.id
       flash[:notice].should_not be_nil
     end
 
