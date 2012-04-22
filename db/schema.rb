@@ -58,12 +58,14 @@ ActiveRecord::Schema.define(:version => 20120419023354) do
     t.string   "name"
     t.string   "unit"
     t.string   "building"
-    t.integer  "room"
+    t.string   "room"
     t.string   "preference"
     t.integer  "phone_number"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
 end

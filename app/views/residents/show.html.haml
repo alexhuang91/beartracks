@@ -1,0 +1,33 @@
+%table#package-details
+  %caption#resident-detail-caption Resident Settings
+  %tr
+    %td.resident-detail-header First Name:
+    %td.resident-detail-info= @resident.first_name
+  %tr
+    %td.resident-detail-header Last Name:
+    %td.resident-detail-info= @resident.last_name
+  %tr
+    %td.resident-detail-header Unit:
+    %td.resident-detail-info= @resident.unit
+  %tr
+    %td.resident-detail-header Building:
+    %td.resident-detail-info= @resident.building
+  %tr
+    %td.resident-detail-header Room:
+    %td.resident-detail-info= @resident.room
+  %tr
+    %td.resident-detail-header Phone Number:
+    %td.resident-detail-info= @resident.phone_number
+  %tr
+    %td.resident-detail-header Email:
+    %td.resident-detail-info= @resident.email
+  %tr
+    %td.resident-detail-header Preference:
+    %td.resident-detail-info= @resident.preference
+  %tr
+    %td.resident-detail-header Password:
+    %td.resident-detail-info= "**********"
+.options
+  = link_to "Edit", edit_resident_path(@resident)
+  |
+  = link_to "Go Home", residents_path
