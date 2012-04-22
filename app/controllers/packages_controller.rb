@@ -170,17 +170,33 @@ class PackagesController < ApplicationController
     end
   end
 
-  def picked_up
+  # Toggles the pickup status of a package
+  def toggle_pickup
     p = Package.find(params[:id])
-    p.picked_up = true
-    p.clerk_accepted_id = current_clerk.id
-    p.datetime_accepted = Time.now.to_datetime
-    if p.save
-      flash[:notice] = "Package was picked up."
-      redirect_to packages_path # or to the resident sign-up page if they arent opted in?
+    
+    if p.picked_up 
+      p.picked_up = false
+      p.clerk_accepted_id = nil
+      p.datetime_accepted = nil
+      
+      if p.save
+        flash[:notice] = "Package was marked as not picked up."
+        redirect_to packages_path
+      else
+        flash[:warning] = "There was an error in marking this package as not picked up."
+        redirect_to package_path p
+      end
     else
-      flash[:warning] = "There was an error in updating this package."
-      redirect_to package_path p
+      p.picked_up = true
+      p.clerk_accepted_id = current_clerk.id
+      p.datetime_accepted = Time.now.to_datetime
+      if p.save
+        flash[:notice] = "Package was marked as picked up."
+        redirect_to packages_path # or to the resident sign-up page if they arent opted in?
+      else
+        flash[:warning] = "There was an error in marking this package as picked up."
+        redirect_to package_path p
+      end
     end
   end
   

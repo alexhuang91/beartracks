@@ -53,6 +53,9 @@
     = link_to 'Delete', package_path(@package), :method => :delete, :confirm => 'Are you sure?'
   -if not @package.picked_up
     |
-    = link_to 'Picked up', :action => 'picked_up', :id => @package.id
+    = link_to 'Mark as picked up', :action => 'toggle_pickup', :id => @package.id
+  -else
+    |
+    = link_to 'Mark as not picked up', :action => 'toggle_pickup', :id => @package.id
   | 
   = link_to 'Back to package list', packages_path

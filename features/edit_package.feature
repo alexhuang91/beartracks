@@ -74,9 +74,25 @@ Scenario: mark a package as picked up
   And I should see "Case"
   When I follow "view details"
   Then I should be on the package details page for package 1	
-  When I follow "Picked up"
+  When I follow "Mark as picked up"
   Then I should be on the packages page
-  And I should see "Package was picked up."
+  And I should see "Package was marked as picked up."
+  And I should not see "Case"
+
+Scenario: mark a package as not picked up
+  Given I am on the package details page for package 1
+  When I follow "Mark as picked up"
+  Then I should be on the packages page
+  And I should see "Package was marked as picked up."
+  When I select "Picked up" from "packages"
+  And I press "Refresh List"
+  Then I should be on the packages page
+  And I should see "All picked up packages"
+  And I should see "Case"
+  Given I am on the package details page for package 1
+  When I follow "Mark as not picked up"
+  Then I should be on the packages page
+  And I should see "Package was marked as not picked up."
   And I should not see "Case"
 
 Scenario: delete a package as an admin
