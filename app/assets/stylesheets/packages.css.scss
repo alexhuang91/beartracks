@@ -1,38 +1,10 @@
 /*
- * Styles for everything about packages
-*/
+ * Packages table css here
+ */
 
 table#packages {
 	width: 90%;
 	margin: 15px auto 20px;
-}
-
-table#package-details {
-  width: 50%;
-  margin: 50px auto 10px;
-}
-
-table#package-form {
-  width: 50%;
-  margin: 50px auto 10px; 
-}
-
-#package-view-options {
-  margin-left: 20px;
-}
-
-#simple-search-options {
-  text-align: right;
-  margin-right: 20px;
-}
-
-#package-detail-caption,
-#package-table-caption,
-#package-form-caption {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: black;
 }
 
 tr.packages-table-header {
@@ -46,27 +18,54 @@ tr.packages-table-info {
 	text-align: center;
 }
 
-/* This is to change font color */
+// Makes all the picked up rows show up in gray
 tr.packages-table-info-picked {
 	text-align: center;
 	color: #C4C4C4;
 }
 
-/* This is to change the BG color */
-/*
-tr.packages-table-info-picked {
-	text-align: center;
-	background-color: #DDDDDD;
+.packages-table-cell {
+	padding: 12px 0px;
 }
-*/
 
 #packages-table-options {
   margin-top: 50px;
   text-align: center;
 }
 
-.packages-table-cell {
-	padding: 7px 0px;
+#package-view-options {
+  float: left;
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+
+#simple-search-options {
+  float: right;
+  margin-right: 20px;
+}
+
+
+/* 
+ * Package form and view details css here
+ */
+
+table#package-details {
+  width: 50%;
+  margin: 50px auto 10px;
+}
+
+table#package-form {
+  width: 50%;
+  margin: 50px auto 10px; 
+}
+
+#package-detail-caption,
+#package-table-caption,
+#package-form-caption {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: black;
 }
 
 .package-detail-header,
