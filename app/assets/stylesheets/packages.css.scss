@@ -44,6 +44,11 @@ tr.packages-table-info-picked {
   margin-right: 20px;
 }
 
+// '!important' is necessary to override the 
+// normal gray color for picked up packages
+.highlight {
+  color: red !important;
+}
 
 /* 
  * Package form and view details css here
