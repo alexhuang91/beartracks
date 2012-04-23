@@ -65,7 +65,7 @@ Scenario: edit a package's information without filling all required fields
   And I should see "Edit package"
   And I should see "Cannot leave Tracking Number blank."
 
-Scenario: mark a package as picked up
+Scenario: mark a package as picked up from the details page
   Given I am on the packages page
   When I select "Not picked up" from "packages"
   And I press "Refresh List"
@@ -79,7 +79,7 @@ Scenario: mark a package as picked up
   And I should see "Package was marked as picked up."
   And I should not see "Case"
 
-Scenario: mark a package as not picked up
+Scenario: mark a package as not picked up from the details page
   Given I am on the package details page for package 1
   When I follow "Mark as picked up"
   Then I should be on the packages page
@@ -94,6 +94,13 @@ Scenario: mark a package as not picked up
   Then I should be on the packages page
   And I should see "Package was marked as not picked up."
   And I should not see "Case"
+
+Scenario: toggle pickup status of a package from the packages page
+  Given I am on the packages page
+  When I follow "_"
+  Then I should be on the packages page
+  And I should see "Case"
+  And I should see "Package was marked as picked up."
 
 Scenario: delete a package as an admin
   Given I am on the packages page
