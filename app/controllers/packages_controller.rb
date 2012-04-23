@@ -87,11 +87,18 @@ class PackagesController < ApplicationController
   end
   
   def show
-    @package = Package.find params[:id]
+    @package = Package.find_by_id(params[:id])
     @clerk = current_clerk
-    if @package.picked_up
-      @accepted = true
-      @clerk_released = Clerk.find @package.clerk_accepted_id
+    
+    # If the package can't be found, go back to the packages page
+    if @package.nil?
+      flash[:notice] = "Package #{params[:id]} doesn't exist."
+      redirect_to packages_path
+    else
+      if @package.picked_up
+        @accepted = true
+        @clerk_released = Clerk.find @package.clerk_accepted_id
+      end
     end
   end
 

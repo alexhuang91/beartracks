@@ -109,3 +109,9 @@ Scenario: no packages in the database for a particular view
   And I should not see "Daniel"
   And I should not see "Kevin"
   And I should not see "Alex"
+
+Scenario: go back to the packages page when trying to access a nonexistent package
+  When I am on the package details page for package 5
+  Then I should be on the packages page
+  And I should see "Package 5 doesn't exist."
+  
