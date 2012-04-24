@@ -43,12 +43,12 @@ class PackagesController < ApplicationController
     
     # Select the packages to display
     if params[:commit] == 'Search' and @search_options.values.include?(params[:search_option])
-      @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => params[:search_string]).page params[:page]
+      @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => params[:search_string]).order("datetime_received DESC").page params[:page]
       @option = params[:search_option]
       @s_string = params[:search_string]
       @searching = true # instance variable used when setting the table caption
     else
-      @packages = Package.where(:picked_up => picked, :unit => units).page params[:page]
+      @packages = Package.where(:picked_up => picked, :unit => units).order("datetime_received DESC").page params[:page]
     end
 
     # Set up instance variables for displaying packages
