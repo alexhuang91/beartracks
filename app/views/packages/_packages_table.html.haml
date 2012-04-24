@@ -1,0 +1,45 @@
+%table#packages
+  %caption#package-table-caption
+    = @table_caption
+  -if @packages != []
+    %thead
+      %tr.packages-table-header
+        %th.packages-table-cell Arrival Time
+        %th.packages-table-cell Package ID
+        %th.packages-table-cell Tracking Number
+        %th.packages-table-cell Package Type
+        %th.packages-table-cell Resident Name
+        -if @clerk.is_admin?
+          %th.packages-table-cell Unit
+        %th.packages-table-cell Building
+        %th.packages-table-cell Room
+        %th.packages-table-cell More Info
+        %th.packages-table-cell-pickup 
+    %tbody
+      - @packages.each do |p|
+        -if p.picked_up and @viewing_all
+          %tr.packages-table-info-picked
+            %td.packages-table-cell= p.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
+            %td.packages-table-cell= p.id
+            %td.packages-table-cell= p.tracking_number
+            %td.packages-table-cell= p.package_type
+            %td.packages-table-cell= p.resident_name
+            -if @clerk.is_admin?
+              %td.packages-table-cell= p.unit
+            %td.packages-table-cell= p.building
+            %td.packages-table-cell= p.room
+            %td.packages-table-cell-details=link_to "view details", package_path(p)
+            %td.packages-table-cell-pickup=link_to "_", :action => 'toggle_pickup', :id => p.id
+        -else
+          %tr.packages-table-info
+            %td.packages-table-cell= p.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
+            %td.packages-table-cell= p.id
+            %td.packages-table-cell= p.tracking_number
+            %td.packages-table-cell= p.package_type
+            %td.packages-table-cell= p.resident_name
+            -if @clerk.is_admin?
+              %td.packages-table-cell= p.unit
+            %td.packages-table-cell= p.building
+            %td.packages-table-cell= p.room
+            %td.packages-table-cell-details=link_to "view details", package_path(p)
+            %td.packages-table-cell-pickup=link_to "_", :action => 'toggle_pickup', :id => p.id
