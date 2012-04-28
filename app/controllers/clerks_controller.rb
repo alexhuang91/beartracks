@@ -1,14 +1,19 @@
 class ClerksController < ApplicationController
   
-  before_filter :is_admin?, :only => [:new, :create]
-  before_filter :check_id_access, :only => [:edit, :update]
+  before_filter :is_admin?, :only => [:new, :create, :index, :toggle_admin_access]
+  before_filter :check_id_access, :only => [:edit, :update, :show]
+  
+  def index
+    @my_id = current_clerk.id
+    @clerks = Clerk.all  
+  end
   
   def new
     @clerk = Clerk.new
   end
   
   def show
-    
+    @clerk = Clerk.find params[:id] 
   end
 
   def create
@@ -42,10 +47,37 @@ class ClerksController < ApplicationController
     end
   end
   
+  def toggle_admin_access
+    clerk = Clerk.find params[:id]
+    
+    if clerk.is_admin?
+      clerk.is_admin = false
+
+      if clerk.save
+        flash[:notice] = "#{clerk.first_name} #{clerk.last_name} has lost admin privileges."
+        redirect_to clerks_path
+      else
+        flash[:warning] = "Error in revoking admin privileges. Try again."
+        redirect_to clerks_path
+      end
+    else # clerk is not an admin
+      clerk.is_admin = true
+
+      if clerk.save
+        flash[:notice] = "#{clerk.first_name} #{clerk.last_name} has been granted admin privileges."
+        redirect_to clerks_path
+      else
+        flash[:warning] = "Error in granting admin privileges. Try again."
+        redirect_to clerks_path
+      end 
+    end
+  end
+
   protected
   
   def is_admin?
     unless current_clerk.is_admin?
+      flash[:warning] = "You don't have permission to do that."
       redirect_to packages_path
       return false
     end
@@ -60,6 +92,5 @@ class ClerksController < ApplicationController
     end
     return true
   end
-  
   
 end

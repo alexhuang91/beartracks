@@ -1,3 +1,35 @@
 // Place all the styles related to the clerks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table#clerks {
+	width: 90%;
+	margin: 15px auto 20px;
+}
+
+#clerks-table-caption {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: black;
+}
+
+tr.clerks-table-header {
+	color: black;
+	font-weight: bold;
+	font-size: 12pt;
+	text-align: center;
+}
+
+tr.clerks-table-info {
+	text-align: center;
+}
+
+.clerks-table-cell {
+	padding: 12px 0px;
+}
+
+#clerks-table-options {
+  margin-top: 50px;
+  text-align: center;
+}

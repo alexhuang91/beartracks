@@ -101,6 +101,10 @@ Scenario: toggle pickup status of a package from the packages page
   Then I should be on the packages page
   And I should see "Case"
   And I should see "Package was marked as picked up."
+  When I follow "_"
+  Then I should be on the packages page
+  And I should see "Case"
+  And I should see "Package was marked as not picked up."
 
 Scenario: delete a package as an admin
   Given I am on the packages page
