@@ -40,15 +40,15 @@ Scenario: view all packages in the clerk's unit
 
 Scenario: sort the packages by resident name on the landing page
   When I am on the packages page
-  And I press "Resident Name"
+  And I follow "Resident Name"
   Then I should be on the packages page
-  And I should see "Alex" before "Kevin"
+  And I should see "Alex" before "Case"
 
 Scenario: sort the packages by datetime received on the landing page
   When I am on the packages page
-  And I press "Arrival Time"
+  And I follow "Arrival Time"
   Then I should be on the packages page
-  And I should see "Daniel" before "Kevin"
+  And I should see "Case" before "Alex"
 
 
 Scenario: view all picked up packages in the clerk's unit
