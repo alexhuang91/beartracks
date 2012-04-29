@@ -215,7 +215,10 @@ class PackagesController < ApplicationController
 
   def package_slips
   # most of the info on how to set it up came from here: http://stackoverflow.com/questions/8658302/
-  # how to do it came mostly from here: http://prawn.majesticseacreature.com/manual.pdf
+  # how to make the pdf came mostly from here: http://prawn.majesticseacreature.com/manual.pdf
+    if params[:format].blank?
+      redirect_to :format => 'pdf' and return
+    end
 
     packages = Package.all # should be Package.where(resident_id: nil, notified: false) or something
 
