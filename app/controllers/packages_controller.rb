@@ -252,7 +252,7 @@ class PackagesController < ApplicationController
   
   def clerk_check
     if not clerk_logged_in?
-      flash[:warning] = "You must be logged in as a clerk to work with packages."
+      flash[:warning] = "You must be logged in as a clerk to access that."
       redirect_to root_url
       return false
     end

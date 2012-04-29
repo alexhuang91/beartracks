@@ -40,8 +40,15 @@ class ResidentsController < ApplicationController
       flash[:error] = html_list("Please fix the following errors:\n", @resident.errors.full_messages)
       redirect_to edit_resident_path(@resident)
     else
-      flash[:notice] = "Profile was successfully updated."
-      redirect_to resident_path(@resident)
+      # If password was not updated, go back to the show profile page
+      # Otherwise, go to the home page and flash a notice
+      if params[:resident][:password] == ""
+        flash[:notice] = "Profile was successfully updated."
+        redirect_to resident_path(@resident)
+      else # password was updated, resident will be automatically logged out anyway so redirect to home page with a notice
+        flash[:notice] = "Your password was changed. Please log in again."
+        redirect_to root_url
+      end
     end
   end
 

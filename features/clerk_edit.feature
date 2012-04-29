@@ -39,3 +39,17 @@ Scenario: Attempt to Edit With Errors
   Then I should be on the clerk edit page for John
   And I should see "the following errors"
   
+Scenario: Logout and redirect to home after editing the password
+  Given I am on the clerk login page 
+  And I fill in the following:
+      | Login     | John       |
+      | Password  | pass       |
+  And I press "Login"
+  When I follow "Edit Profile"
+  And I fill in the following:
+    | Password 				| alex |
+    | Password confirmation | alex |
+  When I press "Update"
+  Then I should be on the home page
+  And I should see "Your password was changed. Please log in again."
+  

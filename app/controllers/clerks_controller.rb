@@ -51,8 +51,15 @@ class ClerksController < ApplicationController
       flash[:error] = html_list("Please fix the following errors:\n", @clerk.errors.full_messages)
       redirect_to edit_clerk_path(@clerk)
     else
-      flash[:notice] = "#{@clerk.login} was successfully updated."
-      redirect_to clerk_path(@clerk)
+      # If password was not updated, go back to the show profile page
+      # Otherwise, go to the home page and flash a notice
+      if params[:clerk][:password] == ""
+        flash[:notice] = "#{@clerk.login} was successfully updated."
+        redirect_to clerk_path(@clerk)
+      else # password was updated, clerk will be automatically logged out anyway so redirect to home page with a notice
+        flash[:notice] = "Your password was changed. Please log in again."
+        redirect_to root_url
+      end
     end
   end
   
@@ -85,7 +92,7 @@ class ClerksController < ApplicationController
   protected
   
   def is_admin?
-    unless current_clerk.is_admin?
+    if current_clerk.nil? or not current_clerk.is_admin?
       flash[:warning] = "You don't have permission to do that."
       redirect_to packages_path
       return false
@@ -94,7 +101,7 @@ class ClerksController < ApplicationController
   end
   
   def check_id_access
-    unless params[:id].to_i == current_clerk.id
+    if current_clerk.nil? or params[:id].to_i != current_clerk.id
       flash[:warning] = "Sorry, you don't have access to that!"
       redirect_to clerk_home_path
       return false

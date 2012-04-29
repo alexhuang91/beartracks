@@ -11,7 +11,7 @@
 $(document).ready(function() {
 	
 	// Hide notice and warning flashes after 5 seconds
-	setTimeout(function(){ $("#flash #notice").hide("slow"); }, 5000);
-	setTimeout(function(){ $("#flash #warning").hide("slow"); }, 5000);
+	setTimeout(function(){ $("#flash #notice").hide("slow"); }, 8000);
+	setTimeout(function(){ $("#flash #warning").hide("slow"); }, 8000);
 	
 });

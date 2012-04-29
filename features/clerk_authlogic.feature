@@ -62,6 +62,4 @@ Scenario: Admin Clerk Signs Up a new normal Clerk
     Then I should be on the clerks page
 
   
-  
-  
     
