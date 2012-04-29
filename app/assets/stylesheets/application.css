@@ -48,18 +48,39 @@ h1 {
 }
 */
 
-h1.title {
-	margin: 0 0 0 30px;
-	color: #5F5F5F;
-	font-size: 2.9em;
-	font-style: normal;
-	letter-spacing: 2px;
-	line-height: 129px;
-}
-
 #header {
 	background-color: #C2D4EC;
 	border-bottom: 4px solid #EAEAEA;
+}
+
+h1 {
+	color: #5F5F5F;
+	font-style: normal;
+	margin: 0px 10px 10px 30px;
+	padding: 10px 0 0 0;
+}
+
+h1#title {
+	font-size: 2.9em;
+	letter-spacing: 2px;
+	line-height: 60px;
+	float: left;
+}
+
+h1#username {
+	display: inline;
+	font-size:1.1em;
+}
+
+#login_status_bar {
+	background-image: url('usernav_bg.png');
+	height: 30px;
+	line-height: 30px;
+	text-align: right;
+}
+
+span.user_links {
+	margin: 0 20px 0 0;
 }
 
 
@@ -161,6 +182,4 @@ h1.title {
   margin: 15px 15px 15px 15px
 }
 
-#user_name {
-	text-align: right;
-}
+
