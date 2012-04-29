@@ -160,3 +160,7 @@ h1.title {
   text-shadow:1px 1px 0px #b23e35;
   margin: 15px 15px 15px 15px
 }
+
+#user_name {
+	text-align: right;
+}
