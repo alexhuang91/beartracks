@@ -19,7 +19,7 @@ Scenario: Login Taken
     | Password              | pass    |
     | Password confirmation | pass    |
     | Email                 | a@a.com |
-  When I press "Submit"
+  When I press "Create Clerk"
   Then I should be on the new clerk page
   And I should see "Login has already been taken"
 
@@ -30,7 +30,7 @@ Scenario: Email Taken
     | Password              | pass    |
     | Password confirmation | pass    |
     | Email                 | j@j.com |
-  When I press "Submit"
+  When I press "Create Clerk"
   Then I should be on the new clerk page
   And I should see "Email has already been taken"
 
@@ -41,7 +41,7 @@ Scenario: Login Too Short
     | Password              | pass    |
     | Password confirmation | pass    |
     | Email                 | a@a.com |
-  When I press "Submit"
+  When I press "Create Clerk"
   Then I should be on the new clerk page
   And I should see "Login is too short (minimum is 3 characters)"
 
@@ -52,7 +52,7 @@ Scenario: Invalid login
     | Password              | pass    |
     | Password confirmation | pass    |
     | Email                 | a@a.com |
-  When I press "Submit"
+  When I press "Create Clerk"
   Then I should be on the new clerk page
   And I should see "Login should use only letters, numbers, spaces, and .-_@ please."
 
@@ -63,7 +63,7 @@ Scenario: Password Too Short
     | Password              | a       |
     | Password confirmation | a       |
     | Email                 | a@a.com |
-  When I press "Submit"
+  When I press "Create Clerk"
   Then I should be on the new clerk page
   And I should see "Password is too short (minimum is 4 characters)"
 
@@ -74,7 +74,7 @@ Scenario: Password confirmation Mismatch
     | Password              | pass    |
     | Password confirmation | pasy    |
     | Email                 | a@a.com |
-  When I press "Submit"
+  When I press "Create Clerk"
   Then I should be on the new clerk page
   And I should see "Password doesn't match confirmation"
 
@@ -85,7 +85,7 @@ Scenario: Password confirmation Too Short
     | Password              | pass    |
     | Password confirmation | pa      |
     | Email                 | a@a.com |
-  When I press "Submit"
+  When I press "Create Clerk"
   Then I should be on the new clerk page
   And I should see "Password confirmation is too short (minimum is 4 characters)"
 
@@ -98,8 +98,8 @@ Scenario: Signup Success
     | Password              | pass    |
     | Password confirmation | pass    |
     | Email                 | a@a.com |
-  When I press "Submit"
-  Then I should be on the packages page
-  And I should see "Clerk account successfully created"
+  When I press "Create Clerk"
+  Then I should be on the clerks page
+  And I should see "Clerk account successfully created."
   And I should not see "Login is too short (minimum is 3 characters)"
 

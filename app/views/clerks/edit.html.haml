@@ -1,3 +1,12 @@
-%h1 Edit Clerk Info
+= form_for @clerk do |f| 
 
-= render :partial => "form"
+  = render :partial => "form", :locals => {:f => f}
+
+  .options
+    %br
+    = submit_tag "Update"
+    %br
+    %br
+
+.options 
+  = link_to "Cancel", clerk_path(@clerk)

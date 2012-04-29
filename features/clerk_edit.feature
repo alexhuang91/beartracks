@@ -19,10 +19,10 @@ Scenario: Should see edit profile link when clerk is logged in and be able to ed
   Then I should see "Edit Profile"
   When I follow "Edit Profile"
   Then I should be on the clerk edit page for John
-  And I should see "Edit Clerk Info"
+  And I should see "Edit clerk info"
   And I fill in the following:
     | Login    | Paul |
-  When I press "Submit"
+  When I press "Update"
   Then the current clerk's login should be "Paul"
   And I should be on the clerk show page for Paul
   
@@ -35,7 +35,7 @@ Scenario: Attempt to Edit With Errors
   When I follow "Edit Profile"
   And I fill in the following:
     | Email | alex |
-  When I press "Submit"
+  When I press "Update"
   Then I should be on the clerk edit page for John
   And I should see "the following errors"
   

@@ -56,10 +56,10 @@ Scenario: Admin Clerk Signs Up a new normal Clerk
         | Password              | newpass        |
         | Password confirmation | newpass        |
         | Email                 | sally@mail.com |
-    When I press "Submit"
+    When I press "Create Clerk"
     Then a new Clerk account for "Sally" should be created
     And the current clerk's login should be "admin"
-    Then I should be on the packages page
+    Then I should be on the clerks page
 
   
   

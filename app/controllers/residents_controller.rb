@@ -5,7 +5,14 @@ class ResidentsController < ApplicationController
   end
 
   def show
-    @resident = Resident.find(params[:id])
+    # Use find_by_id instead of find so that it will return nil instead of throwing an exception
+    @resident = Resident.find_by_id(params[:id])
+
+    # If the resident doesn't exist, go back to the residents page
+    if @resident.nil?
+      flash[:notice] = "The resident you requested doesn't exist."
+      redirect_to residents_path
+    end
   end
 
   def create
@@ -33,7 +40,7 @@ class ResidentsController < ApplicationController
       flash[:error] = html_list("Please fix the following errors:\n", @resident.errors.full_messages)
       redirect_to edit_resident_path(@resident)
     else
-      flash[:notice] = "#{@resident.login} was successfully updated."
+      flash[:notice] = "Profile was successfully updated."
       redirect_to resident_path(@resident)
     end
   end

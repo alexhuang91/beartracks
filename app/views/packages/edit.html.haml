@@ -3,4 +3,10 @@
   = render :partial => "form"
 
   .options
+    %br
     = submit_tag "Update"
+    %br
+    %br
+
+.options 
+  = link_to "Cancel", package_path(@package)

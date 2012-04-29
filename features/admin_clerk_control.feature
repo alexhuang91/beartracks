@@ -35,6 +35,26 @@ Scenario: Regular Clerk can not see Add clerk button on page header nor navigate
   When I go to the new clerk page
   Then I should be on the clerk home page
   
+Scenario: Admin clerk can create a new clerk
+  When I am on the clerk login page
+  And I fill in the following:
+      | Login     | admin       |
+      | Password  | admin       |
+  Then I press "Login"
+  Given I am on the new clerk page
+  Then I should see "Create a new clerk"
+  When I fill in the following:
+  	  | Login				  | newclerk |
+  	  | First name			  | new		 |
+  	  | Last name			  | clerk    |
+  	  | Password			  | pass	 |
+  	  | Password confirmation | pass 	 |
+  	  | Email				  | n@c.com  |
+  And I press "Create Clerk"
+  Then I should be on the clerks page 
+  And I should see "Clerk account successfully created."
+  And I should see "newclerk"
+
 Scenario: Admin clerk can see a list of all Clerks
   When I am on the clerk login page
   And I fill in the following:

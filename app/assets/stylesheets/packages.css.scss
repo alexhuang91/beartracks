@@ -54,18 +54,14 @@ tr.packages-table-info-picked {
  * Package form and view details css here
  */
 
-table#package-details {
-  width: 50%;
-  margin: 50px auto 10px;
-}
-
+table#package-details,
 table#package-form {
   width: 50%;
   margin: 50px auto 10px; 
 }
 
+#packages-table-caption,
 #package-detail-caption,
-#package-table-caption,
 #package-form-caption {
   font-size: 24px;
   font-weight: bold;
@@ -78,11 +74,13 @@ table#package-form {
   font-weight: bold;
   text-align: right;
   padding: 10px 5px 10px 0px;
+  width: 50%;
 }
 
 .package-detail-info,
 .package-form-info {
   text-align: left;
+  width: 50%;
 }
 
 .options {

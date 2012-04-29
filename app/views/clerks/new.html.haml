@@ -1,3 +1,12 @@
-%h1 New Clerk
+= form_for @clerk do |f|
+  
+  = render :partial => "form", :locals => {:f => f}
 
-= render :partial => "form"
+  .options
+    %br
+    = submit_tag "Create Clerk"
+    %br
+    %br
+
+.options 
+  = link_to "Cancel", clerks_path

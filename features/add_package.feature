@@ -73,7 +73,7 @@ Scenario: Cancel an add package operation
     | Tracking Number | 1122   |
     | Building        | Cheney |
     | Room            | 253    |
-  And I press "Cancel"
+  And I follow "Cancel"
   Then I should be on the packages page
   And I should see "1SFELKJ23"
   And I should not see "1122"

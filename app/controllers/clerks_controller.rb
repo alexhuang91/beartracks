@@ -9,21 +9,29 @@ class ClerksController < ApplicationController
   end
   
   def new
+    @new = true
     @clerk = Clerk.new
   end
   
   def show
-    @clerk = Clerk.find params[:id] 
+    # Use find_by_id instead of find so that it will return nil instead of throwing an exception
+    @clerk = Clerk.find_by_id(params[:id])
+
+    # If the clerk doesn't exist, go back to the clerks page
+    if @clerk.nil?
+      flash[:notice] = "The clerk you requested doesn't exist."
+      redirect_to clerks_path
+    end
   end
 
   def create
     @clerk = Clerk.new(params[:clerk])
     if @clerk.save
       flash[:notice] = "Clerk account successfully created."
-      redirect_to clerk_home_path
+      redirect_to clerks_path
     else
       if @clerk.errors.any?
-        flash[:error] = html_list("Please fix the following errors:\n",@clerk.errors.full_messages)
+        flash[:error] = html_list("Please fix the following errors:\n", @clerk.errors.full_messages)
       else
         flash[:error] = "There was a problem. Please try again."
       end
@@ -32,6 +40,7 @@ class ClerksController < ApplicationController
   end
   
   def edit
+    @new = false
     @clerk = Clerk.find(params[:id])
   end
   

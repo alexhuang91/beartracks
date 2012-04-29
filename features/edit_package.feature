@@ -128,3 +128,15 @@ Scenario: clerks can't delete packages
   Then I should be on the packages page
   When I am on the package details page for package 1 
   Then I should not see "Delete"
+
+Scenario: Cancel an edit package operation
+  When I am on the edit package page for package 1
+  And I fill in the following:
+    | Resident Name   | Bilbo  |
+    | Tracking Number | 1122   |
+    | Building        | Cheney |
+    | Room            | 253    |
+  And I follow "Cancel"
+  Then I should be on the package details page for package 1
+  And I should see "123"
+  And I should not see "1122"

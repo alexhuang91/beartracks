@@ -1,1 +1,19 @@
-%h1 Your Current Info
+%table#clerk-details
+  %caption#clerk-detail-caption= "#{@clerk.login}'s profile info"
+  %tr
+    %td.clerk-detail-header Name:
+    %td.clerk-detail-info= "#{@clerk.first_name} #{@clerk.last_name}"
+  %tr
+    %td.clerk-detail-header Login:
+    %td.clerk-detail-info= @clerk.login
+  %tr
+    %td.clerk-detail-header Email:
+    %td.clerk-detail-info= @clerk.email
+  %tr
+    %td.clerk-detail-header Unit:
+    %td.clerk-detail-info= @clerk.unit
+
+.options
+  = link_to 'Edit', edit_clerk_path(@clerk)
+  |
+  = link_to 'Back to all clerks', clerks_path

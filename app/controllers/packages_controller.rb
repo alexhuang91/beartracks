@@ -87,6 +87,7 @@ class PackagesController < ApplicationController
   end
   
   def show
+    # Use find_by_id instead of find so that it will return nil instead of throwing an exception
     @package = Package.find_by_id(params[:id])
     @clerk = current_clerk
     

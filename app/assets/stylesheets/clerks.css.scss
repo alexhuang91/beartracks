@@ -2,16 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/*
+ * Clerks table CSS 
+ */
+
 table#clerks {
 	width: 90%;
 	margin: 15px auto 20px;
-}
-
-#clerks-table-caption {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: black;
 }
 
 tr.clerks-table-header {
@@ -31,5 +28,42 @@ tr.clerks-table-info {
 
 #clerks-table-options {
   margin-top: 50px;
+  text-align: center;
+}
+
+/*
+ * Clerk form and details page CSS
+ */
+
+table#clerk-details,
+table#clerk-form {
+  width: 50%;
+  margin: 50px auto 10px; 
+}
+
+#clerks-table-caption,
+#clerk-detail-caption,
+#clerk-form-caption {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: black;
+}
+
+.clerk-detail-header,
+.clerk-form-header {
+  font-weight: bold;
+  text-align: right;
+  padding: 10px 5px 10px 0px;
+  width: 50%;
+}
+
+.clerk-detail-info,
+.clerk-form-info {
+  text-align: left;
+  width: 50%;
+}
+
+.options {
   text-align: center;
 }
