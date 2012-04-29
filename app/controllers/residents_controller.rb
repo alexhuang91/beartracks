@@ -12,10 +12,6 @@ class ResidentsController < ApplicationController
     @resident = Resident.find_by_id(params[:id])
 
     # If the resident doesn't exist, go back to the residents page
-    if @resident.nil?
-      flash[:notice] = "The resident you requested doesn't exist."
-      redirect_to residents_path
-    end
   end
 
   def create

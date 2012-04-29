@@ -34,6 +34,12 @@ module NavigationHelpers
     when /^the edit package page for package ([0-9]+)$/
       "/packages/#{$1}/edit"
 
+    when /^the resident edit page for resident ([0-9]+)$/
+      "/resident/#{$1}/edit"
+    when /^the resident show page for resident ([0-9]+)$/
+      "/residents/#{$1}"
+
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
