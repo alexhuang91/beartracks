@@ -8,32 +8,29 @@
     = csrf_meta_tags
 
   %body
+    #header
+      %h1.title= link_to "BearTracks", root_url
+    
     - if current_resident
-      #header
-        %h1.title= link_to "BearTracks", residents_path
-        #user_nav
-          = link_to "My Profile", resident_path(current_resident)
-          |
-          = link_to "Resident Logout", resident_logout_path
+      #user_nav
+        = link_to "My Profile", resident_path(current_resident)
+        |
+        = link_to "Resident Logout", resident_logout_path
     - elsif current_clerk
-      #header
-        %h1.title= link_to "BearTracks", clerk_home_path
-        #user_nav
-          - if current_clerk.is_admin?
-            = link_to "View Packages", packages_path
-            |
-            = link_to "View All Clerks", clerks_path
-            |
-            = link_to "Add New Clerk", new_clerk_path
+      #user_nav
+        - if current_clerk.is_admin?
+          = link_to "View Packages", packages_path
           |
-          = link_to "Edit Profile", edit_clerk_path(current_clerk)
+          = link_to "View All Clerks", clerks_path
           |
-          = link_to "Clerk Logout", clerk_logout_path
+          = link_to "Add New Clerk", new_clerk_path
+        |
+        = link_to "Edit Profile", edit_clerk_path(current_clerk)
+        |
+        = link_to "Clerk Logout", clerk_logout_path
     - else
-      #header
-        %h1.title= link_to "BearTracks", root_url
-        #user_nav
-          = link_to "Clerk Login", clerk_login_path
+      #user_nav
+        = link_to "Clerk Login", clerk_login_path
 
     #flash
       - if flash[:notice]
