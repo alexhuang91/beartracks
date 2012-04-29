@@ -49,8 +49,9 @@ h1 {
 */
 
 #header {
-	background-color: #C2D4EC;
-	border-bottom: 4px solid #EAEAEA;
+	background-image: url('usernav_bg.png');
+	/*border-bottom: 4px solid #EAEAEA;*/
+	border-bottom: 1px solid #C4C4C4;
 }
 
 h1 {
@@ -73,10 +74,11 @@ h1#username {
 }
 
 #login_status_bar {
-	background-image: url('usernav_bg.png');
+	background-image: url('header_bg.png');
 	height: 30px;
 	line-height: 30px;
 	text-align: right;
+	border-bottom: 1px solid #454C51;
 }
 
 span.user_links {
