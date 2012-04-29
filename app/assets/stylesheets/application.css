@@ -38,16 +38,6 @@ h1#home-page-header {
 	text-align: center;
 }
 
-/*
-h1 {
-	color: #696969;
-	font-size: 1.5em;
-	font-style: italic;
-	display: block;
-	margin: 0 10px 10px 10px;
-}
-*/
-
 #header {
 	background-image: url('usernav_bg.png');
 	/*border-bottom: 4px solid #EAEAEA;*/
@@ -68,17 +58,31 @@ h1#title {
 	float: left;
 }
 
-h1#username {
-	display: inline;
-	font-size:1.1em;
-}
 
+/******
+	Top Bar Styling
+*/
 #login_status_bar {
 	background-image: url('header_bg.png');
 	height: 30px;
 	line-height: 30px;
 	text-align: right;
 	border-bottom: 1px solid #454C51;
+	color: #DCE0E6;
+}
+
+h1#username {
+	display: inline;
+	font-size:1.1em;
+	color: #EEEEEE;
+}
+
+#login_status_bar a {
+	color: #DCE0E6;
+}
+
+#login_status_bar a:hover {
+	color: white;
 }
 
 span.user_links {
@@ -86,6 +90,11 @@ span.user_links {
 }
 
 
+
+
+/******
+	FOOTER 
+*/
 #footer {
 	background-image: url('campanile_shadow.png');
 	background-repeat: no-repeat;
