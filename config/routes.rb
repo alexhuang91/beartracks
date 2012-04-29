@@ -10,7 +10,6 @@ Beartracks::Application.routes.draw do
   # first created -> highest priority.
   
   root :to => 'home#index'
-  match 'packages/package_slips' => 'packages#package_slips'
   resources :packages
   resources :clerks
   resources :residents
