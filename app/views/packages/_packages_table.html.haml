@@ -13,8 +13,8 @@
           %th.packages-table-cell Unit
         %th.packages-table-cell Building
         %th.packages-table-cell Room
-        %th.packages-table-cell More Info
-        %th.packages-table-cell-pickup 
+        %th.packages-table-cell Pickup 
+        %th.packages-table-cell-details 
     %tbody
       - @packages.each do |p|
         -if p.picked_up and @viewing_all
@@ -28,8 +28,8 @@
               %td.packages-table-cell= p.unit
             %td.packages-table-cell= p.building
             %td.packages-table-cell= p.room
-            %td.packages-table-cell-details=link_to "view details", package_path(p)
-            %td.packages-table-cell-pickup=link_to "_", :action => 'toggle_pickup', :id => p.id
+            %td.packages-table-cell-pickup=link_to "toggle pickup", :action => 'toggle_pickup', :id => p.id
+            %td.packages-table-cell-details=link_to "_", package_path(p)
         -else
           %tr.packages-table-info
             %td.packages-table-cell= p.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
@@ -41,5 +41,6 @@
               %td.packages-table-cell= p.unit
             %td.packages-table-cell= p.building
             %td.packages-table-cell= p.room
-            %td.packages-table-cell-details=link_to "view details", package_path(p)
-            %td.packages-table-cell-pickup=link_to "_", :action => 'toggle_pickup', :id => p.id
+            %td.packages-table-cell-pickup=link_to "toggle pickup", :action => 'toggle_pickup', :id => p.id
+            %td.packages-table-cell-details=link_to "_", package_path(p)
+            

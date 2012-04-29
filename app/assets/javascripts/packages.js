@@ -1,10 +1,10 @@
 $(document).ready(function() {
-	// Hide the toggle pickup link
-	$(".packages-table-cell-pickup").hide();
+	// Hide the package details link
+	$(".packages-table-cell-details").hide();
 	
 	// Toggle pickup by clicking the table rows
 	$("tr[class|='packages-table-info']").children("td.packages-table-cell").click(function() {
-		text = $(this).parent().find("td.packages-table-cell-pickup a").attr('href');
+		text = $(this).parent().find("td.packages-table-cell-details a").attr('href');
 		location.href = text;
 	});
 	

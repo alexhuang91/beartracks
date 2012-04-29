@@ -24,7 +24,7 @@ Background: Clerk logged in
 
 Scenario: view a package's details
   Given I am on the packages page
-  When I follow "view details"
+  When I follow "_"
   Then I should be on the package details page for package 1	
   And I should see "Details for package 1"
   And I should see "Case"
@@ -72,7 +72,7 @@ Scenario: mark a package as picked up from the details page
   Then I should be on the packages page
   And I should see "All not picked up packages"
   And I should see "Case"
-  When I follow "view details"
+  When I follow "_"
   Then I should be on the package details page for package 1	
   When I follow "Mark as picked up"
   Then I should be on the packages page
@@ -97,11 +97,11 @@ Scenario: mark a package as not picked up from the details page
 
 Scenario: toggle pickup status of a package from the packages page
   Given I am on the packages page
-  When I follow "_"
+  When I follow "toggle pickup"
   Then I should be on the packages page
   And I should see "Case"
   And I should see "Package was marked as picked up."
-  When I follow "_"
+  When I follow "toggle pickup"
   Then I should be on the packages page
   And I should see "Case"
   And I should see "Package was marked as not picked up."
@@ -110,7 +110,7 @@ Scenario: delete a package as an admin
   Given I am on the packages page
   Then I should see "All packages"
   And I should see "Case"
-  When I follow "view details"
+  When I follow "_"
   Then I should be on the package details page for package 1	
   When I follow "Delete"
   Then I should be on the packages page

@@ -54,7 +54,7 @@ h1.title {
 	font-size: 2.9em;
 	font-style: normal;
 	letter-spacing: 2px;
-	line-height: 129px;
+	padding: 10px 0px;
 }
 
 #header {
