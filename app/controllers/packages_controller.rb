@@ -207,6 +207,41 @@ class PackagesController < ApplicationController
       end
     end
   end
+
+  def package_slips
+  # most of the info on how to set it up came from here: http://stackoverflow.com/questions/8658302/
+  # how to do it came mostly from here: http://prawn.majesticseacreature.com/manual.pdf
+
+    packages = Package.all # should be Package.where(resident_id: nil, notified: false) or something
+
+    pdf = Prawn::Document.new( margin: 36, top_margin: 72, bottom_margin: 72 )
+
+    pdf.define_grid( rows: 3, columns: 2, gutter: 36 )
+    packages.each_with_index do |package, i|
+      if i%6 == 0 && i != 0
+        pdf.start_new_page
+      end
+      pdf.grid(i%6/2, i%2).bounding_box do # draw the boarderline, now make a smaller box to go inside
+        pdf.stroke_bounds
+        top    = pdf.bounds.top
+        left   = pdf.bounds.left
+        right  = pdf.bounds.right
+        bottom = pdf.bounds.bottom
+
+        pdf.bounding_box( [left+3, top-3], width: right-left-6, height: top-bottom-6 ) do
+          pdf.text package.unit
+          pdf.text package.building + ", room " + package.room
+          pdf.text "Resident: " + package.resident_name
+          pdf.text "Package ID = #{package.id}\n\n"
+          pdf.text "You just received a package! Pick it up at\n#{package.unit}'s mailroom.\n\n"
+          pdf.text "Are you sick of package slips? Want to move into the 21st century? Try beartracks.\n\n\n"
+          pdf.text "beartracks.heroku.com"
+        end
+      end
+    end
+
+    send_data pdf.render, type: "application/pdf", disposition: "inline"#, filename: "pslips_"+Time.now.to_date.to_s+".pdf" somehow
+  end
   
   protected
   
