@@ -13,25 +13,24 @@
         %h1#username 
           = "Hey, #{current_clerk.first_name} #{current_clerk.last_name}"
         %span.user_links
-          |
           = link_to "Edit Profile", edit_clerk_path(current_clerk)
           |
           = link_to "LOGOUT", clerk_logout_path
+      - elsif current_resident
+        %span.user_links
+          = link_to "My Profile", resident_path(current_resident)
+          |
+          = link_to "LOGOUT", resident_logout_path
       - else
         %span.user_links
-          = link_to "LOGIN", clerk_login_path
+          = link_to "CLERK LOGIN", clerk_login_path
         
         
     #header
       .title
         %h1.title= link_to "BearTracks", root_url
         
-    - if current_resident
-      #user_nav
-        = link_to "My Profile", resident_path(current_resident)
-        |
-        = link_to "Resident Logout", resident_logout_path
-    - elsif current_clerk
+    - if current_clerk
       #user_nav
         = link_to "View Packages", packages_path
         - if current_clerk.is_admin?
