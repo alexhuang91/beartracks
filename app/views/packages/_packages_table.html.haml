@@ -4,13 +4,13 @@
   -if @packages != []
     %thead
       %tr.packages-table-header
-        %th.packages-table-cell Arrival Time
-        %th.packages-table-cell Package ID
+        %th.packages-table-cell= link_to 'Arrival Time', packages_path(:sort => 'datetime_received DESC')
+        %th.packages-table-cell= link_to 'Package ID', packages_path(:sort => 'id ASC')
         %th.packages-table-cell Tracking Number
-        %th.packages-table-cell Package Type
-        %th.packages-table-cell Resident Name
+        %th.packages-table-cell= link_to 'Package Type', packages_path(:sort => 'package_type ASC')
+        %th.packages-table-cell= link_to 'Resident Name', packages_path(:sort => 'resident_name ASC')
         -if @clerk.is_admin?
-          %th.packages-table-cell Unit
+          %th.packages-table-cell= link_to 'Unit', packages_path(:sort => 'unit ASC')
         %th.packages-table-cell Building
         %th.packages-table-cell Room
         %th.packages-table-cell Pickup 

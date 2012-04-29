@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
     end
 
     def preferences_array
-      ['Mail Slip', 'Email', 'Text Message']
+      ['Mail Slip', 'Email'] #, 'Text Message']
     end
 
     def units_array
