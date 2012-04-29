@@ -5,6 +5,11 @@ class PackagesController < ApplicationController
   def index
     params_and_session_dont_match = params[:unit] != session[:unit] || params[:packages] != session[:packages]
     a_param_is_nil = !params[:unit] || !params[:packages]
+    if (params[:sort] == nil)
+        ordering = "datetime_received DESC"
+    else
+        ordering = params[:sort]
+    end
     if a_param_is_nil or params_and_session_dont_match
       # If the clerk is an admin, store and use the new unit setting (or default to 'all').
       # Otherwise, enforce viewing only the clerk's unit for the setting.
@@ -20,11 +25,11 @@ class PackagesController < ApplicationController
       
       flash.keep
       if params[:commit] == 'Search'
-        redirect_to :unit => session[:unit], :packages => session[:packages],
+        redirect_to :unit => session[:unit], :packages => session[:packages], :sort => params[:sort],
         :search_option => params[:search_option], :search_string => params[:search_string],
         :commit => 'Search' and return
       else
-        redirect_to :unit => session[:unit], :packages => session[:packages] and return
+        redirect_to :unit => session[:unit], :packages => session[:packages], :sort => params[:sort] and return
       end
     end
 
@@ -43,12 +48,12 @@ class PackagesController < ApplicationController
     
     # Select the packages to display
     if params[:commit] == 'Search' and @search_options.values.include?(params[:search_option])
-      @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => params[:search_string]).order("datetime_received DESC").page params[:page]
+      @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => params[:search_string]).order(ordering).page params[:page]
       @option = params[:search_option]
       @s_string = params[:search_string]
       @searching = true # instance variable used when setting the table caption
     else
-      @packages = Package.where(:picked_up => picked, :unit => units).order("datetime_received DESC").page params[:page]
+      @packages = Package.where(:picked_up => picked, :unit => units).order(ordering).page params[:page]
     end
 
     # Set up instance variables for displaying packages
