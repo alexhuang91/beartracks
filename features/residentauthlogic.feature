@@ -23,9 +23,9 @@ Scenario: Logging in and out through the user interface
     Then I should be on the residents page
     And the current resident's login should be "John"
     Then I should see "You have successfully logged in."
-    Then I should see "Logout"
-    Then I should not see "Resident Login"
-    When I follow "Resident Logout"
+    Then I should see the "resident logout" link
+    Then I should not see the "resident login" link
+    When I follow the "resident logout" link
     Then I should see "You have successfully logged out."
 
 Scenario: Visiting the logout url with no user logged in

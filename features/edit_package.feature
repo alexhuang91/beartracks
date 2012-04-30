@@ -11,12 +11,7 @@ Background: Clerk logged in
     | Tony     | pass       | pass                  | Unit 1 |   true   |
     | Tiny     | pass       | pass                  | Unit 1 |   false  |
 
-  When I am on the homepage
-  When I follow "Clerk Login"
-  And I fill in the following:
-    | Login     | Tony |
-    | Password  | pass |
-  And I press "Login"
+  Then I log in as a clerk through the UI with login "Tony" and password "pass"
 
   Given the following packages exist my way:
   | resident_name | tracking_number | unit   | building | room | datetime_received | picked_up | clerk_id | sender_city | sender_state | sender_zip |
@@ -119,8 +114,8 @@ Scenario: delete a package as an admin
 
 Scenario: clerks can't delete packages
   When I am on the home page
-  And I follow "Clerk Logout"
-  Then I follow "Clerk Login"
+  And I follow the "clerk logout" link
+  Then I follow the "clerk login" link
   And I fill in the following:
     | Login     | Tiny |
     | Password  | pass |

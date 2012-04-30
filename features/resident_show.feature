@@ -39,7 +39,7 @@ Scenario: Click Settings
   Then the current resident's first name should be "Nottony"
 
 Scenario: Click Logout
-  When I follow "Resident Logout"
+  When I follow the "resident logout" link
   Then I should see "You have successfully logged out"
   Then there should be no resident logged in
 
