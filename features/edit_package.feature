@@ -11,12 +11,7 @@ Background: Clerk logged in
     | Tony     | pass       | pass                  | Unit 1 |   true   |
     | Tiny     | pass       | pass                  | Unit 1 |   false  |
 
-  When I am on the homepage
-  When I follow "Clerk Login"
-  And I fill in the following:
-    | Login     | Tony |
-    | Password  | pass |
-  And I press "Login"
+  Then I log in as a clerk through the UI with login "Tony" and password "pass"
 
   Given the following packages exist my way:
   | resident_name | tracking_number | unit   | building | room | datetime_received | picked_up | clerk_id | sender_city | sender_state | sender_zip |
@@ -24,7 +19,7 @@ Background: Clerk logged in
 
 Scenario: view a package's details
   Given I am on the packages page
-  When I follow "view details"
+  When I follow "_"
   Then I should be on the package details page for package 1	
   And I should see "Details for package 1"
   And I should see "Case"
@@ -72,7 +67,7 @@ Scenario: mark a package as picked up from the details page
   Then I should be on the packages page
   And I should see "All not picked up packages"
   And I should see "Case"
-  When I follow "view details"
+  When I follow "_"
   Then I should be on the package details page for package 1	
   When I follow "Mark as picked up"
   Then I should be on the packages page
@@ -97,16 +92,20 @@ Scenario: mark a package as not picked up from the details page
 
 Scenario: toggle pickup status of a package from the packages page
   Given I am on the packages page
-  When I follow "_"
+  When I follow "toggle pickup"
   Then I should be on the packages page
   And I should see "Case"
   And I should see "Package was marked as picked up."
+  When I follow "toggle pickup"
+  Then I should be on the packages page
+  And I should see "Case"
+  And I should see "Package was marked as not picked up."
 
 Scenario: delete a package as an admin
   Given I am on the packages page
   Then I should see "All packages"
   And I should see "Case"
-  When I follow "view details"
+  When I follow "_"
   Then I should be on the package details page for package 1	
   When I follow "Delete"
   Then I should be on the packages page
@@ -115,8 +114,8 @@ Scenario: delete a package as an admin
 
 Scenario: clerks can't delete packages
   When I am on the home page
-  And I follow "Clerk Logout"
-  Then I follow "Clerk Login"
+  And I follow the "clerk logout" link
+  Then I follow the "clerk login" link
   And I fill in the following:
     | Login     | Tiny |
     | Password  | pass |
@@ -124,3 +123,15 @@ Scenario: clerks can't delete packages
   Then I should be on the packages page
   When I am on the package details page for package 1 
   Then I should not see "Delete"
+
+Scenario: Cancel an edit package operation
+  When I am on the edit package page for package 1
+  And I fill in the following:
+    | Resident Name   | Bilbo  |
+    | Tracking Number | 1122   |
+    | Building        | Cheney |
+    | Room            | 253    |
+  And I follow "Cancel"
+  Then I should be on the package details page for package 1
+  And I should see "123"
+  And I should not see "1122"

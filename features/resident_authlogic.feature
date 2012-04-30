@@ -23,9 +23,9 @@ Scenario: Logging in and out through the user interface
     Then I should be on the residents page
     And the current resident's login should be "John"
     Then I should see "You have successfully logged in."
-    Then I should see "Logout"
-    Then I should not see "Resident Login"
-    When I follow "Resident Logout"
+    Then I should see the "resident logout" link
+    Then I should not see the "resident login" link
+    When I follow the "resident logout" link
     Then I should see "You have successfully logged out."
 
 Scenario: Visiting the logout url with no user logged in
@@ -52,3 +52,22 @@ Scenario: Signing up
     Then a new resident account for "Sally" should be created
     And the current resident's login should be "Sally"
     And I am on the root page
+
+Scenario: Redirect to home page after a resident changes his/her password
+  Given the following resident exists:
+    | login    | password   | password_confirmation | email   |
+    | Tony     | pass       | pass                  | j@j.com |
+  Given I am on the resident login page 
+  And I fill in the following:
+      | Login     | Tony  |
+      | Password  | pass  |
+  And I press "Login"
+  Given I am on the resident edit page for resident 1
+  And I should see "Edit resident profile"
+  And I fill in the following:
+    | resident_password 		 	 | alex |
+    | resident_password_confirmation | alex |
+  When I press "Update"
+  Then I should be on the home page
+  And I should see "Your password was changed. Please log in again."
+  

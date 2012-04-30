@@ -11,11 +11,7 @@ Background: Clerk logged in
     | Tony     | pass       | pass                  | Unit 1 | Tony       | Montana   |
 
   When I am on the homepage
-  When I follow "Clerk Login"
-  And I fill in the following:
-    | Login     | Tony |
-    | Password  | pass |
-  And I press "Login"
+  Then I log in as a clerk through the UI with login "Tony" and password "pass"
 
 Scenario: Get to the Add Package page
   When I go to the packages page
@@ -73,7 +69,7 @@ Scenario: Cancel an add package operation
     | Tracking Number | 1122   |
     | Building        | Cheney |
     | Room            | 253    |
-  And I press "Cancel"
+  And I follow "Cancel"
   Then I should be on the packages page
   And I should see "1SFELKJ23"
   And I should not see "1122"

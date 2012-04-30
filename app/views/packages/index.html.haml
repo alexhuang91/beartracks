@@ -17,6 +17,8 @@
 
 #packages-table-options
   = link_to "Add New Package", new_package_path
+  |
+  = link_to "Package Slips", packages_package_slips_path(:format => 'pdf')
   %br
   %br
   =paginate @packages

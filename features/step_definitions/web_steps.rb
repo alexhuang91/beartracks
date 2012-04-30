@@ -236,6 +236,13 @@ Then /^(?:|I )should be on (.+)$/ do |page_name|
   end
 end
 
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  step %Q{I should see "#{e1}"}
+    step %Q{I should see "#{e2}"}
+      contents = page.body
+        assert contents.index(e1) < contents.index(e2)
+        end
+
 Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   query = URI.parse(current_url).query
   actual_params = query ? CGI.parse(query) : {}

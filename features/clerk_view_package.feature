@@ -10,14 +10,7 @@ Background: packages in database, clerk logged in
     | login    | password   | password_confirmation | unit   | is_admin |
     | Timy     | pass       | pass                  | Unit 1 |  false   |
 
-  Given there is no clerk logged in
-  When I am on the homepage
-  When I follow "Clerk Login"
-  And I fill in the following:
-    | Login     | Timy |
-    | Password  | pass |
-  And I check "Remember me"
-  And I press "Login"
+  Then I log in as a clerk through the UI with login "Timy" and password "pass"
 
   Given the following packages exist my way:
   | resident_name | tracking_number | unit   | building | room | datetime_received | picked_up | clerk_id |
@@ -36,6 +29,20 @@ Scenario: view all packages in the clerk's unit
   And I should not see "Daniel"
   And I should not see "Kevin"
   And I should see "Alex"
+
+
+Scenario: sort the packages by resident name on the landing page
+  When I am on the packages page
+  And I follow "Resident Name"
+  Then I should be on the packages page
+  And I should see "Alex" before "Case"
+
+Scenario: sort the packages by datetime received on the landing page
+  When I am on the packages page
+  And I follow "Arrival Time"
+  Then I should be on the packages page
+  And I should see "Case" before "Alex"
+
 
 Scenario: view all picked up packages in the clerk's unit
   When I am on the packages page

@@ -4,12 +4,12 @@ Beartracks::Application.routes.draw do
   get "resident_sessions/new"
   post "resident_sessions/create"
   get "home/index"
-  get "packages/picked_up"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
   
   root :to => 'home#index'
+  match 'packages/package_slips' => 'packages#package_slips'
   resources :packages
   resources :clerks
   resources :residents
@@ -18,6 +18,7 @@ Beartracks::Application.routes.draw do
   match 'resident/login' => 'resident_sessions#new'
   match 'resident/logout' => 'resident_sessions#destroy'
   match 'packages/:id/toggle_pickup' => 'packages#toggle_pickup'
+  match 'clerks/:id/toggle_admin_access' => 'clerks#toggle_admin_access'
   
   match 'clerk/home' => 'packages#index'
   

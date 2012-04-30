@@ -5,6 +5,11 @@ class PackagesController < ApplicationController
   def index
     params_and_session_dont_match = params[:unit] != session[:unit] || params[:packages] != session[:packages]
     a_param_is_nil = !params[:unit] || !params[:packages]
+    if (params[:sort] == nil)
+        ordering = "datetime_received DESC"
+    else
+        ordering = params[:sort]
+    end
     if a_param_is_nil or params_and_session_dont_match
       # If the clerk is an admin, store and use the new unit setting (or default to 'all').
       # Otherwise, enforce viewing only the clerk's unit for the setting.
@@ -20,11 +25,11 @@ class PackagesController < ApplicationController
       
       flash.keep
       if params[:commit] == 'Search'
-        redirect_to :unit => session[:unit], :packages => session[:packages],
+        redirect_to :unit => session[:unit], :packages => session[:packages], :sort => params[:sort],
         :search_option => params[:search_option], :search_string => params[:search_string],
         :commit => 'Search' and return
       else
-        redirect_to :unit => session[:unit], :packages => session[:packages] and return
+        redirect_to :unit => session[:unit], :packages => session[:packages], :sort => params[:sort] and return
       end
     end
 
@@ -43,12 +48,12 @@ class PackagesController < ApplicationController
     
     # Select the packages to display
     if params[:commit] == 'Search' and @search_options.values.include?(params[:search_option])
-      @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => params[:search_string]).order("datetime_received DESC").page params[:page]
+      @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => params[:search_string]).order(ordering).page params[:page]
       @option = params[:search_option]
       @s_string = params[:search_string]
       @searching = true # instance variable used when setting the table caption
     else
-      @packages = Package.where(:picked_up => picked, :unit => units).order("datetime_received DESC").page params[:page]
+      @packages = Package.where(:picked_up => picked, :unit => units).order(ordering).page params[:page]
     end
 
     # Set up instance variables for displaying packages
@@ -87,6 +92,7 @@ class PackagesController < ApplicationController
   end
   
   def show
+    # Use find_by_id instead of find so that it will return nil instead of throwing an exception
     @package = Package.find_by_id(params[:id])
     @clerk = current_clerk
     
@@ -206,12 +212,50 @@ class PackagesController < ApplicationController
       end
     end
   end
+
+  def package_slips
+  # most of the info on how to set it up came from here: http://stackoverflow.com/questions/8658302/
+  # how to make the pdf came mostly from here: http://prawn.majesticseacreature.com/manual.pdf
+    if params[:format].blank?
+      redirect_to :format => 'pdf' and return
+    end
+
+    packages = Package.all # should be Package.where(resident_id: nil, notified: false) or something
+
+    pdf = Prawn::Document.new( margin: 36, top_margin: 72, bottom_margin: 72 )
+
+    pdf.define_grid( rows: 3, columns: 2, gutter: 36 )
+    packages.each_with_index do |package, i|
+      if i%6 == 0 && i != 0
+        pdf.start_new_page
+      end
+      pdf.grid(i%6/2, i%2).bounding_box do # draw the boarderline, now make a smaller box to go inside
+        pdf.stroke_bounds
+        top    = pdf.bounds.top
+        left   = pdf.bounds.left
+        right  = pdf.bounds.right
+        bottom = pdf.bounds.bottom
+
+        pdf.bounding_box( [left+3, top-3], width: right-left-6, height: top-bottom-6 ) do
+          pdf.text package.unit
+          pdf.text package.building + ", room " + package.room
+          pdf.text "Resident: " + package.resident_name
+          pdf.text "Package ID = #{package.id}\n\n"
+          pdf.text "You just received a package! Pick it up at\n#{package.unit}'s mailroom.\n\n"
+          pdf.text "Are you sick of package slips? Want to move into the 21st century? Try beartracks.\n\n\n"
+          pdf.text "beartracks.heroku.com"
+        end
+      end
+    end
+
+    send_data pdf.render, type: "application/pdf", disposition: "inline"#, filename: "pslips_"+Time.now.to_date.to_s+".pdf" somehow
+  end
   
   protected
   
   def clerk_check
     if not clerk_logged_in?
-      flash[:warning] = "You must be logged in as a clerk to work with packages."
+      flash[:warning] = "You must be logged in as a clerk to access that."
       redirect_to root_url
       return false
     end

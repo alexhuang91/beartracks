@@ -1,5 +1,5 @@
 %table#resident-form
-  %caption#resident-form-caption= "Edit Resident"
+  %caption#resident-form-caption= "Edit resident profile"
   = form_for @resident do |f|
     %tr
       %td.resident-form-header= f.label :first_name
@@ -16,9 +16,10 @@
     %tr
       %td.resident-form-header= f.label :room
       %td.resident-form-info= f.text_field :room
-    %tr
+    -#%tr
       %td.resident-form-header= f.label :phone_number
       %td.resident-form-info= f.text_field :phone_number
+    -
     %tr
       %td.resident-form-header= f.label :email
       %td.resident-form-info= f.text_field :email

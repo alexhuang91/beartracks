@@ -70,9 +70,9 @@ describe ClerksController do
         flash[:notice].should_not be_nil
       end
       
-      it "should redirect to the clerk home page" do
+      it "should redirect to the clerks page" do
         post_good_create
-        response.should redirect_to(clerk_home_path)
+        response.should redirect_to(clerks_path)
       end
       
     end
@@ -205,7 +205,7 @@ describe ClerksController do
     before :each do
       @clerk = FactoryGirl.create(:clerk)
       controller.stub(:current_clerk).and_return(@clerk)
-      put :update, :id => @clerk.id, :clerk => {:login => "Ringo"} 
+      put :update, :id => @clerk.id, :clerk => {:login => "Ringo", :password => ""} 
     end
     
     it "should render the view for this clerk" do

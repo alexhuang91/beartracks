@@ -1,5 +1,5 @@
 %table#package-details
-  %caption#resident-detail-caption Resident Settings
+  %caption#resident-detail-caption Resident Profile
   %tr
     %td.resident-detail-header First Name:
     %td.resident-detail-info= @resident.first_name
@@ -24,10 +24,7 @@
   %tr
     %td.resident-detail-header Preference:
     %td.resident-detail-info= @resident.preference
-  %tr
-    %td.resident-detail-header Password:
-    %td.resident-detail-info= "**********"
 .options
   = link_to "Edit", edit_resident_path(@resident)
   |
-  = link_to "Go Home", residents_path
+  = link_to "Go to home page", residents_path

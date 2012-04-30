@@ -15,22 +15,30 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
+
+    when /^the clerks? page$/
+      '/clerks'
     when /^the clerk edit page for (.*)$/
       "/clerks/#{Clerk.find_by_login($1).id}/edit"
     when /^the clerk show page for (.*)$/
       "/clerks/#{Clerk.find_by_login($1).id}"
+    when /^the clerk home page$/
+      "/packages"
+
     when /^the packages? page$/
       '/packages'
     when /^the add\s?-?package page$/
       '/packages/new'
-    when /^the clerk home page$/
-      "/packages"
-
     when /^the package details page for package ([0-9]+)$/
       "/packages/#{$1}"
-
     when /^the edit package page for package ([0-9]+)$/
       "/packages/#{$1}/edit"
+
+    when /^the resident edit page for resident ([0-9]+)$/
+      "/residents/#{$1}/edit"
+    when /^the resident show page for resident ([0-9]+)$/
+      "/residents/#{$1}"
+
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

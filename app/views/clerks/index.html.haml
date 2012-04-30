@@ -1,0 +1,24 @@
+%table#clerks
+  %caption#clerks-table-caption All Clerks
+  %thead
+    %tr.clerks-table-header
+      %th.clerks-table-cell Name
+      %th.clerks-table-cell Login
+      %th.clerks-table-cell Email
+      %th.clerks-table-cell Unit
+      %th.clerks-table-cell Admin?
+      %th.clerks-table-cell Access Control
+  %tbody
+    - @clerks.each do |clerk|
+      %tr.clerks-table-info
+        %td.clerks-table-cell= "#{clerk.first_name} #{clerk.last_name}" 
+        %td.clerks-table-cell= clerk.login
+        %td.clerks-table-cell= clerk.email
+        %td.clerks-table-cell= clerk.unit
+        %td.clerks-table-cell= clerk.is_admin ? "Yes" : "No"
+        - if @my_id != clerk.id
+          - if not clerk.is_admin?
+            %td.clerks-table-cell= link_to "grant admin privileges", :action => "toggle_admin_access", :id => clerk.id
+          - else
+            %td.clerks-table-cell= link_to "revoke admin privileges", :action => "toggle_admin_access", :id => clerk.id
+            
