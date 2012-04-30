@@ -205,7 +205,7 @@ describe ClerksController do
     before :each do
       @clerk = FactoryGirl.create(:clerk)
       controller.stub(:current_clerk).and_return(@clerk)
-      put :update, :id => @clerk.id, :clerk => {:login => "Ringo"} 
+      put :update, :id => @clerk.id, :clerk => {:login => "Ringo", :password => ""} 
     end
     
     it "should render the view for this clerk" do

@@ -8,30 +8,37 @@
     = csrf_meta_tags
 
   %body
+    #login_status_bar
+      - if current_clerk
+        %h1#username 
+          = "Hey, #{current_clerk.first_name} #{current_clerk.last_name}"
+        %span.user_links
+          = link_to "Edit Profile", edit_clerk_path(current_clerk)
+          |
+          = link_to "LOGOUT", clerk_logout_path
+      - elsif current_resident
+        %span.user_links
+          = link_to "My Profile", resident_path(current_resident)
+          |
+          = link_to "LOGOUT", resident_logout_path
+      - else
+        %span.user_links
+          = link_to "CLERK LOGIN", clerk_login_path
+        
+        
     #header
-      %h1.title= link_to "BearTracks", root_url
-    
-    - if current_resident
+      .title
+        %h1.title= link_to "BearTracks", root_url
+        
+    - if current_clerk
       #user_nav
-        = link_to "My Profile", resident_path(current_resident)
-        |
-        = link_to "Resident Logout", resident_logout_path
-    - elsif current_clerk
-      #user_nav
+        = link_to "View Packages", packages_path
         - if current_clerk.is_admin?
-          = link_to "View Packages", packages_path
           |
           = link_to "View All Clerks", clerks_path
           |
           = link_to "Add New Clerk", new_clerk_path
-        |
-        = link_to "Edit Profile", edit_clerk_path(current_clerk)
-        |
-        = link_to "Clerk Logout", clerk_logout_path
-    - else
-      #user_nav
-        = link_to "Clerk Login", clerk_login_path
-
+        
     #flash
       - if flash[:notice]
         #notice
