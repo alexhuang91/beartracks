@@ -2,7 +2,7 @@
   %caption#package-detail-caption Details for package #{@package.id}
   %tr
     %td.package-detail-header Resident:
-    %td.package-detail-info= @package.resident_name
+    %td.package-detail-info= @package.resident_first_name + " " + @package.resident_last_name
   %tr
     %td.package-detail-header Housing:
     %td.package-detail-info= @package.unit + ', ' + @package.building + ' ' + @package.room

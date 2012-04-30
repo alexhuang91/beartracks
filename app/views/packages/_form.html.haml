@@ -6,8 +6,11 @@
       Edit package
   %caption *required fields
   %tr
-    %td.package-form-header= label :package, :resident_name, "Resident Name*:"
-    %td.package-form-info= text_field :package, "resident_name"
+    %td.package-form-header= label :package, :resident_first_name, "Resident First Name*:"
+    %td.package-form-info= text_field :package, "resident_first_name"
+  %tr
+    %td.package-form-header= label :package, :resident_last_name, "Resident Last Name*:"
+    %td.package-form-info= text_field :package, "resident_last_name"
   %tr
     %td.package-form-header= label :package, :unit, "Unit*:"
     -if @new and @clerk_unit

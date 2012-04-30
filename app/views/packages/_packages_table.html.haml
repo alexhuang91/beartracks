@@ -8,7 +8,7 @@
         %th.packages-table-cell= link_to 'Package ID', packages_path(:sort => 'id ASC')
         %th.packages-table-cell Tracking Number
         %th.packages-table-cell= link_to 'Package Type', packages_path(:sort => 'package_type ASC')
-        %th.packages-table-cell= link_to 'Resident Name', packages_path(:sort => 'resident_name ASC')
+        %th.packages-table-cell= link_to 'Resident Name', packages_path(:sort => 'resident_last_name ASC')
         -if @clerk.is_admin?
           %th.packages-table-cell= link_to 'Unit', packages_path(:sort => 'unit ASC')
         %th.packages-table-cell Building
@@ -23,7 +23,7 @@
             %td.packages-table-cell= p.id
             %td.packages-table-cell= p.tracking_number
             %td.packages-table-cell= p.package_type
-            %td.packages-table-cell= p.resident_name
+            %td.packages-table-cell= "#{p.resident_last_name}, #{p.resident_first_name}"
             -if @clerk.is_admin?
               %td.packages-table-cell= p.unit
             %td.packages-table-cell= p.building
@@ -36,7 +36,7 @@
             %td.packages-table-cell= p.id
             %td.packages-table-cell= p.tracking_number
             %td.packages-table-cell= p.package_type
-            %td.packages-table-cell= p.resident_name
+            %td.packages-table-cell= "#{p.resident_last_name}, #{p.resident_first_name}"
             -if @clerk.is_admin?
               %td.packages-table-cell= p.unit
             %td.packages-table-cell= p.building
