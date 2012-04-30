@@ -36,6 +36,8 @@ h1#home-page-header {
 	font-weight: bold;
 	color: black;
 	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 50px;
 }
 
 #header {
