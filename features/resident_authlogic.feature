@@ -46,7 +46,7 @@ Scenario: Signing up
     And I fill in the following:
         | Login                 | Sally      |
         | Password              | newpass    |
-        | Password confirmation | newpass    |
+        | Password Confirmation | newpass    |
         | Email                 | a@b.com    |
     When I press "Submit"
     Then a new resident account for "Sally" should be created
@@ -63,7 +63,6 @@ Scenario: Redirect to home page after a resident changes his/her password
       | Password  | pass  |
   And I press "Login"
   Given I am on the resident edit page for resident 1
-  And I should see "Edit resident profile"
   And I fill in the following:
     | resident_password 		 	 | alex |
     | resident_password_confirmation | alex |

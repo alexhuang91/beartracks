@@ -19,10 +19,9 @@ Background: I am logged in as a user and I look at my settings
   Then I should see "Email: "
   Then I should see "j@j.com"
   When I follow "Edit"
-  Then I should see "Edit resident profile"
   And I fill in the following:
-    | First name | Istony     |
-    | Last name  | mylastname |
+    | First Name | Istony     |
+    | Last Name  | mylastname |
 
 @model
 Scenario: Simple update
@@ -50,7 +49,7 @@ Scenario: Click Logout. No Resident show page
 Scenario: Bad password update
   When I fill in the following:
     | Password             | mypass         |
-    | Password confirmation| notthesamepass |
+    | Password Confirmation| notthesamepass |
   When I press "Update"
   Then I should see "Please fix the following errors:"
   Then I should see "Password doesn't match confirmation"
