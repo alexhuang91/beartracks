@@ -39,8 +39,8 @@ Scenario: Click Settings
   Then I should see "My Profile"
   Then the current resident's first name should be "Nottony"
 
-Scenario: Click Logout. No Resident show page
-  When I follow "Resident Logout"
+Scenario: Click Logout
+  When I follow the "resident logout" link
   Then I should see "You have successfully logged out"
   Then there should be no resident logged in
   When I go to the resident show page for resident 1
@@ -56,7 +56,7 @@ Scenario: Bad password update
   Then I should see "Password doesn't match confirmation"
 
 Scenario: No logged in tries to go to residents/4
-  When I follow "Resident Logout"
+  When I follow the "resident logout" link
   Then I should see "You have successfully logged out"
   When I go to the resident show page for resident 4
   Then I should see "Sorry, you don't have access to that!"
@@ -67,16 +67,11 @@ Scenario: Resident tries to access another resident settings
   Then I should see "Sorry, you don't have access to that!"
 
 Scenario: Clerk tried to access resident settings
-  When I follow "Resident Logout"
+  When I follow the "resident logout" link
   Given the following clerk exists:
     | login    | password   | password_confirmation | unit   | email            | first_name | last_name |
     | Paul     | pass       | pass                  | Unit 1 | paul@beatles.com | Paul       | McCartney |
-  When I follow "Clerk Login"
-  When I fill in the following:
-    | Login    | Paul |
-    | Password | pass |
-  When I press "Login"
-  Then the current clerk's login should be "Paul"
+  When I log in as a clerk through the UI with login "Paul" and password "pass"
   When I go to the resident show page for resident 1
   Then I should be on the home page
   Then I should see "Sorry, you don't have access to that!"

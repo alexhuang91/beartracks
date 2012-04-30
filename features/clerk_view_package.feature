@@ -10,14 +10,7 @@ Background: packages in database, clerk logged in
     | login    | password   | password_confirmation | unit   | is_admin |
     | Timy     | pass       | pass                  | Unit 1 |  false   |
 
-  Given there is no clerk logged in
-  When I am on the homepage
-  When I follow "Clerk Login"
-  And I fill in the following:
-    | Login     | Timy |
-    | Password  | pass |
-  And I check "Remember me"
-  And I press "Login"
+  Then I log in as a clerk through the UI with login "Timy" and password "pass"
 
   Given the following packages exist my way:
   | resident_name | tracking_number | unit   | building | room | datetime_received | picked_up | clerk_id |
