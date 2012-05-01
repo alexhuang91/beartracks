@@ -18,6 +18,11 @@
             |
           = link_to "LOGOUT", clerk_logout_path
       - elsif current_resident
+        %h1#username
+          - if current_resident.name.blank?
+            = "Hey, #{current_resident.first_name}"
+          - else
+            = "Hey, #{current_resident.name}"
         %span.user_links
           = link_to "My Profile", resident_path(current_resident)
           |

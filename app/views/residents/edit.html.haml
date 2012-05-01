@@ -1,6 +1,7 @@
 = form_tag resident_path(@resident), :method=>'put'  do
+  %table#resident-form
+    %caption#resident-form-caption= "Resident Profile"
 
-  = render :partial => "settings_form"
-
+  = render :partial => "form"
   .options
     = submit_tag "Update"

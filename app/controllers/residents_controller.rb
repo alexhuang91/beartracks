@@ -18,7 +18,7 @@ class ResidentsController < ApplicationController
     @resident = Resident.new(params[:resident])
     if @resident.save
       ResidentSession.create! @resident
-      flash[:notice] = "Resident account successfully created. "
+      flash[:notice] = "Resident account successfully created."
       redirect_to root_url
     else
       if @resident.errors.any?
@@ -59,15 +59,20 @@ class ResidentsController < ApplicationController
   def check_id_access
     if current_resident.nil?
       flash[:warning] = "Sorry, you don't have access to that!"
-      redirect_to root_path
+      if current_clerk.nil?
+        redirect_to root_path
+      else
+        redirect_to packages_path
+      end
       return false
+    else
+      unless params[:id].to_i == current_resident.id
+        flash[:warning] = "Sorry, you don't have access to that!"
+        redirect_to residents_path
+        return false
+      end
+      return true
     end
-    unless params[:id].to_i == current_resident.id
-      flash[:warning] = "Sorry, you don't have access to that!"
-      redirect_to residents_path
-      return false
-    end
-    return true
   end
 
 end

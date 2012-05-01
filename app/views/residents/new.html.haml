@@ -1,6 +1,7 @@
 = form_tag residents_path do
-
+  %table#resident-form
+    %caption#resident-form-caption= "New resident"
+    %caption All fields are required
   = render :partial => "form"
-
   .options
     = submit_tag "Submit"
