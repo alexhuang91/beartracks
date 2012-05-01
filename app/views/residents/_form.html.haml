@@ -17,7 +17,7 @@
       %td.resident-form-info= f.text_field :last_name
     %tr
       %td.resident-form-header= f.label :unit, "Unit:"
-      %td.resident-form-info= f.select :unit, units_array
+      %td.resident-form-info= f.select :unit, units_hash.keys
     %tr
       %td.resident-form-header= f.label :building, "Building:"
       %td.resident-form-info= f.text_field :building
