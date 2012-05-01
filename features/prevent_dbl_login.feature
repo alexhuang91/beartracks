@@ -2,8 +2,8 @@ Feature: Clerks and Residents cannot be simultaneously logged in within a sessio
 
 Scenario: Resident Logged in Can't log in as a Clerk through interface
   Given the following resident exists:
-    | login    | password   | password_confirmation | email   |
-    | Corre    | pass       | pass                  | mail@email.com |
+    | login | password | password_confirmation | email          | unit   | building | room | preference | first_name      | last_name |
+    | Corre | pass     | pass                  | mail@email.com | Unit 2 | Cheney   | 510  | Email      | Alex            | Corre     |
   Then I am on the resident login page
   And I fill in the following:
       | Login     | Corre       |

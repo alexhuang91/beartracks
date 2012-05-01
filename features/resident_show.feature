@@ -2,9 +2,9 @@ Feature: Testing Resident Settings Page
 
 Background: I am logged in as a user and I look at my settings
   Given the following resident exists:
-    | login | password | password_confirmation | email   | first name |
-    | Tony  | pass     | pass                  | j@j.com | Nottony    |
-    | Alex  | pass     | pass                  | p@p.com | Alex       |
+    | login | password | password_confirmation | email   | unit   | building | room | preference | first_name      | last_name |
+    | Tony  | pass     | pass                  | j@j.com | Unit 3 | Priestly | 202  | Email      | Nottony         | Pizzaman  |
+    | Alex  | pass     | pass                  | p@p.com | Unit 2 | Cheney   | 101  | Mail Slip  | Alex            | Great     |
   And I am on the resident login page
   When I fill in the following:
     | Login    | Tony |
@@ -72,5 +72,5 @@ Scenario: Clerk tried to access resident settings
     | Paul     | pass       | pass                  | Unit 1 | paul@beatles.com | Paul       | McCartney |
   When I log in as a clerk through the UI with login "Paul" and password "pass"
   When I go to the resident show page for resident 1
-  Then I should be on the home page
+  Then I should be on the packages page
   Then I should see "Sorry, you don't have access to that!"
