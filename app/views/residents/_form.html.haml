@@ -1,48 +1,35 @@
 %table#resident-form
   = form_for @resident do |f|
     %tr
-      %td.resident-form-header= f.label :login, "Login*:"
+      %td.resident-form-header= f.label :login, "Login:"
       %td.resident-form-info= f.text_field :login
     %tr
-      %td.resident-form-header= f.label :password, "Password*:"
+      %td.resident-form-header= f.label :password, "Password:"
       %td.resident-form-info= f.password_field :password
     %tr
-      %td.resident-form-header= f.label :password_confirmation, "Password Confirmation*:"
+      %td.resident-form-header= f.label :password_confirmation, "Password Confirmation:"
       %td.resident-form-info= f.password_field :password_confirmation
     %tr
-      %td.resident-form-header= f.label :first_name, "First Name*:"
+      %td.resident-form-header= f.label :first_name, "First Name:"
       %td.resident-form-info= f.text_field :first_name
     %tr
-      %td.resident-form-header= f.label :last_name, "Last Name*:"
+      %td.resident-form-header= f.label :last_name, "Last Name:"
       %td.resident-form-info= f.text_field :last_name
     %tr
       %td.resident-form-header= f.label :unit, "Unit:"
       %td.resident-form-info= f.select :unit, units_array
     %tr
-      %td.resident-form-header= f.label :building, "Building*:"
+      %td.resident-form-header= f.label :building, "Building:"
       %td.resident-form-info= f.text_field :building
     %tr
-      %td.resident-form-header= f.label :room, "Room Number*:"
+      %td.resident-form-header= f.label :room, "Room Number:"
       %td.resident-form-info= f.text_field :room
     -#%tr
       %td.resident-form-header= f.label :phone_number, "Phone Number:"
       %td.resident-form-info= f.text_field :phone_number
-    -#%tr
+    %tr
       %td.resident-form-header= f.label :email, "Email:"
       %td.resident-form-info= f.text_field :email
     %tr
-      %td.resident-form-header= f.label :email, "Email*:"
-      %td.resident-form-info= f.text_field :email
-    %tr
-      %td.resident-form-header= f.label :preference, "Preference*:"
+      %td.resident-form-header= f.label :preference, "Preference:"
       %td.resident-form-info= f.select :preference, preferences_array
-    -#%tr
-      %td.resident-form-header= f.label :login, "Login*:"
-      %td.resident-form-info= f.text_field :login
-    -#%tr
-      %td.resident-form-header= f.label :password, "Password:"
-      %td.resident-form-info= f.password_field :password
-    -#%tr
-      %td.resident-form-header= f.label :password_confirmation, "Password Confirmation:"
-      %td.resident-form-info= f.password_field :password_confirmation
-
