@@ -161,6 +161,8 @@ describe ClerksController do
     
       before :each do
         @clerk = FactoryGirl.create(:clerk)
+        @clerk.is_admin = true
+        @clerk.save
         controller.stub(:current_clerk).and_return(@clerk)
         get :edit, :id => @clerk.id
       end
@@ -204,6 +206,8 @@ describe ClerksController do
     
     before :each do
       @clerk = FactoryGirl.create(:clerk)
+      @clerk.is_admin = true
+      @clerk.save
       controller.stub(:current_clerk).and_return(@clerk)
       put :update, :id => @clerk.id, :clerk => {:login => "Ringo", :password => ""} 
     end
@@ -226,6 +230,8 @@ describe ClerksController do
     
     before :each do
       @clerk = FactoryGirl.create(:clerk)
+      @clerk.is_admin = true
+      @clerk.save
       controller.stub(:current_clerk).and_return(@clerk)
       put :update, :id => @clerk.id, :clerk => {:email => "email"}
     end

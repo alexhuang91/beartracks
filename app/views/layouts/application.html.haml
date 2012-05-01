@@ -11,10 +11,11 @@
     #login_status_bar
       - if current_clerk
         %h1#username 
-          = "Hey, #{current_clerk.first_name} #{current_clerk.last_name}"
+          = "#{current_clerk.first_name} #{current_clerk.last_name}"
         %span.user_links
-          = link_to "Edit Profile", edit_clerk_path(current_clerk)
-          |
+          - if current_clerk.is_admin?
+            = link_to "Edit Profile", edit_clerk_path(current_clerk)
+            |
           = link_to "LOGOUT", clerk_logout_path
       - elsif current_resident
         %span.user_links
