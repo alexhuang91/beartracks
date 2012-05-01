@@ -263,5 +263,42 @@ describe ClerksController do
     end
     
   end
+  
+  describe "toggle_admin access." do
+    
+    before :each do
+      @admin_clerk = FactoryGirl.create(:admin)
+      @non_clerk = FactoryGirl.create(:clerk)
+      controller.stub(:current_clerk).and_return(@admin_clerk)
+      Clerk.stub(:find).and_return(@non_clerk)
+    end
+    
+    def do_toggle
+      get :toggle_admin_access, :id => @non_clerk.id
+    end
+    
+    it "should determine the admin status of the clerk id passed in." do
+      @non_clerk.should_receive(:is_admin?)
+      do_toggle
+    end
+    
+    it "should set the clerk admin to true" do
+      @non_clerk.should_receive(:is_admin=).with(true)
+      do_toggle
+    end
+    
+    it "should save the modified record" do
+      @non_clerk.should_receive(:save)
+      do_toggle
+    end
+    
+    it "should redirect to clerks page" do
+      do_toggle
+      response.should redirect_to clerks_path
+    end
+    
+    it "the old non-admin should now be an admin clerk in the db"
+    
+  end
 
 end

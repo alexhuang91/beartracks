@@ -15,7 +15,7 @@
         %td.clerks-table-cell= clerk.login
         %td.clerks-table-cell= clerk.email
         %td.clerks-table-cell= clerk.unit
-        %td.clerks-table-cell= clerk.is_admin ? "Yes" : "No"
+        %td.clerks-table-cell= clerk.is_admin? ? "Yes" : "No"
         - if @my_id != clerk.id
           - if not clerk.is_admin?
             %td.clerks-table-cell= link_to "grant admin privileges", :action => "toggle_admin_access", :id => clerk.id
