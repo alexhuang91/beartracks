@@ -11,7 +11,7 @@
   %tr
     %td.package-form-header= label :package, :unit, "Unit*:"
     -if @new and @clerk_unit
-      %td.package-form-info= select :package, :unit, units_array,:selected => @clerk_unit
+      %td.package-form-info= select :package, :unit, units_array, :selected => @clerk_unit
     -else
       %td.package-form-info= select :package, :unit, units_array
   %tr

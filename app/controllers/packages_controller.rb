@@ -34,7 +34,7 @@ class PackagesController < ApplicationController
     end
 
     # Set up the mappings for the view options
-    @units_hash = Hash[units_array.collect { |unit| [unit,unit] }]
+    @units_hash = Hash[units_array.collect{ |u| [u,u] }]
     @units_hash['All Units'] = 'all'
     @packages_hash = {'Not picked up' => 'not_picked_up', 
                       'Picked up'     => 'picked_up', 
