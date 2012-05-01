@@ -59,90 +59,90 @@ class ApplicationController < ActionController::Base
     end
 
     def units_hash
-      {"Unit 1"             => "U1",
-       "Unit 2"             => "U2",
-       "Unit 3"             => "U3",
-       "Unit 4"             => "U4",
-       "Clark Kerr"         => "CKC",
-       "University Village" => "UV",
-       "Smyth Fernwald"     => "SF"}
+      {"Unit 1"             => "Unit 1",
+       "Unit 2"             => "Unit 2",
+       "Unit 3"             => "Unit 3",
+       "Unit 4"             => "Unit 4",
+       "Clark Kerr"         => "Clark Kerr",
+       "University Village" => "University Village",
+       "Smyth Fernwald"     => "Smyth Fernwald"}
     end
 
     def buildings_hash(unit)
       if(unit == "CKC")
-        hash = {"CK Building 1"  => "CK1",
-                "CK Building 2"  => "CK2",
-                "CK Building 3"  => "CK3",
-                "CK Building 4"  => "CK4",
-                "CK Building 6"  => "CK6",
-								"CK Building 5"  => "CK5",
-								"CK Building 7"  => "CK7",
-								"CK Building 8"  => "CK8",
-                "CK Building 9"  => "CK9",
-								"CK Building 11" => "CK11",
-								"CK Building 12" => "CK12",
-								"CK Building 13" => "CK13",
-                "CK Building 14" => "CK14",
-								"CK Building 15" => "CK15",
-								"CK Building 16" => "CK16",
-								"CK Building 17" => "CK17",
-                "CK Building 18" => "CK18",
-								"CK Building 19" => "CK19",
-								"CK Building 20" => "CK20"}
+        hash = {"Building 1"  => "Building 1",
+                "Building 2"  => "Building 2",
+                "Building 3"  => "Building 3",
+                "Building 4"  => "Building 4",
+                "Building 6"  => "Building 6",
+								"Building 5"  => "Building 5",
+								"Building 7"  => "Building 7",
+								"Building 8"  => "Building 8",
+                "Building 9"  => "Building 9",
+								"Building 11" => "Building 11",
+								"Building 12" => "Building 12",
+								"Building 13" => "Building 13",
+                "Building 14" => "Building 14",
+								"Building 15" => "Building 15",
+								"Building 16" => "Building 16",
+								"Building 17" => "Building 17",
+                "Building 18" => "Building 18",
+								"Building 19" => "Building 19",
+								"Building 20" => "Building 20"}
 
       elsif(unit == "U1")
-        hash = {"Channing Bowditch" => "CB",
-								"Cheney Hall"       => "CH",
-								"Christian Hall"    => "CN",
-								"Deutsch Hall"      => "DE",
-                "Freeborn Hall"     => "FB",
-								"Ida Jackson House" => "JH",
-								"Putnam Hall"       => "PU",
-								"Slottman Hall"     => "SL"}
+        hash = {"Channing Bowditch" => "Channing Bowditch",
+								"Cheney Hall"       => "Cheney Hall",
+								"Christian Hall"    => "Christian Hall",
+								"Deutsch Hall"      => "Deutsch Hall",
+                "Freeborn Hall"     => "Freeborn Hall",
+								"Ida Jackson House" => "Ida Jackson House",
+								"Putnam Hall"       => "Putnam Hall",
+								"Slottman Hall"     => "Slottman Hall"}
 
       elsif(unit == "U2")
-        hash = {"Cunningham Hall" => "CU",
-								"Davidson Hall"   => "DA",
-								"Ehman Hall"      => "EH",
-								"Griffiths Hall"  => "GR",
-								"Towle Hall"      => "TO",
-								"Wada Hall"       => "WA"}
+        hash = {"Cunningham Hall" => "Cunningham Hall",
+								"Davidson Hall"   => "Davidson Hall",
+								"Ehman Hall"      => "Ehman Hall",
+								"Griffiths Hall"  => "Griffiths Hall",
+								"Towle Hall"      => "Towle Hall",
+								"Wada Hall"       => "Wada Hall"}
 
       elsif(unit == "U3")
-        hash = {"Beverly Cleary Hall" => "BC",
-								"Ida Sproul Hall"     => "IS",
-								"Manville Hall"       => "MV",
-								"Norton Hall"         => "NO",
-								"Priestley Hall"      => "PR",
-								"Spens Black Hall"    => "SB"}
+        hash = {"Beverly Cleary Hall" => "Beverly Cleary Hall",
+								"Ida Sproul Hall"     => "Ida Sproul Hall",
+								"Manville Hall"       => "Manville Hall",
+								"Norton Hall"         => "Norton Hall",
+								"Priestley Hall"      => "Priestley Hall",
+								"Spens Black Hall"    => "Spens Black Hall"}
 
       elsif(unit == "U4")
-        hash = {"FH Building 1" => "FH1",
-								"FH Building 2" => "FH2",
-								"FH Building 3" => "FH3",
-								"FH Building 4" => "FH4",
-								"FH Building 5" => "FH5",
-								"FH Building 6" => "FH6",
-								"FH Building 7" => "FH7",
-								"FH Building 8" => "FH8",
-								"FH Building 9" => "FH9",
-								"Bowles Hall"   => "BO",
-								"Stern Hall"    => "ST"}
+        hash = {"FH Building 1" => "FH Building 1",
+								"FH Building 2" => "FH Building 2",
+								"FH Building 3" => "FH Building 3",
+								"FH Building 4" => "FH Building 4",
+								"FH Building 5" => "FH Building 5",
+								"FH Building 6" => "FH Building 6",
+								"FH Building 7" => "FH Building 7",
+								"FH Building 8" => "FH Building 8",
+								"FH Building 9" => "FH Building 9",
+								"Bowles Hall"   => "Bowles Hall",
+								"Stern Hall"    => "Stern Hall"}
 
       elsif(unit == "UV")
-        hash = {"East" => "UVE",
-                "West" => "UVW"}
+        hash = {"East" => "East",
+                "West" => "West"}
 
       elsif(unit == "SF")
-        hash = {"3002" => "SF3002",
-                "3024" => "SF3024",
-                "E" => "SFE",
-                "F" => "SFF",
-                "G" => "SFG",
-                "H" => "SFH",
-                "J" => "SFJ",
-                "K" => "SFK",
-                "L" => "SFL"}
+        hash = {"3002" => "3002",
+                "3024" => "3024",
+                "E" => "E",
+                "F" => "F",
+                "G" => "G",
+                "H" => "H",
+                "J" => "J",
+                "K" => "K",
+                "L" => "L"}
       else
         hash = {}
       end
