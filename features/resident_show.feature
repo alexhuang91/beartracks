@@ -68,8 +68,8 @@ Scenario: Resident tries to access another resident settings
 Scenario: Clerk tried to access resident settings
   When I follow the "resident logout" link
   Given the following clerk exists:
-    | login    | password   | password_confirmation | unit   | email            | first_name | last_name |
-    | Paul     | pass       | pass                  | Unit 1 | paul@beatles.com | Paul       | McCartney |
+    | login    | password   | password_confirmation | unit   | email            | is_admin | first_name | last_name |
+    | Paul     | pass       | pass                  | Unit 1 | paul@beatles.com | false    | Paul       | McCartney |
   When I log in as a clerk through the UI with login "Paul" and password "pass"
   When I go to the resident show page for resident 1
   Then I should be on the packages page
