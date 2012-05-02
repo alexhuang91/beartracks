@@ -29,4 +29,12 @@ $(document).ready(function() {
 		$(this).toggleClass("highlight");
 	});
 	
+	// Put categories for the Units in the building select menu
+	$("option[value^='--']").each(function() { 
+		$(this).attr("disabled", "disabled");
+	});
+	
+	// In the building select menu, default to Channing Bowditch since it's the first option
+	$("option[value^='Channing Bowditch']").attr("selected", "selected");
+	
 });
