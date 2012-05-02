@@ -46,7 +46,7 @@ Scenario: Add Package without filling in any fields
   When I go to the add package page
   When I press "Save Package"
   Then I should be on the add package page
-  And I should see "Cannot leave Resident Name, Building, Room, or Tracking Number blank."
+  And I should see "Cannot leave Building, Resident First Name, Resident Last Name, Room, or Tracking Number blank."
 
 Scenario: Save and add another package
   When I go to the add package page
