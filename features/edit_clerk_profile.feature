@@ -14,28 +14,19 @@ Scenario: Should not see edit profile link when no clerk logged in
 
 Scenario: A clerk should not see the edit profile link
   Given I am on the clerk login page
-  And I fill in the following:
-      | Login     | john       |
-      | Password  | pass       |
-  And I press "Login" 
+  And I log in as a clerk through the UI with login "John" and password "pass"
   Then I should not see "Edit Profile"
  
 Scenario: A clerk should not be able to edit his/her own profile
   Given I am on the clerk login page
-  And I fill in the following:
-      | Login     | john       |
-      | Password  | pass       |
-  And I press "Login" 
+  And I log in as a clerk through the UI with login "John" and password "pass"
   And I am on the clerk edit page for John
   Then I should be on the clerk home page
   And I should see "You can't edit your own profile. Please ask your supervisor."
   
 Scenario: Should see edit profile link when admin is logged in and be able to edit profile
   Given I am on the clerk login page
-  And I fill in the following:
-      | Login     | Dave       |
-      | Password  | pass       |
-  And I press "Login" 
+  And I log in as a clerk through the UI with login "Dave" and password "pass"
   Then I should see "Edit Profile"
   When I follow "Edit Profile"
   Then I should be on the clerk edit page for Dave
@@ -48,10 +39,7 @@ Scenario: Should see edit profile link when admin is logged in and be able to ed
   
 Scenario: Admin can edit a clerk's information
   Given I am on the clerk login page
-  And I fill in the following:
-      | Login     | Dave       |
-      | Password  | pass       |
-  And I press "Login" 
+  And I log in as a clerk through the UI with login "Dave" and password "pass"
   And I am on the clerk edit page for John
   Then I should see "Edit clerk info"
   And I fill in the following:
@@ -61,20 +49,14 @@ Scenario: Admin can edit a clerk's information
   
 Scenario: Admin cannot edit another admin's profile
   Given I am on the clerk login page
-  And I fill in the following:
-      | Login     | Dave       |
-      | Password  | pass       |
-  And I press "Login" 
+  And I log in as a clerk through the UI with login "Dave" and password "pass"
   And I am on the clerk edit page for Steve
   Then I should be on the clerks page
   And I should see "You can't edit another admin's profile."  
 
 Scenario: Attempt to Edit With Errors
   Given I am on the clerk login page
-  And I fill in the following:
-      | Login     | Dave       |
-      | Password  | pass       |
-  And I press "Login" 
+  And I log in as a clerk through the UI with login "Dave" and password "pass"
   When I follow "Edit Profile"
   And I fill in the following:
     | Email | alex |
@@ -84,10 +66,7 @@ Scenario: Attempt to Edit With Errors
   
 Scenario: Logout and redirect to home after editing the password
   Given I am on the clerk login page
-  And I fill in the following:
-      | Login     | Dave       |
-      | Password  | pass       |
-  And I press "Login" 
+  And I log in as a clerk through the UI with login "Dave" and password "pass"
   When I follow "Edit Profile"
   And I fill in the following:
     | Password 				| alex |

@@ -16,10 +16,7 @@ Scenario: Logging in and out through the user interface
         | John     | pass       | pass                  | Unit 1 | john@lennon.com | John       | Lennon    |
     And I am on the clerk login page
     Then I should not see "Logout"
-    And I fill in the following:
-        | Login     | John       |
-        | Password  | pass       |
-    When I press "Login"
+    When I log in as a clerk through the UI with login "John" and password "pass"
     Then I should be on the packages page
     And the current clerk's login should be "John"
     Then I should see "You have successfully logged in."
@@ -43,11 +40,7 @@ Scenario: Admin Clerk Signs Up a new normal Clerk
           | login | password | password_confirmation | unit   | email           | first_name | last_name | is_admin |
           | admin | admin    | admin                 | Unit 1 | john@lennon.com | John       | Lennon    | true     |
     And I am on the clerk login page
-    And I fill in the following:
-        | Login     | admin   |
-        | Password  | admin    |
-    When I press "Login"
-    Then the current clerk's login should be "admin"
+    When I log in as a clerk through the UI with login "admin" and password "admin"
     And I go to the new clerk page
     And I fill in the following:
         | Login                 | Sally          |

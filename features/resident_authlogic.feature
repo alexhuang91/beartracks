@@ -16,10 +16,7 @@ Scenario: Logging in and out through the user interface
     | John  | pass     | pass                  | j@j.com | Unit 3 | Priestly | 202  | Email      | Nottony         | Pizzaman  |
   And I am on the resident login page
   Then I should not see "Logout"
-  And I fill in the following:
-    | Login     | John       |
-    | Password  | pass       |
-  When I press "Login"
+  When I log in as a resident through the UI with login "John" and password "pass"
   Then I should be on the residents page
   And the current resident's login should be "John"
   Then I should see "You have successfully logged in."
@@ -62,10 +59,7 @@ Scenario: Redirect to home page after a resident changes his/her password
     | login | password | password_confirmation | email   | unit   | building | room | preference | first_name      | last_name |
     | Tony  | pass     | pass                  | j@j.com | Unit 3 | Priestly | 202  | Email      | Nottony         | Pizzaman  |
   Given I am on the resident login page 
-  And I fill in the following:
-      | Login     | Tony  |
-      | Password  | pass  |
-  And I press "Login"
+  When I log in as a resident through the UI with login "Tony" and password "pass"
   Given I am on the resident edit page for resident 1
   And I fill in the following:
     | resident_password 		 	 | alex |
