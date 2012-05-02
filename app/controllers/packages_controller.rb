@@ -247,7 +247,7 @@ class PackagesController < ApplicationController
         pdf.bounding_box( [left+3, top-3], width: right-left-6, height: top-bottom-6 ) do
           pdf.text package.unit
           pdf.text package.building + ", room " + package.room
-          pdf.text "Resident: " + package.resident_name
+          pdf.text "Resident: " + package.resident_first_name + " " + package.resident_last_name
           pdf.text "Package ID = #{package.id}\n\n"
           pdf.text "You just received a package! Pick it up at\n#{package.unit}'s mailroom.\n\n"
           pdf.text "Are you sick of package slips? Want to move into the 21st century? Try beartracks.\n\n\n"
