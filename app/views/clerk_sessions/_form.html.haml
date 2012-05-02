@@ -1,6 +1,6 @@
 %div.login
   %p
-    = f.text_field :login, :value => "login", :size => 15, :onfocus => "clearfield(this)", :onblur => "resetfield(this)" 
+    = f.text_field :login, :value => "login", :size => 15, :class => "fancy-input" 
   %p
-    = f.text_field :password, :value => "password", :size => 15, :onfocus => "pwclearfield(this)", :onblur => "pwresetfield(this)" 
+    = f.text_field :password, :value => "password", :size => 15, :class => "fancy-password-input"
   

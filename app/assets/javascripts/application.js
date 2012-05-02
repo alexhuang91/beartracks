@@ -10,8 +10,8 @@
 
 $(document).ready(function() {
 	
-	// Hide notice and warning flashes after 5 seconds
+	// Hide notice and warning flashes after 8 seconds
 	setTimeout(function(){ $("#flash #notice").hide("slow"); }, 8000);
 	setTimeout(function(){ $("#flash #warning").hide("slow"); }, 8000);
-	
+
 });
