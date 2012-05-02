@@ -1,9 +1,6 @@
-%table.login
-  %caption.login-caption Resident Login
-  %tr
-    %td.login-header= f.label :login
-    %td.login-field= f.text_field :login, :size => 15 
-  %tr
-    %td.login-header= f.label :password
-    %td.login-field= f.password_field :password, :size => 15 
+%div.login
+  %p
+    = f.text_field :login, :value => "login", :size => 15, :onfocus => "clearfield(this)", :onblur => "resetfield(this)" 
+  %p
+    = f.text_field :password, :value => "password", :size => 15, :onfocus => "pwclearfield(this)", :onblur => "pwresetfield(this)" 
   
