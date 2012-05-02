@@ -18,7 +18,7 @@ class ResidentsController < ApplicationController
     @resident = Resident.new(params[:resident])
     if @resident.save
       ResidentSession.create! @resident
-      flash[:notice] = "Resident account successfully created. "
+      flash[:notice] = "Resident account successfully created."
       redirect_to root_url
     else
       if @resident.errors.any?
@@ -40,8 +40,15 @@ class ResidentsController < ApplicationController
       flash[:error] = html_list("Please fix the following errors:\n", @resident.errors.full_messages)
       redirect_to edit_resident_path(@resident)
     else
-      flash[:notice] = "Profile was successfully updated."
-      redirect_to resident_path(@resident)
+      # If password was not updated, go back to the show profile page
+      # Otherwise, go to the home page and flash a notice
+      if params[:resident][:password] == ""
+        flash[:notice] = "Profile was successfully updated."
+        redirect_to resident_path(@resident)
+      else # password was updated, resident will be automatically logged out anyway so redirect to home page with a notice
+        flash[:notice] = "Your password was changed. Please log in again."
+        redirect_to root_url
+      end
     end
   end
 
@@ -52,15 +59,20 @@ class ResidentsController < ApplicationController
   def check_id_access
     if current_resident.nil?
       flash[:warning] = "Sorry, you don't have access to that!"
-      redirect_to root_path
+      if current_clerk.nil?
+        redirect_to root_path
+      else
+        redirect_to packages_path
+      end
       return false
+    else
+      unless params[:id].to_i == current_resident.id
+        flash[:warning] = "Sorry, you don't have access to that!"
+        redirect_to residents_path
+        return false
+      end
+      return true
     end
-    unless params[:id].to_i == current_resident.id
-      flash[:warning] = "Sorry, you don't have access to that!"
-      redirect_to residents_path
-      return false
-    end
-    return true
   end
 
 end

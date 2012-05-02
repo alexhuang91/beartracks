@@ -1,7 +1,7 @@
 class ClerksController < ApplicationController
   
-  before_filter :is_admin?, :only => [:new, :create, :index, :toggle_admin_access]
-  before_filter :check_id_access, :only => [:edit, :update, :show]
+  before_filter :is_admin?, :only => [:new, :create, :index, :show, :toggle_admin_access]
+  before_filter :check_id_access, :only => [:edit, :update]
   
   def index
     @my_id = current_clerk.id
@@ -51,8 +51,15 @@ class ClerksController < ApplicationController
       flash[:error] = html_list("Please fix the following errors:\n", @clerk.errors.full_messages)
       redirect_to edit_clerk_path(@clerk)
     else
-      flash[:notice] = "#{@clerk.login} was successfully updated."
-      redirect_to clerk_path(@clerk)
+      # If password was not updated, go back to the show profile page
+      # Otherwise, go to the home page and flash a notice
+      if params[:clerk][:password] == ""
+        flash[:notice] = "#{@clerk.login} was successfully updated."
+        redirect_to clerk_path(@clerk)
+      else # password was updated, clerk will be automatically logged out anyway so redirect to home page with a notice
+        flash[:notice] = "Your password was changed. Please log in again."
+        redirect_to root_url
+      end
     end
   end
   
@@ -85,21 +92,34 @@ class ClerksController < ApplicationController
   protected
   
   def is_admin?
-    unless current_clerk.is_admin?
-      flash[:warning] = "You don't have permission to do that."
+    if current_clerk.nil? or not current_clerk.is_admin?
+      flash[:warning] = "You must have admin privileges to do that."
       redirect_to packages_path
       return false
     end
     return true
   end
   
+  # Only admins will be able to edit a clerk's profile
   def check_id_access
-    unless params[:id].to_i == current_clerk.id
-      flash[:warning] = "Sorry, you don't have access to that!"
-      redirect_to clerk_home_path
-      return false
+    target_clerk = Clerk.find_by_id(params[:id])
+    
+    # Nil check, but if this fails then something bad is going on
+    if not current_clerk.nil? and not target_clerk.nil? 
+      if current_clerk.is_admin?
+        if target_clerk.is_admin? and target_clerk.id != current_clerk.id
+          flash[:warning] = "You can't edit another admin's profile."
+          redirect_to clerks_path
+          return false
+        else # Trying to edit a regular clerk's profile
+          return true
+        end
+      else # Not an admin, so can't edit anyone's profile, including your own
+        flash[:warning] = "You can't edit your own profile. Please ask your supervisor." 
+        redirect_to clerk_home_path
+        return false
+      end
     end
-    return true
   end
   
 end

@@ -34,7 +34,7 @@ class PackagesController < ApplicationController
     end
 
     # Set up the mappings for the view options
-    @units_hash = Hash[units_array.collect { |unit| [unit,unit] }]
+    @units_hash = Hash[units_array.collect{ |u| [u,u] }]
     @units_hash['All Units'] = 'all'
     @packages_hash = {'Not picked up' => 'not_picked_up', 
                       'Picked up'     => 'picked_up', 
@@ -223,7 +223,10 @@ class PackagesController < ApplicationController
 
   def package_slips
   # most of the info on how to set it up came from here: http://stackoverflow.com/questions/8658302/
-  # how to do it came mostly from here: http://prawn.majesticseacreature.com/manual.pdf
+  # how to make the pdf came mostly from here: http://prawn.majesticseacreature.com/manual.pdf
+    if params[:format].blank?
+      redirect_to :format => 'pdf' and return
+    end
 
     packages = Package.all # should be Package.where(resident_id: nil, notified: false) or something
 
@@ -260,7 +263,7 @@ class PackagesController < ApplicationController
   
   def clerk_check
     if not clerk_logged_in?
-      flash[:warning] = "You must be logged in as a clerk to work with packages."
+      flash[:warning] = "You must be logged in as a clerk to access that."
       redirect_to root_url
       return false
     end

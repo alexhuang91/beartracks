@@ -55,6 +55,14 @@ Then /^the current clerk should not be an admin$/ do
   sesh.clerk.is_admin?.should be_false
 end
 
+Then /^I log in as a clerk through the UI with login "([^"]*)" and password "([^"]*)"$/ do |login, password|
+  step %Q{I am on the clerk login page}
+  step %Q{I fill in "Login" with "#{login}"}
+  step %Q{I fill in "Password" with "#{password}"}
+  step %Q{I press "Login"}
+end
+
+
 
 ##RESIDENTS##
 When /^I log in as a resident with username "([^"]*)" and password "([^"]*)"$/ do |login, password|

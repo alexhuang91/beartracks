@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_clerk_session, :current_clerk, :clerk_logged_in?
   helper_method :current_resident_session, :current_resident
-  helper_method :preferences_array, :units_array, :states_array, :carriers_array, :package_type_array
+  helper_method :preferences_array, :states_array, :carriers_array, :package_type_array
+  helper_method :units_array, :buildings_arrays, :all_buildings
   
   private
     
@@ -41,12 +42,6 @@ class ApplicationController < ActionController::Base
       ['Mail Slip', 'Email'] #, 'Text Message']
     end
 
-    def units_array
-      ['Unit 1', 'Unit 2', 'Unit 3', 'Foothill', 'Bowles', 'Stern',
-      'Clark Kerr', 'Manville', 'Ida L. Jackson', 'Channing-Bowditch',
-      'Martinez Commons', 'University Village']
-    end
-
     def states_array
       ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
       "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
@@ -61,5 +56,105 @@ class ApplicationController < ActionController::Base
     
     def package_type_array
       ["Tube", "Box", "Large box", "Envelope", "Letter", "Other"]
+    end
+
+    def units_array
+      ["Unit 1",
+       "Unit 2",
+       "Unit 3",
+       "Unit 4",
+       "Clark Kerr",
+       "Smyth Fernwald",
+       "University Village"]
+    end
+
+    def buildings_arrays(unit)
+      units = units_array
+
+      if(unit == units[0]) # Unit 1
+        array = ["Channing Bowditch",
+								 "Cheney Hall",
+								 "Christian Hall",
+								 "Deutsch Hall",
+                 "Freeborn Hall",
+								 "Ida Jackson House",
+								 "Putnam Hall",
+								 "Slottman Hall"]
+
+      elsif(unit == units[1]) # Unit 2
+        array = ["Cunningham Hall",
+								 "Davidson Hall",
+								 "Ehman Hall",
+								 "Griffiths Hall",
+								 "Towle Hall",
+								 "Wada Hall"]
+
+      elsif(unit == units[2]) # Unit 3
+        array = ["Beverly Cleary Hall",
+								 "Ida Sproul Hall",
+								 "Manville Hall",
+								 "Norton Hall",
+								 "Priestley Hall",
+								 "Spens Black Hall"]
+
+      elsif(unit == units[3]) # Unit 4
+        array = ["FH Building 1",
+								 "FH Building 2",
+								 "FH Building 3",
+								 "FH Building 4",
+								 "FH Building 5",
+								 "FH Building 6",
+								 "FH Building 7",
+								 "FH Building 8",
+								 "FH Building 9",
+								 "Bowles Hall",
+								 "Stern Hall"]
+
+      elsif(unit == units[4]) # Clark Ker
+        array = ["Building 1",
+                 "Building 2",
+                 "Building 3",
+                 "Building 4",
+                 "Building 6",
+								 "Building 5",
+								 "Building 7",
+								 "Building 8",
+                 "Building 9",
+								 "Building 11",
+								 "Building 12",
+								 "Building 13",
+                 "Building 14",
+								 "Building 15",
+								 "Building 16",
+								 "Building 17",
+                 "Building 18",
+								 "Building 19",
+								 "Building 20"]
+
+      elsif(unit == units[5]) # University Village
+        array = ["East",
+                 "West"]
+
+      elsif(unit == units[6]) # Smyth Fernwald
+        array = ["3002",
+                 "3024",
+                 "E",
+                 "F",
+                 "G",
+                 "H",
+                 "J",
+                 "K",
+                 "L"]
+      else
+        array = []
+      end
+      array
+    end
+
+    def all_buildings
+      buildings = []
+      units = units_array
+      units.each { |unit| buildings << buildings_arrays(unit) }
+      buldings.flatten
     end
 end

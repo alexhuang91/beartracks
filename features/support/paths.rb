@@ -35,7 +35,7 @@ module NavigationHelpers
       "/packages/#{$1}/edit"
 
     when /^the resident edit page for resident ([0-9]+)$/
-      "/resident/#{$1}/edit"
+      "/residents/#{$1}/edit"
     when /^the resident show page for resident ([0-9]+)$/
       "/residents/#{$1}"
 

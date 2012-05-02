@@ -11,11 +11,7 @@ Background: Clerk logged in
     | Tony     | pass       | pass                  | Unit 1 | Tony       | Montana   |
 
   When I am on the homepage
-  When I follow "Clerk Login"
-  And I fill in the following:
-    | Login     | Tony |
-    | Password  | pass |
-  And I press "Login"
+  Then I log in as a clerk through the UI with login "Tony" and password "pass"
 
 Scenario: Get to the Add Package page
   When I go to the packages page

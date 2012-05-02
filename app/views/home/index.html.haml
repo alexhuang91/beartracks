@@ -1,25 +1,13 @@
 %h1#home-page-header
   Better than package slips. Guaranteed.
 
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-= image_tag("karate_bears.jpg")
-
 - if not current_resident and not current_clerk
-  %br
-  = link_to "Resident Sign Up", new_resident_path, :class => "signup"
-  %br
-  %br
-  = link_to "Resident Login", resident_login_path, :class => "signup"
+  
+  %table#resident-controls
+    %tr
+      %td
+        %a.button.huge.blue{:href => new_resident_path}
+          %span Resident Sign Up
+      %td
+        %a.button.huge.blue{:href => resident_login_path}
+          %span Resident Login

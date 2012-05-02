@@ -23,8 +23,8 @@ Scenario: Logging in and out through the user interface
     Then I should be on the packages page
     And the current clerk's login should be "John"
     Then I should see "You have successfully logged in."
-    Then I should see "Logout"
-    Then I should not see "Clerk Login"
+    Then I should see the "clerk logout" link
+    Then I should not see the "clerk login" link
     
 Scenario: Visiting the logout url with no user logged in
   Given there is no clerk logged in
@@ -34,8 +34,8 @@ Scenario: Visiting the logout url with no user logged in
     
 Scenario: Getting to the Login page from the root url
   Given I am on the root page
-  Then I should see "Clerk Login"
-  When I follow "Clerk Login"
+  Then I should see the "clerk login" link
+  When I follow the "clerk login" link
   Then I should be on the clerk login page
 
 Scenario: Admin Clerk Signs Up a new normal Clerk
@@ -61,7 +61,5 @@ Scenario: Admin Clerk Signs Up a new normal Clerk
     And the current clerk's login should be "admin"
     Then I should be on the clerks page
 
-  
-  
   
     
