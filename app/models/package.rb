@@ -6,8 +6,7 @@ class Package < ActiveRecord::Base
   paginates_per 25 
 
   def unfilled_fields
-    @@never_null_fields = {:unit=>'Unit', :building=>'Building',
-      :room=>'Room',:tracking_number=>'Tracking Number'} #leaving datetime_received out, not for user
+    @@never_null_fields = {:unit=>'Unit', :building=>'Building', :resident_first_name=>'Resident First Name', :resident_last_name=> 'Resident Last Name', :room=>'Room',:tracking_number=>'Tracking Number'} #leaving datetime_received out, not for user
     empty_fields = @@never_null_fields.keys.
       collect{ |field| field if (not self[field] or self[field].to_s.blank?) }.
       compact
