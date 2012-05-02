@@ -111,25 +111,25 @@ class ApplicationController < ActionController::Base
 								 "Stern Hall"]
 
       elsif(unit == units[4]) # Clark Ker
-        array = ["Building 1",
-                 "Building 2",
-                 "Building 3",
-                 "Building 4",
-                 "Building 6",
-								 "Building 5",
-								 "Building 7",
-								 "Building 8",
-                 "Building 9",
-								 "Building 11",
-								 "Building 12",
-								 "Building 13",
-                 "Building 14",
-								 "Building 15",
-								 "Building 16",
-								 "Building 17",
-                 "Building 18",
-								 "Building 19",
-								 "Building 20"]
+        array = ["CK Building 1",
+                 "CK Building 2",
+                 "CK Building 3",
+                 "CK Building 4",
+                 "CK Building 6",
+								 "CK Building 5",
+								 "CK Building 7",
+								 "CK Building 8",
+                 "CK Building 9",
+								 "CK Building 11",
+								 "CK Building 12",
+								 "CK Building 13",
+                 "CK Building 14",
+								 "CK Building 15",
+								 "CK Building 16",
+								 "CK Building 17",
+                 "CK Building 18",
+								 "CK Building 19",
+								 "CK Building 20"]
 
       elsif(unit == units[5]) # University Village
         array = ["East",
@@ -155,6 +155,6 @@ class ApplicationController < ActionController::Base
       buildings = []
       units = units_array
       units.each { |unit| buildings << buildings_arrays(unit) }
-      buldings.flatten
+      buildings.flatten
     end
 end
