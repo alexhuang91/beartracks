@@ -76,9 +76,6 @@ GEM
       multi_json (~> 1.0)
     factory_girl (3.0.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (3.0.0)
-      factory_girl (~> 3.0.0)
-      railties (>= 3.0.0)
     ffi (1.0.11)
     gherkin (2.9.3)
       json (>= 1.4.6)
@@ -219,7 +216,7 @@ DEPENDENCIES
   cucumber-rails
   cucumber-rails-training-wheels
   database_cleaner
-  factory_girl_rails
+  factory_girl
   haml
   haml-rails
   jquery-rails

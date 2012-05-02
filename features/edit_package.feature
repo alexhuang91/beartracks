@@ -14,8 +14,8 @@ Background: Clerk logged in
   Then I log in as a clerk through the UI with login "Tony" and password "pass"
 
   Given the following packages exist my way:
-  | resident_name | tracking_number | unit   | building | room | datetime_received | picked_up | clerk_id | sender_city | sender_state | sender_zip | returned |
-  | Case          | 123             | Unit 1 | Fire     | 1    | 1977-05-25        | false     | 1        | Berkeley	| CA		   | 94704		|   true   |
+  | resident_first_name | resident_last_name | tracking_number | unit   | building | room | datetime_received | picked_up | clerk_id | sender_city | sender_state | sender_zip | returned |
+  | Case                | Walker             | 123             | Unit 1 | Fire     | 1    | 1977-05-25        | false     | 1        | Berkeley	| CA		   | 94704		|   true   |
 
 Scenario: view a package's details
   Given I am on the packages page
@@ -32,10 +32,11 @@ Scenario: edit a package's information with all required fields
   Then I should be on the edit package page for package 1
   And I should see "Edit package"
   And I fill in the following:
-    | Resident Name   | Bilbo  |
-    | Tracking Number | 1122   |
-    | Building        | Cheney |
-    | Room            | 253    |
+    | Resident First Name | Bilbo  |
+    | Resident Last Name  | Cool   |
+    | Tracking Number     | 1122   |
+    | Building            | Cheney |
+    | Room                | 253    |
   When I press "Update" 
   Then I should be on the package details page for package 1
   And I should see "Details for package 1"
@@ -51,10 +52,11 @@ Scenario: edit a package's information without filling all required fields
   Then I should be on the edit package page for package 1
   And I should see "Edit package"
   And I fill in the following:
-    | Resident Name   | Bilbo  |
-    | Tracking Number |        |
-    | Building        | Cheney |
-    | Room            | 253    |
+    | Resident First Name | Bilbo  |
+    | Resident Last Name  | Cool   |
+    | Tracking Number     |        |
+    | Building            | Cheney |
+    | Room                | 253    |
   When I press "Update" 
   Then I should be on the edit package page for package 1
   And I should see "Edit package"
@@ -127,10 +129,11 @@ Scenario: clerks can't delete packages
 Scenario: Cancel an edit package operation
   When I am on the edit package page for package 1
   And I fill in the following:
-    | Resident Name   | Bilbo  |
-    | Tracking Number | 1122   |
-    | Building        | Cheney |
-    | Room            | 253    |
+    | Resident First Name | Bilbo  |
+    | Resident Last Name  | Cool   |
+    | Tracking Number     | 1122   |
+    | Building            | Cheney |
+    | Room                | 253    |
   And I follow "Cancel"
   Then I should be on the package details page for package 1
   And I should see "123"
