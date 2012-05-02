@@ -93,11 +93,11 @@ Scenario: view not picked up packages for one unit
   
 Scenario: no packages in the database for a particular view
   When I am on the packages page
-  And I select "Foothill" from "unit"
+  And I select "Unit 4" from "unit"
   And I select "All packages" from "packages"
   And I press "Refresh List"
   Then I should be on the packages page
-  And I should see "No packages for Foothill"
+  And I should see "No packages for Unit 4"
   And I should not see "Case"
   And I should not see "Daniel"
   And I should not see "Kevin"

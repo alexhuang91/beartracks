@@ -5,10 +5,7 @@ Scenario: Resident Logged in Can't log in as a Clerk through interface
     | login | password | password_confirmation | email          | unit   | building | room | preference | first_name      | last_name |
     | Corre | pass     | pass                  | mail@email.com | Unit 2 | Cheney   | 510  | Email      | Alex            | Corre     |
   Then I am on the resident login page
-  And I fill in the following:
-      | Login     | Corre       |
-      | Password  | pass       |
-  When I press "Login"
+  When I log in as a resident through the UI with login "Corre" and password "pass"
   And the current resident's login should be "Corre"
   When I go to the clerk login page
   Then I should be on the home page
@@ -20,10 +17,7 @@ Scenario: Clerk Logged in Can't log in as a Resident through interface
     | login    | password   | password_confirmation | first_name | last_name |
     | Tony     | pass       | pass                  | Tony       | Montana   |
   Then I am on the clerk login page
-  And I fill in the following:
-      | Login     | Tony       |
-      | Password  | pass       |
-  When I press "Login"
+  When I log in as a clerk through the UI with login "Tony" and password "pass"
   And the current clerk's login should be "Tony"
   When I go to the resident login page
   Then I should be on the packages page

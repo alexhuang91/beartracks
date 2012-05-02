@@ -6,10 +6,7 @@ Background: I am logged in as a user and I look at my settings
     | Tony  | pass     | pass                  | j@j.com | Unit 3 | Priestly | 202  | Email      | Nottony         | Pizzaman  |
     | Alex  | pass     | pass                  | p@p.com | Unit 2 | Cheney   | 101  | Mail Slip  | Alex            | Great     |
   And I am on the resident login page
-  When I fill in the following:
-    | Login    | Tony |
-    | Password | pass |
-  When I press "Login"
+  When I log in as a resident through the UI with login "Tony" and password "pass"
   Then I should see "You have successfully logged in."
   When I follow "My Profile"
   Then I should see "Resident Profile"

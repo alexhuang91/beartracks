@@ -116,10 +116,7 @@ Scenario: clerks can't delete packages
   When I am on the home page
   And I follow the "clerk logout" link
   Then I follow the "clerk login" link
-  And I fill in the following:
-    | Login     | Tiny |
-    | Password  | pass |
-  And I press "Login"
+  And I log in as a clerk through the UI with login "Tiny" and password "pass"
   Then I should be on the packages page
   When I am on the package details page for package 1 
   Then I should not see "Delete"

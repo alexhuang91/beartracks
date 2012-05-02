@@ -57,9 +57,9 @@ end
 
 Then /^I log in as a clerk through the UI with login "([^"]*)" and password "([^"]*)"$/ do |login, password|
   step %Q{I am on the clerk login page}
-  step %Q{I fill in "Login" with "#{login}"}
-  step %Q{I fill in "Password" with "#{password}"}
-  step %Q{I press "Login"}
+  step %Q{I fill in "clerk_session_login" with "#{login}"}
+  step %Q{I fill in "clerk_session_password" with "#{password}"}
+  step %Q{I press "Clerk login"}
 end
 
 
@@ -97,4 +97,11 @@ end
 Then /^there should be no resident logged in$/ do
   session = ResidentSession.find
   session.nil?.should be_true
+end
+
+Then /^I log in as a resident through the UI with login "([^"]*)" and password "([^"]*)"$/ do |login, password|
+  step %Q{I am on the resident login page}
+  step %Q{I fill in "resident_session_login" with "#{login}"}
+  step %Q{I fill in "resident_session_password" with "#{password}"}
+  step %Q{I press "Resident login"}
 end
