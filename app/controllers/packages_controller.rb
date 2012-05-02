@@ -26,7 +26,7 @@ class PackagesController < ApplicationController
       flash.keep
       if params[:commit] == 'Search'
         redirect_to :unit => session[:unit], :packages => session[:packages], :sort => params[:sort],
-        :search_option => params[:search_option], :search_string => params[:search_string],
+        :search_option => params[:search_option], :search_text => params[:search_text], :search_select => params[:search_select],
         :commit => 'Search' and return
       else
         redirect_to :unit => session[:unit], :packages => session[:packages], :sort => params[:sort] and return
@@ -48,7 +48,8 @@ class PackagesController < ApplicationController
     
     # Select the packages to display
     if params[:commit] == 'Search' and @search_options.values.include?(params[:search_option])
-      @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => params[:search_string]).order(ordering).page params[:page]
+      params[:search_option].downcase == "building" ? search_string = params[:search_select] : search_string = params[:search_text]
+      @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => search_string).order(ordering).page params[:page]
       @option = params[:search_option]
       @s_string = params[:search_string]
       @searching = true # instance variable used when setting the table caption
