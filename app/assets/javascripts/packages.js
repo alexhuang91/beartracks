@@ -1,14 +1,23 @@
 $(document).ready(function() {
-  // Hide one of the search fields based on the selected search option
-  $("#selector").change(function(){
-    $(".selecting").hide();
-    if ($(this).val() == "building") {
-      $("#ss-select").show();
-    } else {
-      $("#ss-text").show();
-    }
-  });
+	
+	//$("#ss-select").hide();
+	
+	/*
+	choose_select_option = function() {
+    	if ($("#selector").val() == "building") {
+        	$("#ss-text").hide();
+        	$("#ss-select").show();
+    	} else {
+        	$("#ss-select").hide();
+        	$("#ss-text").show();
+    	}
+	}
 
+	choose_select_option();
+    */ 
+    // Hide one of the search fields based on the selected search option
+    $("#selector").change(choose_select_option);
+	
 	// Hide the package details link
 	$(".packages-table-cell-details").hide();
 	
