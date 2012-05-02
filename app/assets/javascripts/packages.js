@@ -1,23 +1,19 @@
 $(document).ready(function() {
 	
-	/*
-	//$("#ss-select").hide();
-	
+    // Function to hide one of the search fields based on the selected search option
 	choose_select_option = function() {
-    	if ($("#selector").val() == "building") {
-        	$("#ss-text").hide();
-        	$("#ss-select").show();
+    	if ($("#search-type").val() == "building") {
+        	$("#search-text").hide();
+        	$("#search-select").show();
     	} else {
-        	$("#ss-select").hide();
-        	$("#ss-text").show();
+        	$("#search-select").hide();
+        	$("#search-text").show();
     	}
 	}
 
+	// When the page loads and when the search option changes, hide the correct field
 	choose_select_option();
-    
-    // Hide one of the search fields based on the selected search option
-    $("#selector").change(choose_select_option);
-    */ 
+    $("#search-type").change(choose_select_option);
 	
 	// Hide the package details link
 	$(".packages-table-cell-details").hide();
