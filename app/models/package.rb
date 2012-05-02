@@ -1,5 +1,6 @@
 class Package < ActiveRecord::Base
-  belongs_to :clerk
+  belongs_to :clerk 
+  belongs_to :resident
   
   # how many packages are displayed on a page
   paginates_per 25 

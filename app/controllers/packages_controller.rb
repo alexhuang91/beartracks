@@ -129,6 +129,14 @@ class PackagesController < ApplicationController
       if p.save
       # TODO Send out an email or text or add to the slip-queue
         flash[:notice] = "Package created successfully."
+        #Associate the package with the appropriate resident
+        first_collection = Resident.where( :unit => params[:package][:unit], :room => params[:package][:room], :building => params[:package][:building])
+        second_collection =  first_collection.find_all {|resid| ((resid.first_name == params[:package][:resident_first_name]) || resid.name == params[:package][:resident_first_name]) && (resid.last_name == params[:package][:resident_last_name])}
+        if (second_collection[0])
+          p.resident = second_collection[0]
+          p.save
+          print p.resident.first_name
+        end
       else
         flash[:warning] = "There was an error creating this package."
       end
