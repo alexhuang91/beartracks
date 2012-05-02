@@ -1,4 +1,23 @@
 $(document).ready(function() {
+	
+	//$("#ss-select").hide();
+	
+	/*
+	choose_select_option = function() {
+    	if ($("#selector").val() == "building") {
+        	$("#ss-text").hide();
+        	$("#ss-select").show();
+    	} else {
+        	$("#ss-select").hide();
+        	$("#ss-text").show();
+    	}
+	}
+
+	choose_select_option();
+    */ 
+    // Hide one of the search fields based on the selected search option
+    $("#selector").change(choose_select_option);
+	
 	// Hide the package details link
 	$(".packages-table-cell-details").hide();
 	
@@ -12,5 +31,5 @@ $(document).ready(function() {
 	$("tr[class|='packages-table-info']").hover(function() {
 		$(this).toggleClass("highlight");
 	});
-	
+
 });

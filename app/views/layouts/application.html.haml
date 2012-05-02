@@ -1,6 +1,7 @@
 !!! 5
 %html
-  %head
+  %head{:profile => "http://www.w3.org/2005/10/profile"}
+    = favicon_link_tag 'favicon.png'
     %title BearTracks
     %link{:href => "http://fonts.googleapis.com/css?family=Droid+Sans", :rel => "stylesheet", :type => "text/css"}/
     = stylesheet_link_tag 'application'
