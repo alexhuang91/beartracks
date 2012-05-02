@@ -1,4 +1,14 @@
 $(document).ready(function() {
+  // Hide one of the search fields based on the selected search option
+  $("#selector").change(function(){
+    $(".selecting").hide();
+    if ($(this).val() == "building") {
+      $("#ss-select").show();
+    } else {
+      $("#ss-text").show();
+    }
+  });
+
 	// Hide the package details link
 	$(".packages-table-cell-details").hide();
 	
@@ -12,5 +22,5 @@ $(document).ready(function() {
 	$("tr[class|='packages-table-info']").hover(function() {
 		$(this).toggleClass("highlight");
 	});
-	
+
 });
