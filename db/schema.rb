@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(:version => 20120503081915) do
     t.string   "tracking_number"
     t.string   "room"
     t.string   "package_type",        :default => "Other", :null => false
+    t.boolean  "returned",            :default => false,   :null => false
     t.string   "resident_first_name"
     t.string   "resident_last_name"
-    t.boolean  "returned",            :default => false,   :null => false
     t.string   "resident_name"
   end
 

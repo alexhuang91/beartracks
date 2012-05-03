@@ -1,6 +1,7 @@
 class ClerksController < ApplicationController
   
   before_filter :is_admin?, :only => [:new, :create, :index, :show, :toggle_admin_access]
+  before_filter :check_id_access, :only => [:set_password, :update_password]
   before_filter :check_admin_access, :only => [:edit, :update]
   
   def index
@@ -27,7 +28,12 @@ class ClerksController < ApplicationController
   def create
     @clerk = Clerk.new(params[:clerk])
     if @clerk.save
-      flash[:notice] = "Clerk account successfully created."
+      flash[:notice] = "Account created. We have delivered an email to #{@clerk.email} with further instructions."
+      
+      # reset clerks token and send email
+      @clerk.reset_perishable_token!
+      MailSender.verification_instructions(@clerk).deliver
+      
       redirect_to clerks_path
     else
       if @clerk.errors.any?
@@ -89,6 +95,21 @@ class ClerksController < ApplicationController
     end
   end
   
+  def update_password
+    @clerk = Clerk.find(params[:id])
+    @clerk.update_attributes(params[:clerk])
+    if @clerk.errors.any?
+      flash[:error] = html_list("Please fix the following errors:\n", @clerk.errors.full_messages)
+      redirect_to set_clerk_password(:id => @clerk.id)
+    end
+    flash[:notice] = "Your password has been set please login again."
+    redirect_to clerk_login_path
+  end
+  
+  def set_password
+    @clerk = Clerk.find(params[:id])
+  end
+
   def destroy
     if current_clerk.is_admin?
       @clerk = Clerk.find params[:id]
@@ -101,6 +122,7 @@ class ClerksController < ApplicationController
     end
   end
   
+
   protected
   
   def is_admin?
@@ -135,6 +157,12 @@ class ClerksController < ApplicationController
   end
 
   def check_id_access
+	if current_clerk.nil? or params[:id].to_i != current_clerk.id
+      flash[:warning] = "Sorry, you don't have access to that!"
+      redirect_to clerk_home_path
+      return false
+    end
+    return true
   end
   
 end

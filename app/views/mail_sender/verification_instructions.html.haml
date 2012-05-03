@@ -1,0 +1,16 @@
+%h2
+  =  "#{@clerk.first_name} #{@clerk.last_name}, welcome to beartracks."
+  
+%p
+  A Clerk account has been set up for you. Please click the following link to verify your email address and continue setting up your account:
+  = link_to("Verify me!", @url)
+  
+  %br
+  Thanks for using Beartracks!
+  
+  %br
+  Enjoy,
+  
+  %br
+  %br
+  The Beartracks Team
