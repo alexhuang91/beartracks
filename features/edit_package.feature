@@ -15,7 +15,8 @@ Background: Clerk logged in
 
   Given the following packages exist my way:
   | resident_first_name | resident_last_name | tracking_number | unit   | building | room | datetime_received | picked_up | clerk_id | sender_city | sender_state | sender_zip | returned |
-  | Case                | Walker             | 123             | Unit 1 | Fire     | 1    | 1977-05-25        | false     | 1        | Berkeley	| CA		   | 94704		|   true   |
+  | Case                | Walker             | 123             | Unit 1 | Fire     | 1    | 1977-05-25        | false     | 1        | Berkeley	| CA		   | 94704		|   false   |
+  | Walk                | Walker             | 1234            | Unit 1 | Fire     | 1    | 1977-05-25        | false     | 1        | Berkeley	| CA		   | 94704		|   true   |
 
 Scenario: view a package's details
   Given I am on the packages page
@@ -140,6 +141,6 @@ Scenario: Cancel an edit package operation
   And I should not see "1122"
 
 Scenario: See a message on the package details page if a package is marked as returned
-  When I am on the package details page for package 1 
+  When I am on the package details page for package 2 
   Then I should see "This package was returned to sender"
   
