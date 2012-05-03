@@ -70,11 +70,11 @@ Scenario: clerk can search for a package
   When I am on the packages page
   And I select "Tracking Number" from "search_option"
   And I fill in the following:
-    | search_string | 123 |
+    | search_text | 123 |
   And I press "Search"
   Then I should be on the packages page
   And I should see "Search results"
   And I should see "Case"
   And I should not see "Daniel"
   And I should not see "Kevin"
-  And I should not see "Alex" 
+  And I should not see "Alex"
