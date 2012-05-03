@@ -20,10 +20,14 @@ table#resident-form {
 #resident-view-options {
   margin-left: 20px;
 }
+#resident-form-caption {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
 
 #resident-detail-caption,
-#resident-table-caption,
-#resident-form-caption {
+#resident-table-caption {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 15px;
