@@ -1,7 +1,7 @@
 class ClerksController < ApplicationController
   
   before_filter :is_admin?, :only => [:new, :create, :index, :toggle_admin_access]
-  before_filter :check_id_access, :only => [:edit, :update, :show]
+  before_filter :check_id_access, :only => [:edit, :update, :show, :set_password, :update_password]
   
   def index
     @my_id = current_clerk.id
@@ -95,7 +95,16 @@ class ClerksController < ApplicationController
   end
   
   def update_password
-    
+    @clerk = Clerk.find(params[:id])
+    @clerk.update_attributes(params[:clerk])
+    if @clerk.errors.any?
+      flash[:error] = html_list("Please fix the following errors:\n", @clerk.errors.full_messages)
+      redirect_to set_clerk_password(:id = @clerk.id)
+    else
+  end
+  
+  def set_password
+    # @clerk = Clerk.find(params[:id])
   end
 
   protected

@@ -21,7 +21,10 @@ Beartracks::Application.routes.draw do
   match 'resident/logout' => 'resident_sessions#destroy'
   match 'packages/:id/toggle_pickup' => 'packages#toggle_pickup'
   match 'clerks/:id/toggle_admin_access' => 'clerks#toggle_admin_access'
-  match 'clerks/:id/update_password' => 'clerks#update_password', :as => 'update_clerk_password'
+  
+  # setting/updating clerk passwords
+  match 'clerks/:id/set_password' => 'clerks#set_password', :as => 'set_clerk_password'
+  post 'clerks/:id/update_password' => 'clerks#update_password', :as => 'update_clerk_password'
   
   match 'clerk/home' => 'packages#index'
   
