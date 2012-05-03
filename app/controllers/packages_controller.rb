@@ -149,8 +149,6 @@ class PackagesController < ApplicationController
       
       if matched
         p.resident_id = matched_resident[0].id
-      else
-        flash[:warning] = "Unable to automatically match package to a resident."
       end
       
       # Save and if successful, send notification email if there was a match
