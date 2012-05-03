@@ -7,6 +7,7 @@
       %th.clerks-table-cell Email
       %th.clerks-table-cell Unit
       %th.clerks-table-cell Admin?
+      %th.clerks-table-cell View Details
       %th.clerks-table-cell Access Control
   %tbody
     - @clerks.each do |clerk|
@@ -16,9 +17,10 @@
         %td.clerks-table-cell= clerk.email
         %td.clerks-table-cell= clerk.unit
         %td.clerks-table-cell= clerk.is_admin? ? "Yes" : "No"
+        %td.clerks-table-cell= link_to "view clerk details", clerk_path(clerk.id)
         - if @my_id != clerk.id
           - if not clerk.is_admin?
             %td.clerks-table-cell= link_to "grant admin privileges", :action => "toggle_admin_access", :id => clerk.id
           - else
             %td.clerks-table-cell= link_to "revoke admin privileges", :action => "toggle_admin_access", :id => clerk.id
-            
+        
