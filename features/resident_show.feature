@@ -41,7 +41,7 @@ Scenario: Click Logout
   Then there should be no resident logged in
   When I go to the resident show page for resident 1
   Then I should be on the home page
-  Then I should see "Sorry, you don't have access to that!"
+  Then I should see "You must be logged in as the correct resident to access this page."
 
 Scenario: Bad password update
   When I fill in the following:
@@ -55,12 +55,12 @@ Scenario: No logged in tries to go to residents/4
   When I follow the "resident logout" link
   Then I should see "You have successfully logged out"
   When I go to the resident show page for resident 4
-  Then I should see "Sorry, you don't have access to that!"
+  Then I should see "You must be logged in as the correct resident to access this page."
 
 Scenario: Resident tries to access another resident settings
   When I go to the resident show page for resident 2
   Then I should be on the residents page
-  Then I should see "Sorry, you don't have access to that!"
+  Then I should see "You must be logged in as the correct resident to access this page."
 
 Scenario: Clerk tried to access resident settings
   When I follow the "resident logout" link
@@ -70,4 +70,4 @@ Scenario: Clerk tried to access resident settings
   When I log in as a clerk through the UI with login "Paul" and password "pass"
   When I go to the resident show page for resident 1
   Then I should be on the packages page
-  Then I should see "Sorry, you don't have access to that!"
+  Then I should see "You must be logged in as the correct resident to access this page."
