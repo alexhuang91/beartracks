@@ -6,6 +6,20 @@ describe ClerksController do
   
   #setup :activate_authlogic
     
+  describe "index action" do
+    
+    before :each do
+      @test_clerk = FactoryGirl.create(:clerk)
+      controller.stub(:current_clerk).and_return(@test_clerk)
+    end
+    
+    it "should make the current users id available to the view." do
+      get :index
+      assigns(:my_id).should == @test_clerk.id
+    end
+    
+  end
+  
   describe "create action by non-admin. test before filter" do
     
     before :each do
