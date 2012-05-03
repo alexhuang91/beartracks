@@ -3,7 +3,7 @@
 %br
 %p Here are your package details
 %div
-  %p= "Arrival time: #{@package.datetime_received}"
+  %p= "Arrival time: #{@package.datetime_received.localtime.strftime('%m/%d/%y %I:%M%p')}"
   %p= "Carrier: #{@package.carrier}"
   %p= "Tracking Number: #{@package.tracking_number}"
   %p= "Package type: #{@package.package_type}"

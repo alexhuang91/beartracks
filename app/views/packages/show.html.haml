@@ -59,7 +59,7 @@
   -else
     |
     = link_to 'Mark as not picked up', :action => 'toggle_pickup', :id => @package.id
-  -if @package.resident != nil
+  -if @package.resident != nil and @package.picked_up == false
     |
     = link_to "Notify resident", :action => 'notify_resident', :id => @package.id
   | 
