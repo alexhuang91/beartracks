@@ -5,6 +5,7 @@ class ClerkVerificationController < ApplicationController
   def show
     if @clerk
       @clerk.verify!
+      ClerkSession.create! @clerk # log this clerk in 
       flash[:notice] = "Thanks for verifying your account.  You may now set your password."
     end
     redirect_to set_clerk_password_path(:id => @clerk.id)
@@ -17,9 +18,7 @@ class ClerkVerificationController < ApplicationController
     current_clerk_session.destroy
     
     @clerk = Clerk.find_by_perishable_token(params[:token])
-    if @clerk
-      ClerkSession.create! @clerk # log this clerk in 
-    else
+    unless @clerk
       flash[:error] = "Sorry, we were unable to locate your account. You sure that link is correct?"
       redirect_to root_url
     end    

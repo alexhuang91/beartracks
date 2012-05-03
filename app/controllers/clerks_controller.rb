@@ -99,12 +99,14 @@ class ClerksController < ApplicationController
     @clerk.update_attributes(params[:clerk])
     if @clerk.errors.any?
       flash[:error] = html_list("Please fix the following errors:\n", @clerk.errors.full_messages)
-      redirect_to set_clerk_password(:id = @clerk.id)
-    else
+      redirect_to set_clerk_password(:id => @clerk.id)
+    end
+    flash[:notice] = "Your password has been set please login again."
+    redirect_to clerk_login_path
   end
   
   def set_password
-    # @clerk = Clerk.find(params[:id])
+    @clerk = Clerk.find(params[:id])
   end
 
   protected
