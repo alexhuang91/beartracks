@@ -6,9 +6,9 @@ Given the following clerks exist:
    | admin    | admin     | admin                 | Unit 1 | admin      | admin     | true     | admin@admin.com  |
    | paul     | pass      | pass                  | Unit 2 | Paul       | McCartney | true     | paul@beatles.com |
 Given the following resident exists:
-    | login | password | password_confirmation | email   | unit   | building    | room | preference | first_name      | last_name | name    |
-    | Alex  | pass     | pass                  | j@j.com | Unit 3 | Spens-Black | 202  | Email      | Alex            | Huang     |         |
-    | Kevin | pass     | pass                  | a@a.com | Unit 2 | Cheney      | 101  | Mail Slip  | Kevin           | Sheng     | Kevdawg |
+    | login | password | password_confirmation | email   | unit   | building    | room | preference | first_name      | last_name | nickname    |
+    | Alex  | pass     | pass                  | j@j.com | Unit 3 | Spens-Black | 202  | Email      | Alex            | Huang     |             |
+    | Kevin | pass     | pass                  | a@a.com | Unit 2 | Cheney      | 101  | Mail Slip  | Kevin           | Sheng     | Kevdawg     |
 
 Scenario: When clerk is logged in their name will be visible in page header
   Given I am on the clerk login page
