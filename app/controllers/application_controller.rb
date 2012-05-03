@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
     end
 
     def preferences_array
-      ['Mail Slip', 'Email'] #, 'Text Message']
+      ['Email', 'Mail Slip'] #, 'Text Message']
     end
 
     def states_array

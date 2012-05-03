@@ -35,7 +35,12 @@
         
     #header
       .title
-        %h1.title= link_to "BearTracks", root_url
+        - if current_resident
+          %h1.title= link_to "BearTracks", residents_path
+        - elsif current_clerk
+          %h1.title= link_to "BearTracks", packages_path
+        - else
+          %h1.title= link_to "BearTracks", root_url
         
     - if current_clerk
       #user_nav

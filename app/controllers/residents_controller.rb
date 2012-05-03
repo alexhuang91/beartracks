@@ -29,7 +29,7 @@ class ResidentsController < ApplicationController
     if @resident.save
       ResidentSession.create! @resident
       flash[:notice] = "Resident account successfully created."
-      redirect_to root_url
+      redirect_to residents_path
     else
       if @resident.errors.any?
         flash[:error] = html_list("Please fix the following errors:\n", @resident.errors.full_messages)
