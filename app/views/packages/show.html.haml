@@ -59,5 +59,8 @@
   -else
     |
     = link_to 'Mark as not picked up', :action => 'toggle_pickup', :id => @package.id
+  -@package.returned ? rts = 'Undo \'Returned\'' : rts = 'Returned to Sender'
+  |
+  = link_to rts, :action => 'return', :id => @package.id, :confirm => 'are you sure?'
   | 
   = link_to 'Back to package list', packages_path

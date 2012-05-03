@@ -30,6 +30,19 @@
             %td.packages-table-cell= p.room
             %td.packages-table-cell-pickup=link_to "toggle pickup", :action => 'toggle_pickup', :id => p.id
             %td.packages-table-cell-details=link_to "_", package_path(p)
+        -elsif p.returned
+          %tr.packages-table-info-returned
+            %td.packages-table-cell= p.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
+            %td.packages-table-cell= p.id
+            %td.packages-table-cell= p.tracking_number
+            %td.packages-table-cell= p.package_type
+            %td.packages-table-cell= "#{p.resident_first_name} #{p.resident_last_name}"
+            -if @clerk.is_admin?
+              %td.packages-table-cell= p.unit
+            %td.packages-table-cell= p.building
+            %td.packages-table-cell= p.room
+            %td.packages-table-cell-pickup-returned="toggle pickup"
+            %td.packages-table-cell-details=link_to "_", package_path(p)
         -else
           %tr.packages-table-info
             %td.packages-table-cell= p.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")

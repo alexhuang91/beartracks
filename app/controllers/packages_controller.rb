@@ -273,6 +273,22 @@ class PackagesController < ApplicationController
 
     send_data pdf.render, type: "application/pdf", disposition: "inline"#, filename: "pslips_"+Time.now.to_date.to_s+".pdf" somehow
   end
+
+  def return
+    package = Package.find(params[:id])
+    package.returned = !package.returned
+    package.returned ? status = "returned" : status = "changed back from returned"
+    if package.returned && package.picked_up
+      flash[:warning] = "Cannot return a package that has been picked up"
+    else
+      if package.save
+        flash[:notice] = "Package was #{status} successfully."
+      else
+        flash[:warning] = "An error ocurred, please try again."
+      end
+    end
+    redirect_to package_path @package
+  end
   
   protected
   
