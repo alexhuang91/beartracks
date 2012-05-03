@@ -39,7 +39,7 @@ class PackagesController < ApplicationController
     @packages_hash = {'Not picked up' => 'not_picked_up', 
                       'Picked up'     => 'picked_up', 
                       'All packages'  => 'all'}
-    @search_options = ['ID', 'Tracking Number', 'Room', 'Building', 'Carrier', 'Resident Name', 'Package Type']
+    @search_options = ['ID', 'Tracking Number', 'Room', 'Building', 'Carrier', 'Resident First Name', 'Resident Last Name', 'Resident Full Name', 'Package Type']
     @search_options = Hash[@search_options.collect{ |option| [option, option.downcase.gsub(/\s/, '_')] }]
 
     package_value = {'picked_up' => true, 'not_picked_up' => false, 'all' => [true, false]}
@@ -49,7 +49,18 @@ class PackagesController < ApplicationController
     # Select the packages to display
     if params[:commit] == 'Search' and @search_options.values.include?(params[:search_option])
       params[:search_option].downcase == "building" ? search_string = params[:search_select] : search_string = params[:search_text]
-      @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => search_string).order(ordering).page params[:page]
+      if (params[:search_option] == "resident_full_name")
+        temp = search_string.split(" ")
+        first = temp[0]
+        if (temp.length > 1)
+          last = temp[1..temp.length - 1].join(" ")
+        else
+          last = ""
+          end
+        @packages = Package.where(:picked_up => picked, :unit => units, :resident_first_name => first, :resident_last_name => last).order(ordering).page params[:page]
+      else
+        @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => search_string).order(ordering).page params[:page]
+        end
       @option = params[:search_option]
       @s_string = params[:search_string]
       @searching = true # instance variable used when setting the table caption

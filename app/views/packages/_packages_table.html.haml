@@ -23,7 +23,7 @@
             %td.packages-table-cell= p.id
             %td.packages-table-cell= p.tracking_number
             %td.packages-table-cell= p.package_type
-            %td.packages-table-cell= "#{p.resident_last_name}, #{p.resident_first_name}"
+            %td.packages-table-cell= "#{p.resident_first_name} #{p.resident_last_name}"
             -if @clerk.is_admin?
               %td.packages-table-cell= p.unit
             %td.packages-table-cell= p.building
@@ -36,7 +36,7 @@
             %td.packages-table-cell= p.id
             %td.packages-table-cell= p.tracking_number
             %td.packages-table-cell= p.package_type
-            %td.packages-table-cell= "#{p.resident_last_name}, #{p.resident_first_name}"
+            %td.packages-table-cell= "#{p.resident_first_name} #{p.resident_last_name}"
             -if @clerk.is_admin?
               %td.packages-table-cell= p.unit
             %td.packages-table-cell= p.building
