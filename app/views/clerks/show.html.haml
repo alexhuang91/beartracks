@@ -15,5 +15,8 @@
 
 .options
   = link_to 'Edit', edit_clerk_path(@clerk)
+  -if (not @clerk.is_admin?)
+    |
+    = link_to 'Remove clerk', clerk_path(@clerk), :method => :delete, :confirm => "Are you sure you want to delete this clerk?"
   |
   = link_to 'Back to all clerks', clerks_path

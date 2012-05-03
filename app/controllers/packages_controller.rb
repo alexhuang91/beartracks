@@ -136,23 +136,35 @@ class PackagesController < ApplicationController
       flash[:warning] = "Cannot leave #{p.blank_fields} blank."
       redirect_to new_package_path
     else
+      # Set some other fields that aren't manually entered by the clerk
       p.datetime_received = Time.now.to_datetime
       p.clerk_id = current_clerk.id
+
+      # Associate the package with the appropriate resident
+      first, last = p.resident_first_name, p.resident_last_name
+      matched_location = Resident.where(:unit => p.unit, :building => p.building, :room => p.room)
+      matched_resident =  matched_location.find_all {|r| (r.first_name == first || r.nickname == first) && (r.last_name == last)} 
+      
+      matched = matched_resident != [] ? true : false
+      
+      if matched
+        p.resident_id = matched_resident[0].id
+      else
+        flash[:warning] = "Unable to automatically match package to a resident."
+      end
+      
+      # Save and if successful, send notification email if there was a match
       if p.save
-      # TODO Send out an email or text or add to the slip-queue
-        flash[:notice] = "Package created successfully."
-        #Associate the package with the appropriate resident
-        first_collection = Resident.where( :unit => params[:package][:unit], :room => params[:package][:room], :building => params[:package][:building])
-        second_collection =  first_collection.find_all {|resid| ((resid.first_name == params[:package][:resident_first_name]) || resid.nickname == params[:package][:resident_first_name]) && (resid.last_name == params[:package][:resident_last_name])}
-        if (second_collection[0])
-          p.resident = second_collection[0]
-          p.save
-	  flash[:notice] = "Package created, #{p.resident.first_name} #{p.resident.last_name} was successfully notified"
-          print p.resident.first_name
+        if matched
+          PackageNotifier.package_notification(p).deliver
+          flash[:notice] = "Package created successfully and email notification sent."
+        else
+          flash[:notice] = "Package created successfully."
         end
       else
         flash[:warning] = "There was an error creating this package."
       end
+      
       # Now that the package is saved, redirect to the list of packages if the
       # clerk is done creating them, or another create package form if the
       # clerk wants to create more packages.

@@ -1,0 +1,9 @@
+%h1= "Hi, #{@resident.first_name}, you have a package ready for pickup."
+%br
+%br
+%p Here are your package details
+%div
+  %p= "Arrival time: #{@package.datetime_received}"
+  %p= "Carrier: #{@package.carrier}"
+  %p= "Tracking Number: #{@package.tracking_number}"
+  %p= "Package type: #{@package.package_type}"
