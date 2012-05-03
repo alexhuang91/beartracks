@@ -123,11 +123,13 @@ class PackagesController < ApplicationController
   def edit
     @new = false
     @package = Package.find params[:id]
+    @buildings = buildings_hash.to_json
   end
 
   def new
     @new = true
     @clerk_unit = current_clerk.unit
+    @buildings = buildings_hash.to_json
   end
 
   def create

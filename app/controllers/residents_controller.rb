@@ -14,13 +14,13 @@ class ResidentsController < ApplicationController
   # NEW RESIDENT
   def new
     @resident = Resident.new
+    @buildings = buildings_hash.to_json
   end
 
   # 
   def show
     # Use find_by_id instead of find so that it will return nil instead of throwing an exception
     @resident = Resident.find_by_id(params[:id])
-
     # If the resident doesn't exist, go back to the residents page
   end
 
@@ -40,6 +40,7 @@ class ResidentsController < ApplicationController
 
   def edit
     @resident = Resident.find(params[:id])
+    @buildings = buildings_hash.to_json
   end
 
   # UPDATES RESIDENT SETTINGS

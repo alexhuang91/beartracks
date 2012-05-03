@@ -45,10 +45,11 @@ Scenario: Signing up
         | Password              | newpass     |
         | Password Confirmation | newpass     |
         | Email                 | a@b.com     |
-        | Building              | Spens-Black |
         | Room                  | 101         |
         | First Name            | Sally       |
         | Last Name             | Superwoman  |
+    And I select "Unit 1" from "Unit"
+    And I select "Cheney Hall" from "Building"
     When I press "Submit"
     Then a new resident account for "Sally" should be created
     And the current resident's login should be "Sally"

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_clerk_session, :current_clerk, :clerk_logged_in?
   helper_method :current_resident_session, :current_resident
   helper_method :preferences_array, :states_array, :carriers_array, :package_type_array
-  helper_method :units_array, :buildings_arrays, :all_buildings
+  helper_method :units_array, :buildings_hash, :all_buildings
   
   private
     
@@ -68,41 +68,32 @@ class ApplicationController < ActionController::Base
        "University Village"]
     end
 
-    def buildings_arrays(unit)
-      units = units_array
-
-      if(unit == units[0]) # Unit 1
-        array = ["-- Unit 1 --",
-                 "Channing Bowditch",
+    def buildings_hash
+      hash = {"Unit 1" =>
+                ["Channing Bowditch",
 								 "Cheney Hall",
 								 "Christian Hall",
 								 "Deutsch Hall",
                  "Freeborn Hall",
 								 "Ida Jackson House",
 								 "Putnam Hall",
-								 "Slottman Hall"]
-
-      elsif(unit == units[1]) # Unit 2
-        array = ["-- Unit 2 --",
-                 "Cunningham Hall",
+								 "Slottman Hall"],
+              "Unit 2" =>
+                ["Cunningham Hall",
 								 "Davidson Hall",
 								 "Ehman Hall",
 								 "Griffiths Hall",
 								 "Towle Hall",
-								 "Wada Hall"]
-
-      elsif(unit == units[2]) # Unit 3
-        array = ["-- Unit 3 --",
-                 "Beverly Cleary Hall",
+								 "Wada Hall"],
+              "Unit 3" =>
+                ["Beverly Cleary Hall",
 								 "Ida Sproul Hall",
 								 "Manville Hall",
 								 "Norton Hall",
 								 "Priestley Hall",
-								 "Spens Black Hall"]
-
-      elsif(unit == units[3]) # Unit 4
-        array = ["-- Unit 4 --",
-                 "FH Building 1",
+								 "Spens Black Hall"],
+              "Unit 4" =>
+                ["FH Building 1",
 								 "FH Building 2",
 								 "FH Building 3",
 								 "FH Building 4",
@@ -112,11 +103,9 @@ class ApplicationController < ActionController::Base
 								 "FH Building 8",
 								 "FH Building 9",
 								 "Bowles Hall",
-								 "Stern Hall"]
-
-      elsif(unit == units[4]) # Clark Kerr
-        array = ["-- Clark Kerr --",
-                 "CK Building 1",
+								 "Stern Hall"],
+              "Clark Kerr" =>
+                ["CK Building 1",
                  "CK Building 2",
                  "CK Building 3",
                  "CK Building 4",
@@ -134,16 +123,12 @@ class ApplicationController < ActionController::Base
 								 "CK Building 17",
                  "CK Building 18",
 								 "CK Building 19",
-								 "CK Building 20"]
-
-      elsif(unit == units[5]) # University Village
-        array = ["-- University Village --",
-                 "East",
-                 "West"]
-
-      elsif(unit == units[6]) # Smyth Fernwald
-        array = ["-- Smyth Fernwald --",
-                 "3002",
+								 "CK Building 20"],
+              "University Village" =>
+                ["East",
+                 "West"],
+              "Smyth Fernwald" =>
+                ["3002",
                  "3024",
                  "E",
                  "F",
@@ -151,17 +136,16 @@ class ApplicationController < ActionController::Base
                  "H",
                  "J",
                  "K",
-                 "L"]
-      else
-        array = []
-      end
-      array
+                 "L"] }
     end
 
     def all_buildings
       buildings = []
       units = units_array
-      units.each { |unit| buildings << buildings_arrays(unit) }
+      units.each do |unit| 
+        buildings << ("-- "+unit+" --")
+        buildings << buildings_hash[unit]
+      end
       buildings.flatten
     end
 end
