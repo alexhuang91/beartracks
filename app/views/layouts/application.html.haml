@@ -15,7 +15,7 @@
           = "#{current_clerk.first_name} #{current_clerk.last_name}"
         %span.user_links
           - if current_clerk.is_admin?
-            = link_to "Edit Profile", edit_clerk_path(current_clerk)
+            = link_to "My Profile", clerk_path(current_clerk)
             |
           = link_to "LOGOUT", clerk_logout_path
       - elsif current_resident
