@@ -246,6 +246,13 @@ class PackagesController < ApplicationController
     end
   end
 
+  def notify_resident
+    p = Package.find(params[:id])
+    PackageNotifier.package_notification(p).deliver
+    flash[:notice] = "Resident notified successfully."
+    redirect_to packages_path
+  end
+  
   def package_slips
   # most of the info on how to set it up came from here: http://stackoverflow.com/questions/8658302/
   # how to make the pdf came mostly from here: http://prawn.majesticseacreature.com/manual.pdf
