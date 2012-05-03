@@ -1,3 +1,11 @@
+// Make form inputs look nicer  
+.fancy-input, .fancy-password-input {
+  color: #888;
+  border: 1px solid #C0C0C0;
+  font-size: 20px;
+  padding: 10px;
+}
+
 /** NEW BUTTONS **/
 .button, .button span {
 	display: block;

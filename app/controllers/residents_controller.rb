@@ -1,5 +1,5 @@
 class ResidentsController < ApplicationController
-  before_filter :check_id_access, :only => [:edit, :update, :show]
+  before_filter :check_id_access, :only => [:edit, :update, :show, :destroy]
 
   # Display a list of all packages that the resident has received
   def index
@@ -62,9 +62,15 @@ class ResidentsController < ApplicationController
     end
   end
 
+  def destroy
+    current_resident_session.resident.destroy
+    flash[:notice] = "Your account has been successfully deleted."
+    redirect_to root_path
+  end
+
   def check_id_access
     if current_resident.nil?
-      flash[:warning] = "Sorry, you don't have access to that!"
+      flash[:warning] = "You must be logged in as the correct resident to access this page."
       if current_clerk.nil?
         redirect_to root_path
       else
@@ -73,7 +79,7 @@ class ResidentsController < ApplicationController
       return false
     else
       unless params[:id].to_i == current_resident.id
-        flash[:warning] = "Sorry, you don't have access to that!"
+        flash[:warning] = "You must be logged in as the correct resident to access this page."
         redirect_to residents_path
         return false
       end
