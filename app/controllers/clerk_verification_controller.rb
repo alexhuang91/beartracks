@@ -12,7 +12,7 @@ class ClerkVerificationController < ApplicationController
   private 
   
   def load_clerk_using_perishable_token
-    @clerk = Clerk.find_by_perishable_token(params[:id])
+    @clerk = Clerk.find_by_perishable_token(params[:token])
     flash[:error] = "Sorry, we were unable to locate your account. You sure that link is correct?" unless @clerk
   end
 
