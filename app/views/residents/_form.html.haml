@@ -16,6 +16,9 @@
       %td.resident-form-header= f.label :last_name, "Last Name:"
       %td.resident-form-info= f.text_field :last_name
     %tr
+      %td.resident-form-header= f.label :name, "(Optional) Alternative First Name:"
+      %td.resident-form-info= f.text_field :name
+    %tr
       %td.resident-form-header= f.label :unit, "Unit:"
       %td.resident-form-info= f.select :unit, units_array
     %tr
