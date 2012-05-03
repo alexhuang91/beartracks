@@ -1,5 +1,6 @@
 class Resident < ActiveRecord::Base
   has_many :packages
+  
   #additional validations that Authlogic does not handle
   validates :first_name, :presence => true
   validates :last_name, :presence => true
