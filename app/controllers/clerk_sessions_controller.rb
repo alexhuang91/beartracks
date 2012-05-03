@@ -12,7 +12,11 @@ class ClerkSessionsController < ApplicationController
       flash[:notice] = "You have successfully logged in."
       redirect_to packages_path
     else
-      flash[:warning] = "There was an error logging in.  Please try again."
+      if @clerk_session.errors.any?
+        flash[:error] = html_list("Please fix the following errors:\n", @clerk_session.errors.full_messages)
+      else
+        flash[:error] = "There was an error logging in.  Please try again."
+      end
       render :action => :new
     end
   end

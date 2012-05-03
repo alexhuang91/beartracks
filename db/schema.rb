@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419023354) do
+ActiveRecord::Schema.define(:version => 20120502232657) do
 
   create_table "clerks", :force => true do |t|
     t.string   "login"
@@ -25,28 +25,32 @@ ActiveRecord::Schema.define(:version => 20120419023354) do
     t.boolean  "is_admin",          :default => false, :null => false
     t.string   "first_name"
     t.string   "last_name"
+    t.boolean  "verified",          :default => false
   end
 
   create_table "packages", :force => true do |t|
     t.string   "carrier"
     t.text     "description"
-    t.string   "resident_name",                          :null => false
+    t.string   "resident_name"
     t.integer  "resident_id"
-    t.string   "unit",                                   :null => false
-    t.string   "building",                               :null => false
+    t.string   "unit",                                     :null => false
+    t.string   "building",                                 :null => false
     t.integer  "clerk_accepted_id"
-    t.integer  "clerk_id",                               :null => false
+    t.integer  "clerk_id",                                 :null => false
     t.string   "sender_address"
     t.string   "sender_city"
     t.string   "sender_state"
     t.integer  "sender_zip"
-    t.datetime "datetime_received",                      :null => false
+    t.datetime "datetime_received",                        :null => false
     t.datetime "datetime_accepted"
     t.datetime "updated_at"
-    t.boolean  "picked_up",         :default => false,   :null => false
+    t.boolean  "picked_up",           :default => false,   :null => false
     t.string   "tracking_number"
     t.string   "room"
-    t.string   "package_type",      :default => "Other", :null => false
+    t.string   "package_type",        :default => "Other", :null => false
+    t.string   "resident_first_name"
+    t.string   "resident_last_name"
+    t.boolean  "returned",            :default => false,   :null => false
   end
 
   create_table "residents", :force => true do |t|

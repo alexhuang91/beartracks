@@ -5,7 +5,7 @@ class ClerkSession < Authlogic::Session::Base
   private
   
   def check_if_verified
-    errors.add(:base, "Your account has not yet been verified") unless attempted_record and attempted_record.verified
+    errors.add(:base, "Your account has not yet been verified. Please check your email to verify!") unless attempted_record and attempted_record.verified
   end
 
 end
