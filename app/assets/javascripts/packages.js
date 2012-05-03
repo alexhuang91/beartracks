@@ -54,6 +54,6 @@ $(document).ready(function() {
 	});
 	
 	// In the building select menu, default to Channing Bowditch since it's the first option
-	$("option[value^='Channing Bowditch']").attr("selected", "selected");
-	
+	//$("#search_selectoption[value^='Channing Bowditch']").attr("selected", "selected"); // touched the forms and messed up defaults
+  $($("#search-select").children()[1]).attr("selected", "selected");
 });
