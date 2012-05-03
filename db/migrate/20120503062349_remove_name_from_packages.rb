@@ -1,5 +1,9 @@
 class RemoveNameFromPackages < ActiveRecord::Migration
-  def change
-	remove_column :packages, :resident_name, :string
+  def up
+    remove_column :packages, :resident_name, :string
+  end
+  
+  def down
+    add_column :packages, :resident_name, :string
   end
 end
