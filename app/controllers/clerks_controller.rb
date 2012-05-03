@@ -1,7 +1,7 @@
 class ClerksController < ApplicationController
   
   before_filter :is_admin?, :only => [:new, :create, :index, :show, :toggle_admin_access]
-  before_filter :check_id_access, :only => [:edit, :update]
+  before_filter :check_admin_access, :only => [:edit, :update]
   
   def index
     @my_id = current_clerk.id
@@ -101,7 +101,7 @@ class ClerksController < ApplicationController
   end
   
   # Only admins will be able to edit a clerk's profile
-  def check_id_access
+  def check_admin_access
     target_clerk = Clerk.find_by_id(params[:id])
     
     # Nil check, but if this fails then something bad is going on
@@ -120,6 +120,9 @@ class ClerksController < ApplicationController
         return false
       end
     end
+  end
+
+  def check_id_access
   end
   
 end
