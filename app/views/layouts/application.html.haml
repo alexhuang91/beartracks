@@ -1,6 +1,7 @@
 !!! 5
 %html
-  %head
+  %head{:profile => "http://www.w3.org/2005/10/profile"}
+    = favicon_link_tag 'favicon.png'
     %title BearTracks
     %link{:href => "http://fonts.googleapis.com/css?family=Droid+Sans", :rel => "stylesheet", :type => "text/css"}/
     = stylesheet_link_tag 'application'
@@ -11,12 +12,18 @@
     #login_status_bar
       - if current_clerk
         %h1#username 
-          = "Hey, #{current_clerk.first_name} #{current_clerk.last_name}"
+          = "#{current_clerk.first_name} #{current_clerk.last_name}"
         %span.user_links
-          = link_to "Edit Profile", edit_clerk_path(current_clerk)
-          |
+          - if current_clerk.is_admin?
+            = link_to "Edit Profile", edit_clerk_path(current_clerk)
+            |
           = link_to "LOGOUT", clerk_logout_path
       - elsif current_resident
+        %h1#username
+          - if current_resident.nickname.blank?
+            = "Hey, #{current_resident.first_name}"
+          - else
+            = "Hey, #{current_resident.nickname}"
         %span.user_links
           = link_to "My Profile", resident_path(current_resident)
           |

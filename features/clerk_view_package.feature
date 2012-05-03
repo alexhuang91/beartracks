@@ -13,11 +13,11 @@ Background: packages in database, clerk logged in
   Then I log in as a clerk through the UI with login "Timy" and password "pass"
 
   Given the following packages exist my way:
-  | resident_name | tracking_number | unit   | building | room | datetime_received | picked_up | clerk_id |
-  | Case          | 123             | Unit 1 | Fire     | 1    | 1977-05-25        | true      | 1        |
-  | Daniel        | 234             | Unit 2 | Wind     | 2    | 1982-06-25        | false     | 1        |
-  | Kevin         | 345             | Unit 3 | Water    | 3    | 1979-05-25        | true      | 1        |
-  | Alex          | 456             | Unit 1 | Air      | 4    | 1971-03-11        | false     | 1        |
+  | resident_first_name | resident_last_name | tracking_number | unit   | building | room | datetime_received | picked_up | clerk_id |
+  | Case                | Walker             | 123             | Unit 1 | Fire     | 1    | 1977-05-25        | true      | 1        |
+  | Daniel              | Alkalai            | 234             | Unit 2 | Wind     | 2    | 1982-06-25        | false     | 1        |
+  | Kevin               | Sheng              | 345             | Unit 3 | Water    | 3    | 1979-05-25        | true      | 1        |
+  | Alex                | Corre              | 456             | Unit 1 | Air      | 4    | 1971-03-11        | false     | 1        |
 
 Scenario: view all packages in the clerk's unit
   When I am on the packages page
@@ -70,11 +70,11 @@ Scenario: clerk can search for a package
   When I am on the packages page
   And I select "Tracking Number" from "search_option"
   And I fill in the following:
-    | search_string | 123 |
+    | search_text | 123 |
   And I press "Search"
   Then I should be on the packages page
   And I should see "Search results"
   And I should see "Case"
   And I should not see "Daniel"
   And I should not see "Kevin"
-  And I should not see "Alex" 
+  And I should not see "Alex"

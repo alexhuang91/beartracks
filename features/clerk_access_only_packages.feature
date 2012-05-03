@@ -12,10 +12,6 @@ Scenario: When a clerk is logged in all package actions should not redirect
   Given the following clerk exists:
         | login    | password   | password_confirmation | first_name | last_name |
         | John     | pass       | pass                  | John       | Lennon    |
-    And I am on the clerk login page
-    And I fill in the following:
-        | Login     | John       |
-        | Password  | pass       |
-    When I press "Login"
+  And I log in as a clerk through the UI with login "John" and password "pass"
   Then I should be on the packages page
   And I should not see "must be logged in"

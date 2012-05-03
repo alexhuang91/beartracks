@@ -15,7 +15,7 @@
   %tr
     %td.resident-detail-header Room:
     %td.resident-detail-info= @resident.room
-  %tr
+  -#%tr
     %td.resident-detail-header Phone Number:
     %td.resident-detail-info= @resident.phone_number
   %tr
@@ -26,5 +26,7 @@
     %td.resident-detail-info= @resident.preference
 .options
   = link_to "Edit", edit_resident_path(@resident)
+  |
+  = link_to "Delete My Account", resident_path, :method => :delete, :confirm => "Are you sure you want to delete your account? This is a permanent action."
   |
   = link_to "Go to home page", residents_path

@@ -1,8 +1,10 @@
 %table#package-details
   %caption#package-detail-caption Details for package #{@package.id}
+  - if @package.returned
+    %caption#package-return-status This package was returned to sender
   %tr
     %td.package-detail-header Resident:
-    %td.package-detail-info= @package.resident_name
+    %td.package-detail-info= @package.resident_first_name + " " + @package.resident_last_name
   %tr
     %td.package-detail-header Housing:
     %td.package-detail-info= @package.unit + ', ' + @package.building + ' ' + @package.room

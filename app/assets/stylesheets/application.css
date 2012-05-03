@@ -75,7 +75,7 @@ h1#title {
 
 h1#username {
 	display: inline;
-	font-size:1.1em;
+	font-size:1em;
 	color: #EEEEEE;
 }
 
@@ -90,8 +90,6 @@ h1#username {
 span.user_links {
 	margin: 0 20px 0 0;
 }
-
-
 
 
 /******

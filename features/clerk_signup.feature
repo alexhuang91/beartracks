@@ -6,10 +6,7 @@ Background: Make a clerk exist and log in an admin user
     | Tony     | pass       | pass                  | j@j.com         | Tony       | Montana   | false    |
     | admin    | admin      | admin                 | admin@admin.com | admin      | admin     | true     |
   And I am on the clerk login page
-  And I fill in the following:
-    | Login     | admin       |
-    | Password  | admin       |
-    When I press "Login"
+  And I log in as a clerk through the UI with login "admin" and password "admin"
 
 @model
 Scenario: Login Taken

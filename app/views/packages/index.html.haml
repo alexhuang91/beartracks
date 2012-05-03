@@ -9,8 +9,9 @@
 #simple-search-options
   =form_tag packages_path, :method=>'get' do
     Search by:
-    = select_tag :search_option, options_for_select(@search_options, @option)
-    = text_field_tag :search_string, @s_string
+    = select_tag :search_option, options_for_select(@search_options, @option), :id => "search-type"
+    = text_field_tag :search_text, @s_string, :size => 15, :id => "search-text"
+    = select_tag :search_select, options_for_select(Hash[all_buildings.collect { |b| [b,b] }], @s_string), :id => "search-select"
     = submit_tag 'Search'
 
 = render :partial => "packages_table"

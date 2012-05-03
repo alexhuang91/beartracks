@@ -26,7 +26,7 @@ class PackagesController < ApplicationController
       flash.keep
       if params[:commit] == 'Search'
         redirect_to :unit => session[:unit], :packages => session[:packages], :sort => params[:sort],
-        :search_option => params[:search_option], :search_string => params[:search_string],
+        :search_option => params[:search_option], :search_text => params[:search_text], :search_select => params[:search_select],
         :commit => 'Search' and return
       else
         redirect_to :unit => session[:unit], :packages => session[:packages], :sort => params[:sort] and return
@@ -34,12 +34,12 @@ class PackagesController < ApplicationController
     end
 
     # Set up the mappings for the view options
-    @units_hash = Hash[units_array.collect { |unit| [unit,unit] }]
+    @units_hash = Hash[units_array.collect{ |u| [u,u] }]
     @units_hash['All Units'] = 'all'
     @packages_hash = {'Not picked up' => 'not_picked_up', 
                       'Picked up'     => 'picked_up', 
                       'All packages'  => 'all'}
-    @search_options = ['ID', 'Tracking Number', 'Room', 'Building', 'Carrier', 'Resident Name', 'Package Type']
+    @search_options = ['ID', 'Tracking Number', 'Room', 'Building', 'Carrier', 'Resident First Name', 'Resident Last Name', 'Resident Full Name', 'Package Type']
     @search_options = Hash[@search_options.collect{ |option| [option, option.downcase.gsub(/\s/, '_')] }]
 
     package_value = {'picked_up' => true, 'not_picked_up' => false, 'all' => [true, false]}
@@ -48,7 +48,19 @@ class PackagesController < ApplicationController
     
     # Select the packages to display
     if params[:commit] == 'Search' and @search_options.values.include?(params[:search_option])
-      @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => params[:search_string]).order(ordering).page params[:page]
+      params[:search_option].downcase == "building" ? search_string = params[:search_select] : search_string = params[:search_text]
+      if (params[:search_option] == "resident_full_name")
+        temp = search_string.split(" ")
+        first = temp[0]
+        if (temp.length > 1)
+          last = temp[1..temp.length - 1].join(" ")
+        else
+          last = ""
+          end
+        @packages = Package.where(:picked_up => picked, :unit => units, :resident_first_name => first, :resident_last_name => last).order(ordering).page params[:page]
+      else
+        @packages = Package.where(:picked_up => picked, :unit => units, params[:search_option] => search_string).order(ordering).page params[:page]
+        end
       @option = params[:search_option]
       @s_string = params[:search_string]
       @searching = true # instance variable used when setting the table caption
@@ -129,6 +141,15 @@ class PackagesController < ApplicationController
       if p.save
       # TODO Send out an email or text or add to the slip-queue
         flash[:notice] = "Package created successfully."
+        #Associate the package with the appropriate resident
+        first_collection = Resident.where( :unit => params[:package][:unit], :room => params[:package][:room], :building => params[:package][:building])
+        second_collection =  first_collection.find_all {|resid| ((resid.first_name == params[:package][:resident_first_name]) || resid.nickname == params[:package][:resident_first_name]) && (resid.last_name == params[:package][:resident_last_name])}
+        if (second_collection[0])
+          p.resident = second_collection[0]
+          p.save
+	  flash[:notice] = "Package created, #{p.resident.first_name} #{p.resident.last_name} was successfully notified"
+          print p.resident.first_name
+        end
       else
         flash[:warning] = "There was an error creating this package."
       end
@@ -239,7 +260,7 @@ class PackagesController < ApplicationController
         pdf.bounding_box( [left+3, top-3], width: right-left-6, height: top-bottom-6 ) do
           pdf.text package.unit
           pdf.text package.building + ", room " + package.room
-          pdf.text "Resident: " + package.resident_name
+          pdf.text "Resident: " + package.resident_first_name + " " + package.resident_last_name
           pdf.text "Package ID = #{package.id}\n\n"
           pdf.text "You just received a package! Pick it up at\n#{package.unit}'s mailroom.\n\n"
           pdf.text "Are you sick of package slips? Want to move into the 21st century? Try beartracks.\n\n\n"

@@ -21,10 +21,11 @@ Scenario: Get to the Add Package page
 Scenario: Add Package with all required fields
   When I go to the add package page
   And I fill in the following:
-    | Resident Name   | Bilbo  |
-    | Tracking Number | 1122   |
-    | Building        | Cheney |
-    | Room            | 253    |
+    | Resident First Name | Bilbo  |
+    | Resident Last Name  | Cool   |
+    | Tracking Number     | 1122   |
+    | Building            | Cheney |
+    | Room                | 253    |
   When I press "Save Package"
   Then I should be on the packages page
   And I should see "Bilbo"
@@ -33,9 +34,10 @@ Scenario: Add Package with all required fields
 Scenario: Add Package without all required fields 
   When I go to the add package page
   And I fill in the following:
-    | Resident Name   | Bilbo  |
-    | Building        | Cheney |
-    | Room            | 253    |
+    | Resident First Name | Bilbo  |
+    | Resident Last Name  | Cool   |
+    | Building            | Cheney |
+    | Room                | 253    |
   When I press "Save Package"
   Then I should be on the add package page
   And I should see "Cannot leave Tracking Number blank."
@@ -44,31 +46,33 @@ Scenario: Add Package without filling in any fields
   When I go to the add package page
   When I press "Save Package"
   Then I should be on the add package page
-  And I should see "Cannot leave Resident Name, Building, Room, or Tracking Number blank."
+  And I should see "Cannot leave Building, Resident First Name, Resident Last Name, Room, or Tracking Number blank."
 
 Scenario: Save and add another package
   When I go to the add package page
   And I fill in the following:
-    | Resident Name   | Bilbo  |
-    | Tracking Number | 1122   |
-    | Building        | Cheney |
-    | Room            | 253    |
+    | Resident First Name | Bilbo  |
+    | Resident Last Name  | Cool   |
+    | Tracking Number     | 1122   |
+    | Building            | Cheney |
+    | Room                | 253    |
   When I press "Save and Create Another Package"
   Then I should be on the add package page
   And I should see "Package created successfully."
   
 Scenario: Cancel an add package operation
   Given the following packages exist:
-    | resident_name | tracking_number | unit   | building | room | datetime_received | picked_up | clerk_id |
-    | Case          | 1SFELKJ23       | Unit 1 | Fire     | 1    | 1977-05-25        | true      | 1        |
+    | resident_first_name | resident_last_name | tracking_number | unit   | building | room | datetime_received | picked_up | clerk_id |
+    | Case                | Walker             | 1SFELKJ23       | Unit 1 | Fire     | 1    | 1977-05-25        | true      | 1        |
   When I go to the packages page
   Then I should see "1SFELKJ23"
   When I go to the add package page
   And I fill in the following:
-    | Resident Name   | Bilbo  |
-    | Tracking Number | 1122   |
-    | Building        | Cheney |
-    | Room            | 253    |
+    | Resident First Name | Bilbo  |
+    | Resident Last Name  | Cool   |
+    | Tracking Number     | 1122   |
+    | Building            | Cheney |
+    | Room                | 253    |
   And I follow "Cancel"
   Then I should be on the packages page
   And I should see "1SFELKJ23"

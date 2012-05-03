@@ -1,5 +1,15 @@
 class ResidentsController < ApplicationController
-  before_filter :check_id_access, :only => [:edit, :update, :show]
+  before_filter :check_id_access, :only => [:edit, :update, :show, :destroy]
+
+  # Display a list of all packages that the resident has received
+  def index
+    @packages = current_resident.packages
+    if @packages == []
+      @caption = "No packages"
+    else
+      @caption = "Your packages"
+    end
+  end
 
   # NEW RESIDENT
   def new
@@ -18,7 +28,7 @@ class ResidentsController < ApplicationController
     @resident = Resident.new(params[:resident])
     if @resident.save
       ResidentSession.create! @resident
-      flash[:notice] = "Resident account successfully created. "
+      flash[:notice] = "Resident account successfully created."
       redirect_to root_url
     else
       if @resident.errors.any?
@@ -52,22 +62,29 @@ class ResidentsController < ApplicationController
     end
   end
 
-  # INDEX PAGE
-  def index
+  def destroy
+    current_resident_session.resident.destroy
+    flash[:notice] = "Your account has been successfully deleted."
+    redirect_to root_path
   end
 
   def check_id_access
     if current_resident.nil?
-      flash[:warning] = "Sorry, you don't have access to that!"
-      redirect_to root_path
+      flash[:warning] = "You must be logged in as the correct resident to access this page."
+      if current_clerk.nil?
+        redirect_to root_path
+      else
+        redirect_to packages_path
+      end
       return false
+    else
+      unless params[:id].to_i == current_resident.id
+        flash[:warning] = "You must be logged in as the correct resident to access this page."
+        redirect_to residents_path
+        return false
+      end
+      return true
     end
-    unless params[:id].to_i == current_resident.id
-      flash[:warning] = "Sorry, you don't have access to that!"
-      redirect_to residents_path
-      return false
-    end
-    return true
   end
 
 end

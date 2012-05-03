@@ -2,5 +2,7 @@
 
   = render :partial => "form", :locals => {:f => f} 
 
-  .options
-    = f.submit "Login"
+  .submit-button
+    %button{:type => "submit", :class => "normal"}
+      = image_tag("key.png", :class => "inside-button")
+      Resident login

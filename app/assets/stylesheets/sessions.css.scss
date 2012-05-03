@@ -1,0 +1,20 @@
+/*
+ * CSS for login related things
+ */
+
+div.login {
+  margin-top: 80px;
+  color: black;
+  font-size: 24px; 
+  text-align: center;
+}
+
+// This is for little pictures that go inside buttons
+img.inside-button {
+  padding-right: 5px;
+  float: left;
+}
+
+.submit-button {
+  text-align: center;
+}

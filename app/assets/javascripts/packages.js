@@ -1,4 +1,20 @@
 $(document).ready(function() {
+	
+    // Function to hide one of the search fields based on the selected search option
+	choose_select_option = function() {
+    	if ($("#search-type").val() == "building") {
+        	$("#search-text").hide();
+        	$("#search-select").show();
+    	} else {
+        	$("#search-select").hide();
+        	$("#search-text").show();
+    	}
+	}
+
+	// When the page loads and when the search option changes, hide the correct field
+	choose_select_option();
+    $("#search-type").change(choose_select_option);
+	
 	// Hide the package details link
 	$(".packages-table-cell-details").hide();
 	
@@ -12,5 +28,13 @@ $(document).ready(function() {
 	$("tr[class|='packages-table-info']").hover(function() {
 		$(this).toggleClass("highlight");
 	});
+	
+	// Put categories for the Units in the building select menu
+	$("option[value^='--']").each(function() { 
+		$(this).attr("disabled", "disabled");
+	});
+	
+	// In the building select menu, default to Channing Bowditch since it's the first option
+	$("option[value^='Channing Bowditch']").attr("selected", "selected");
 	
 });

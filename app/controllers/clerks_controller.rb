@@ -1,7 +1,8 @@
 class ClerksController < ApplicationController
   
-  before_filter :is_admin?, :only => [:new, :create, :index, :toggle_admin_access]
-  before_filter :check_id_access, :only => [:edit, :update, :show, :set_password, :update_password]
+  before_filter :is_admin?, :only => [:new, :create, :index, :show, :toggle_admin_access]
+  before_filter :check_id_access, :only => [:set_password, :update_password]
+  before_filter :check_admin_access, :only => [:edit, :update]
   
   def index
     @my_id = current_clerk.id
@@ -113,15 +114,37 @@ class ClerksController < ApplicationController
   
   def is_admin?
     if current_clerk.nil? or not current_clerk.is_admin?
-      flash[:warning] = "You don't have permission to do that."
+      flash[:warning] = "You must have admin privileges to do that."
       redirect_to packages_path
       return false
     end
     return true
   end
   
+  # Only admins will be able to edit a clerk's profile
+  def check_admin_access
+    target_clerk = Clerk.find_by_id(params[:id])
+    
+    # Nil check, but if this fails then something bad is going on
+    if not current_clerk.nil? and not target_clerk.nil? 
+      if current_clerk.is_admin?
+        if target_clerk.is_admin? and target_clerk.id != current_clerk.id
+          flash[:warning] = "You can't edit another admin's profile."
+          redirect_to clerks_path
+          return false
+        else # Trying to edit a regular clerk's profile
+          return true
+        end
+      else # Not an admin, so can't edit anyone's profile, including your own
+        flash[:warning] = "You can't edit your own profile. Please ask your supervisor." 
+        redirect_to clerk_home_path
+        return false
+      end
+    end
+  end
+
   def check_id_access
-    if current_clerk.nil? or params[:id].to_i != current_clerk.id
+	if current_clerk.nil? or params[:id].to_i != current_clerk.id
       flash[:warning] = "Sorry, you don't have access to that!"
       redirect_to clerk_home_path
       return false
