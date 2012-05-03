@@ -1,5 +1,5 @@
 class MailSender < ActionMailer::Base
-  default :from => "no-reply@beartracks.herokuapp.com"
+  default :from => "berkeley.beartracks@gmail.com"
   
   def verification_instructions(clerk)
     @clerk = clerk
