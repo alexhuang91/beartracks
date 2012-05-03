@@ -1,1 +1,19 @@
-There doesn't seem to be anything here
+%table#resident-packages
+  %caption#resident-packages-caption= @caption
+  -if @packages != []
+    %thead
+      %tr.resident-packages-header
+        %th.resident-packages-cell= link_to 'Arrival Time', packages_path(:sort => 'datetime_received DESC')
+        %th.resident-packages-cell Carrier
+        %th.resident-packages-cell Tracking Number
+        %th.resident-packages-cell= link_to 'Package Type', packages_path(:sort => 'package_type ASC')
+        %th.resident-packages-cell Picked up?
+    %tbody
+      - @packages.each do |p|
+        %tr.resident-packages-info
+          %td.resident-packages-cell= p.datetime_received.localtime.strftime("%m/%d/%y %I:%M%p")
+          %td.resident-packages-cell= p.carrier
+          %td.resident-packages-cell= p.tracking_number
+          %td.resident-packages-cell= p.package_type
+          %td.resident-packages-cell= p.picked_up ? "Yes" : "No"
+            

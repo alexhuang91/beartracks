@@ -1,6 +1,16 @@
 class ResidentsController < ApplicationController
   before_filter :check_id_access, :only => [:edit, :update, :show]
 
+  # Display a list of all packages that the resident has received
+  def index
+    @packages = current_resident.packages
+    if @packages == []
+      @caption = "No packages"
+    else
+      @caption = "Your packages"
+    end
+  end
+
   # NEW RESIDENT
   def new
     @resident = Resident.new
@@ -50,10 +60,6 @@ class ResidentsController < ApplicationController
         redirect_to root_url
       end
     end
-  end
-
-  # INDEX PAGE
-  def index
   end
 
   def check_id_access
