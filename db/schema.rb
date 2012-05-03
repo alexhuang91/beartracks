@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20120503062349) do
     t.boolean  "is_admin",          :default => false, :null => false
     t.string   "first_name"
     t.string   "last_name"
+    t.boolean  "verified",          :default => false
+    t.string   "perishable_token",  :default => "",    :null => false
   end
 
   create_table "packages", :force => true do |t|
