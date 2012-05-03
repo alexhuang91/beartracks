@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120502232657) do
+ActiveRecord::Schema.define(:version => 20120503010330) do
 
   create_table "clerks", :force => true do |t|
     t.string   "login"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20120502232657) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "verified",          :default => false
+    t.string   "perishable_token",  :default => "",    :null => false
   end
 
   create_table "packages", :force => true do |t|
