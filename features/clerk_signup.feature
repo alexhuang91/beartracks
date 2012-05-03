@@ -97,6 +97,6 @@ Scenario: Signup Success
     | Email                 | a@a.com |
   When I press "Create Clerk"
   Then I should be on the clerks page
-  And I should see "Clerk account successfully created."
+  And I should see "Account created."
   And I should not see "Login is too short (minimum is 3 characters)"
 

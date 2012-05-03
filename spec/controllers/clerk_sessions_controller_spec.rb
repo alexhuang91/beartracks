@@ -29,6 +29,7 @@ describe ClerkSessionsController do
     before :each do
       @fake_session.stub(:save).and_return(true)
       ClerkSession.stub(:new).and_return(@fake_session)
+      @fake_session.stub(:errors).and_return([])
     end
     
     it "should create a new ClerkSession object" do
@@ -68,12 +69,11 @@ describe ClerkSessionsController do
         @fake_session.stub(:save).and_return(false)
       end
       
-      it "should not post to clerk login page" do 
-      end
+      it "should not post to clerk login page" 
       
-      it "should set a flash warning" do
+      it "should set a flash error" do
         do_create
-        flash[:warning].should_not be_nil
+        flash[:error].should_not be_nil
       end
       
       it "should not set a flash notice" do

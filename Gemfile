@@ -42,6 +42,7 @@ gem 'authlogic'
 gem 'rails3-generators' # for authlogic generators
 gem 'kaminari'
 gem 'prawn'
+gem 'mail'
 
 # Use unicorn as the web server
 # gem 'unicorn'

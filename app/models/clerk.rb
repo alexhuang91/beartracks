@@ -7,4 +7,10 @@ class Clerk < ActiveRecord::Base
   
   validates_presence_of :first_name, :message => "Must specify your First Name"
   validates_presence_of :last_name, :message => "Must specity your Last Name"
+  
+  def verify!
+    self.verified = true
+    self.save!
+  end
+  
 end

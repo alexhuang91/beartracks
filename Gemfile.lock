@@ -225,6 +225,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
+  mail
   pg
   prawn
   rails (= 3.1.0)

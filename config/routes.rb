@@ -1,4 +1,6 @@
 Beartracks::Application.routes.draw do
+  get "clerk_verification/show"
+
   get "clerk_sessions/new"
   post "clerk_sessions/create"
   get "resident_sessions/new"
@@ -19,7 +21,12 @@ Beartracks::Application.routes.draw do
   match 'resident/logout' => 'resident_sessions#destroy'
   match 'packages/:id/toggle_pickup' => 'packages#toggle_pickup'
   match 'packages/:id/return' => 'packages#return'
+  match 'packages/:id/notify_resident' => 'packages#notify_resident'
   match 'clerks/:id/toggle_admin_access' => 'clerks#toggle_admin_access'
+  
+  # setting/updating clerk passwords
+  match 'clerks/:id/set_password' => 'clerks#set_password', :as => 'set_clerk_password'
+  post 'clerks/:id/update_password' => 'clerks#update_password', :as => 'update_clerk_password'
   
   match 'clerk/home' => 'packages#index'
   
