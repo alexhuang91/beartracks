@@ -3,10 +3,10 @@
   -if @packages != []
     %thead
       %tr.resident-packages-header
-        %th.resident-packages-cell= link_to 'Arrival Time', packages_path(:sort => 'datetime_received DESC')
+        %th.resident-packages-cell Arrival Time
         %th.resident-packages-cell Carrier
         %th.resident-packages-cell Tracking Number
-        %th.resident-packages-cell= link_to 'Package Type', packages_path(:sort => 'package_type ASC')
+        %th.resident-packages-cell Package Type
         %th.resident-packages-cell Picked up?
     %tbody
       - @packages.each do |p|
