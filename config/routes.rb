@@ -1,4 +1,6 @@
 Beartracks::Application.routes.draw do
+  get "clerk_verification/show"
+
   get "clerk_sessions/new"
   post "clerk_sessions/create"
   get "resident_sessions/new"

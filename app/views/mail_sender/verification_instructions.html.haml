@@ -1,0 +1,12 @@
+%h1
+  = "Hello #{@clerk.first_name} #{@clerk.last_name} welcome to beartracks!"
+  
+%p
+  Please click the following link to verify your email address and continue setting up your account:
+  = link_to("Verify me!", @url)
+  
+  Thanks for using Beartracks!
+  
+  Enjoy,
+  
+  The Beartracks Team

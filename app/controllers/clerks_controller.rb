@@ -27,7 +27,12 @@ class ClerksController < ApplicationController
   def create
     @clerk = Clerk.new(params[:clerk])
     if @clerk.save
-      flash[:notice] = "Clerk account successfully created."
+      flash[:notice] = "Account created. We have delivered an email to #{@clerk.email} with further instructions."
+      
+      # reset clerks token and send email
+      @clerk.reset_perishable_token!
+      MailSender.verification_instructions(@clerk).deliver
+      
       redirect_to clerks_path
     else
       if @clerk.errors.any?
