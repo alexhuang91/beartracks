@@ -135,6 +135,7 @@ class PackagesController < ApplicationController
         if (second_collection[0])
           p.resident = second_collection[0]
           p.save
+	  flash[:notice] = "Package created, #{p.resident.first_name} #{p.resident.last_name} was successfully notified"
           print p.resident.first_name
         end
       else

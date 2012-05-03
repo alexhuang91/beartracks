@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Package do
   before :each do
     @empty_package = Package.new()
-    @filled_package = Package.new(:resident_name => "Case", :clerk_id => 1, :unit => "Unit 1",
+    @filled_package = Package.new(:resident_first_name => "Case", :resident_last_name => "Walker", :clerk_id => 1, :unit => "Unit 1",
         :building => "Cheney", :room => 12, :tracking_number => 1212333)
-    @partially_filled_package = Package.new(:resident_name => "Reilly", :room => 343)
-    @never_null_fields = {:resident_name=>'Resident Name', :unit=>'Unit', :building=>'Building',
+    @partially_filled_package = Package.new(:resident_first_name => "Reilly", :resident_last_name => "Cool", :room => 343)
+    @never_null_fields = {:resident_first_name=>'Resident First Name', :resident_last_name => 'Resident Last Name', :unit=>'Unit', :building=>'Building',
       :room=>'Room',:tracking_number=>'Tracking Number'} # copied from package.rb
   end
 
