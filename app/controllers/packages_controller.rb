@@ -243,7 +243,8 @@ class PackagesController < ApplicationController
       redirect_to :format => 'pdf' and return
     end
 
-    packages = Package.all # should be Package.where(resident_id: nil, notified: false) or something
+    packages = Package.where(resident_id: nil, unit: current_clerk.unit)
+  # should be Package.where(resident_id: nil, notified: false) or something so that once we notify, we hold off on printing
 
     pdf = Prawn::Document.new( margin: 36, top_margin: 72, bottom_margin: 72 )
 
