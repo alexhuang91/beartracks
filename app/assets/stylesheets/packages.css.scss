@@ -24,6 +24,17 @@ tr.packages-table-info-picked {
 	color: #C4C4C4;
 }
 
+// Make all returned rows show up in red
+tr.packages-table-info-returned {
+  text-align: center;
+  color: red;
+}
+
+// Make returned "toggle pickup" gray
+td.packages-table-cell-pickup-returned {
+color: #C4C4C4;
+}
+
 .packages-table-cell {
 	padding: 15px 0px;
 }
@@ -51,7 +62,7 @@ th.packages-table-cell {
 // '!important' is necessary to override the 
 // normal gray color for picked up packages
 .highlight {
-  color: red !important;
+  color: green !important;
 }
 
 /* 

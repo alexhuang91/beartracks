@@ -1,3 +1,9 @@
+- content_for :head do
+  :javascript
+    window.onload = function() {
+      buildings = #{@buildings}
+    }
+
 %table#package-form
   %caption#package-form-caption
     -if @new
@@ -14,12 +20,15 @@
   %tr
     %td.package-form-header= label :package, :unit, "Unit*:"
     -if @new and @clerk_unit
-      %td.package-form-info= select :package, :unit, units_array, :selected => @clerk_unit
+      %td.package-form-info.unit_select= select :package, :unit, units_array, :selected => @clerk_unit
     -else
-      %td.package-form-info= select :package, :unit, units_array
+      %td.package-form-info.unit_select= select :package, :unit, units_array
   %tr
     %td.package-form-header= label :package, :building, "Building*:"
-    %td.package-form-info= text_field :package, "building"
+    -if @new
+      %td.package-form-info.building_select= select :package, :building, buildings_hash[@clerk_unit]
+    -else
+      %td.package-form-info.building_select= select :package, :building, buildings_hash[@package.unit]
   %tr
     %td.package-form-header= label :package, :room, "Room Number*:"
     %td.package-form-info= text_field :package, "room"

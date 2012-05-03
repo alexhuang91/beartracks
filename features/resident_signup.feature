@@ -10,12 +10,12 @@ Background:
     | Password              | pass        |
     | Password Confirmation | pass        |
     | Email                 | a@a.com     |
-    | Building              | Spens-Black |
     | Room                  | 101         |
     | First Name            | Alex        |
     | Last Name             | Huang       |
     | (Optional) Nickname   |             |
-  And I select "Unit 3" from "Unit"
+  And I select "Unit 1" from "Unit"
+  And I select "Christian Hall" from "Building"
   And I select "Email" from "Preference"
 
 @model
@@ -79,12 +79,6 @@ Scenario: No Last Name
     | Last Name | |
   When I press "Submit"
   Then I should see "Last name can't be blank"
-
-Scenario: No Building
-  When I fill in the following:
-    | Building | |
-  When I press "Submit"
-  Then I should see "Building can't be blank"
 
 Scenario: No Room
   When I fill in the following:

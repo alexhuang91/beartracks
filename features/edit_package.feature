@@ -31,13 +31,14 @@ Scenario: edit a package's information with all required fields
   When I follow "Edit"
   Then I should be on the edit package page for package 1
   And I should see "Edit package"
-  And I fill in the following:
+  When I fill in the following:
     | Resident First Name | Bilbo  |
     | Resident Last Name  | Cool   |
     | Tracking Number     | 1122   |
-    | Building            | Cheney |
     | Room                | 253    |
-  When I press "Update" 
+  And I select "Unit 1" from "Unit"
+  And I select "Cheney Hall" from "Building"
+  When I press "Update"
   Then I should be on the package details page for package 1
   And I should see "Details for package 1"
   And I should see "Bilbo"
@@ -51,12 +52,13 @@ Scenario: edit a package's information without filling all required fields
   When I follow "Edit"
   Then I should be on the edit package page for package 1
   And I should see "Edit package"
-  And I fill in the following:
+  When I fill in the following:
     | Resident First Name | Bilbo  |
     | Resident Last Name  | Cool   |
     | Tracking Number     |        |
-    | Building            | Cheney |
     | Room                | 253    |
+  And I select "Unit 1" from "Unit"
+  And I select "Cheney Hall" from "Building"
   When I press "Update" 
   Then I should be on the edit package page for package 1
   And I should see "Edit package"
@@ -129,8 +131,9 @@ Scenario: Cancel an edit package operation
     | Resident First Name | Bilbo  |
     | Resident Last Name  | Cool   |
     | Tracking Number     | 1122   |
-    | Building            | Cheney |
     | Room                | 253    |
+  And I select "Unit 1" from "Unit"
+  And I select "Cheney Hall" from "Building"
   And I follow "Cancel"
   Then I should be on the package details page for package 1
   And I should see "123"

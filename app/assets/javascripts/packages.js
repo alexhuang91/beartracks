@@ -1,4 +1,23 @@
 $(document).ready(function() {
+
+  // Function to remove all buildings and then add back the current unit's buildings
+  add_and_remove_buildings_options = function() {
+    var unit = $(".unit_select").children().val();
+    var array = buildings[unit];
+    $(".building_select").children().children().remove();
+    for (var i = 0; i < array.length; i++) {
+      var element = document.createElement('option');
+      element.text = array[i];
+      element.value = array[i];
+      $(".building_select").children().append(element);
+    }
+  }
+
+  // When the page loads, start playing with the buildings appropriately
+  if (window.onload) {
+    window.onload();
+  }
+    $(".unit_select").children().change(add_and_remove_buildings_options);
 	
     // Function to hide one of the search fields based on the selected search option
 	choose_select_option = function() {

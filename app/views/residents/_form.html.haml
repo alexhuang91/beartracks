@@ -1,3 +1,9 @@
+- content_for :head do
+  :javascript
+    window.onload = function() {
+      buildings = #{@buildings}
+    }
+
 %table#resident-form
   = form_for @resident do |f|
     %tr
@@ -20,10 +26,13 @@
       %td.resident-form-info= f.text_field :nickname
     %tr
       %td.resident-form-header= f.label :unit, "Unit:"
-      %td.resident-form-info= f.select :unit, units_array
+      %td.resident-form-info.unit_select= f.select :unit, units_array
     %tr
       %td.resident-form-header= f.label :building, "Building:"
-      %td.resident-form-info= f.text_field :building
+      -if @resident.unit
+        %td.resident-form-info.building_select= f.select :building, buildings_hash[@resident.unit]
+      -else
+        %td.resident-form-info.building_select= f.select :building, buildings_hash[units_array[0]]
     %tr
       %td.resident-form-header= f.label :room, "Room Number:"
       %td.resident-form-info= f.text_field :room
