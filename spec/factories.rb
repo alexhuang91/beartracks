@@ -36,9 +36,14 @@ FactoryGirl.define do
     unit "Unit 1"
     password "pass"
     password_confirmation "pass"
+    verified true
     
     factory :admin do
       is_admin true
+    end
+    
+    factory :unverified_clerk do
+      verified false
     end
     
   end
