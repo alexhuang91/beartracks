@@ -2,8 +2,8 @@ Feature: Testing Authlogic Resident Signup
 
 Background:
   Given the following resident exists:
-    | login            | password   | password_confirmation | email   | unit   | building | room | preference | first_name      | last_name | name   |
-    | alex             | pass       | pass                  | j@j.com | Unit 1 | Cheney   | 201  | Mail Slip  | Alexander       | Great     | Alex   |
+    | login            | password   | password_confirmation | email   | unit   | building | room | preference | first_name      | last_name | nickname   |
+    | alex             | pass       | pass                  | j@j.com | Unit 1 | Cheney   | 201  | Mail Slip  | Alexander       | Great     | Alex       |
   And I am on the new resident page
   When I fill in the following:
     | Login                 | alexhuang   |
@@ -14,6 +14,7 @@ Background:
     | Room                  | 101         |
     | First Name            | Alex        |
     | Last Name             | Huang       |
+    | (Optional) Nickname   |             |
   And I select "Unit 3" from "Unit"
   And I select "Email" from "Preference"
 

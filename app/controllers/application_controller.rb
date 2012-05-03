@@ -72,7 +72,8 @@ class ApplicationController < ActionController::Base
       units = units_array
 
       if(unit == units[0]) # Unit 1
-        array = ["Channing Bowditch",
+        array = ["-- Unit 1 --",
+                 "Channing Bowditch",
 								 "Cheney Hall",
 								 "Christian Hall",
 								 "Deutsch Hall",
@@ -82,7 +83,8 @@ class ApplicationController < ActionController::Base
 								 "Slottman Hall"]
 
       elsif(unit == units[1]) # Unit 2
-        array = ["Cunningham Hall",
+        array = ["-- Unit 2 --",
+                 "Cunningham Hall",
 								 "Davidson Hall",
 								 "Ehman Hall",
 								 "Griffiths Hall",
@@ -90,7 +92,8 @@ class ApplicationController < ActionController::Base
 								 "Wada Hall"]
 
       elsif(unit == units[2]) # Unit 3
-        array = ["Beverly Cleary Hall",
+        array = ["-- Unit 3 --",
+                 "Beverly Cleary Hall",
 								 "Ida Sproul Hall",
 								 "Manville Hall",
 								 "Norton Hall",
@@ -98,7 +101,8 @@ class ApplicationController < ActionController::Base
 								 "Spens Black Hall"]
 
       elsif(unit == units[3]) # Unit 4
-        array = ["FH Building 1",
+        array = ["-- Unit 4 --",
+                 "FH Building 1",
 								 "FH Building 2",
 								 "FH Building 3",
 								 "FH Building 4",
@@ -110,8 +114,9 @@ class ApplicationController < ActionController::Base
 								 "Bowles Hall",
 								 "Stern Hall"]
 
-      elsif(unit == units[4]) # Clark Ker
-        array = ["CK Building 1",
+      elsif(unit == units[4]) # Clark Kerr
+        array = ["-- Clark Kerr --",
+                 "CK Building 1",
                  "CK Building 2",
                  "CK Building 3",
                  "CK Building 4",
@@ -132,11 +137,13 @@ class ApplicationController < ActionController::Base
 								 "CK Building 20"]
 
       elsif(unit == units[5]) # University Village
-        array = ["East",
+        array = ["-- University Village --",
+                 "East",
                  "West"]
 
       elsif(unit == units[6]) # Smyth Fernwald
-        array = ["3002",
+        array = ["-- Smyth Fernwald --",
+                 "3002",
                  "3024",
                  "E",
                  "F",

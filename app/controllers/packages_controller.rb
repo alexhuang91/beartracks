@@ -143,7 +143,7 @@ class PackagesController < ApplicationController
         flash[:notice] = "Package created successfully."
         #Associate the package with the appropriate resident
         first_collection = Resident.where( :unit => params[:package][:unit], :room => params[:package][:room], :building => params[:package][:building])
-        second_collection =  first_collection.find_all {|resid| ((resid.first_name == params[:package][:resident_first_name]) || resid.name == params[:package][:resident_first_name]) && (resid.last_name == params[:package][:resident_last_name])}
+        second_collection =  first_collection.find_all {|resid| ((resid.first_name == params[:package][:resident_first_name]) || resid.nickname == params[:package][:resident_first_name]) && (resid.last_name == params[:package][:resident_last_name])}
         if (second_collection[0])
           p.resident = second_collection[0]
           p.save

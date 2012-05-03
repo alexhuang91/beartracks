@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501053302) do
+ActiveRecord::Schema.define(:version => 20120503005942) do
 
   create_table "clerks", :force => true do |t|
     t.string   "login"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20120501053302) do
     t.string   "password_salt"
     t.string   "persistence_token"
     t.string   "user_id"
-    t.string   "name"
+    t.string   "nickname"
     t.string   "unit"
     t.string   "building"
     t.string   "room"

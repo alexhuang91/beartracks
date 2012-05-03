@@ -78,3 +78,42 @@ tr.residents-table-info {
   text-align: center;
   font-weight: bold;
 }
+
+/*
+ * Resident packages table
+ */
+
+table#resident-packages {
+	width: 75%;
+	margin: 30px auto 20px;
+}
+
+#resident-packages-caption {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px;
+  color: black;
+}
+
+tr.resident-packages-header {
+	color: black;
+	font-weight: bold;
+	font-size: 12pt;
+	text-align: center;
+}
+
+tr.resident-packages-info {
+	text-align: center;
+}
+
+td.resident-packages-cell {
+	padding: 15px 0px;
+}
+
+th.resident-packages-cell {
+	color: #225897;
+}
+
+
+
+
