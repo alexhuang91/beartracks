@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120503062349) do
+ActiveRecord::Schema.define(:version => 20120503081915) do
 
   create_table "clerks", :force => true do |t|
     t.string   "login"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20120503062349) do
     t.string   "resident_first_name"
     t.string   "resident_last_name"
     t.boolean  "returned",            :default => false,   :null => false
+    t.string   "resident_name"
   end
 
   create_table "residents", :force => true do |t|

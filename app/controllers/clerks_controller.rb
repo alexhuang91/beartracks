@@ -88,7 +88,19 @@ class ClerksController < ApplicationController
       end 
     end
   end
-
+  
+  def destroy
+    if current_clerk.is_admin?
+      @clerk = Clerk.find params[:id]
+      @clerk.destroy
+      flash[:notice] = "Clerk was deleted successfully."
+      redirect_to clerks_path
+    else
+      flash[:warning] = "Only admins can delete clerks."
+      redirect_to clerk_path @clerk
+    end
+  end
+  
   protected
   
   def is_admin?
