@@ -93,6 +93,10 @@ class ClerksController < ApplicationController
       end 
     end
   end
+  
+  def update_password
+    
+  end
 
   protected
   
